@@ -8,6 +8,7 @@ namespace EVotingSystem.Application
     {
         public BlockchainService()
         {
+
         }
     }
 

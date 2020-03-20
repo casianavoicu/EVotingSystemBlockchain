@@ -107,3 +107,4 @@ D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcor
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\_ViewImports.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\_ViewStart.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Register\Index.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Vote\Index.cshtml.g.cs
