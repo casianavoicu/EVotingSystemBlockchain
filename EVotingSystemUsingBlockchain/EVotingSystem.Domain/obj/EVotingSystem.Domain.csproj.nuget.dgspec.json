@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Domain\\EVotingSystem.Domain.csproj": {}
+    "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Domain\\EVotingSystem.Domain.csproj": {}
   },
   "projects": {
-    "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Domain\\EVotingSystem.Domain.csproj": {
+    "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Domain\\EVotingSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Domain\\EVotingSystem.Domain.csproj",
+        "projectUniqueName": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Domain\\EVotingSystem.Domain.csproj",
         "projectName": "EVotingSystem.Domain",
-        "projectPath": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Domain\\EVotingSystem.Domain.csproj",
+        "projectPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Domain\\EVotingSystem.Domain.csproj",
         "packagesPath": "C:\\Users\\Casiana\\.nuget\\packages\\",
-        "outputPath": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Domain\\obj\\",
+        "outputPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

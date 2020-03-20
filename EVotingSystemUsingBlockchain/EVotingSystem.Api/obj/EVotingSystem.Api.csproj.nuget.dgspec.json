@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Api\\EVotingSystem.Api.csproj": {}
+    "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Api\\EVotingSystem.Api.csproj": {}
   },
   "projects": {
-    "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Api\\EVotingSystem.Api.csproj": {
+    "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Api\\EVotingSystem.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Api\\EVotingSystem.Api.csproj",
+        "projectUniqueName": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Api\\EVotingSystem.Api.csproj",
         "projectName": "EVotingSystem.Api",
-        "projectPath": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Api\\EVotingSystem.Api.csproj",
+        "projectPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Api\\EVotingSystem.Api.csproj",
         "packagesPath": "C:\\Users\\Casiana\\.nuget\\packages\\",
-        "outputPath": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Api\\obj\\",
+        "outputPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
