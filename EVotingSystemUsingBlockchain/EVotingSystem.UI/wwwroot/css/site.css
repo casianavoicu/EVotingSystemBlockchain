@@ -63,7 +63,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    background-image: url(../images/evoting_1200.jpg);
+    background-image: url(../images/voting-using-digital-interface-3d-rendering.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -126,4 +126,7 @@ hr {
 .signin {
     background-color: #f1f1f1;
     text-align: center;
+}
+.titleColor {
+    color: aquamarine;
 }

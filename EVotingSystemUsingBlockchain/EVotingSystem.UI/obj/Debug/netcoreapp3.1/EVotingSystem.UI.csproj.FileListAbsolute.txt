@@ -94,7 +94,6 @@ D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\bin\Debug\netcor
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\EVotingSystem.UI.MvcApplicationPartsAssemblyInfo.cache
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\EVotingSystem.UI.Views.pdb
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\EVotingSystem.UI.csproj.CopyComplete
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\EVotingSystem.UI.dll
@@ -108,3 +107,6 @@ D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcor
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\_ViewStart.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Register\Index.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Vote\Index.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\EVotingSystem.UI.MvcApplicationPartsAssemblyInfo.cache
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Elections\AddElection.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Elections\Index.cshtml.g.cs

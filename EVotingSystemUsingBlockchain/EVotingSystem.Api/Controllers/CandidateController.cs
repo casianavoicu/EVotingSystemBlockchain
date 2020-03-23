@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EVotingSystem.Api.Controllers
 {
+    [Route("[controller]")]
     public class CandidateController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return View();

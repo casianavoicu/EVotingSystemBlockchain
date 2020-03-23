@@ -86,7 +86,12 @@ D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netco
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.MvcApplicationPartsAssemblyInfo.cache
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.csproj.CopyComplete
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.dll
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.pdb
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.MvcApplicationPartsAssemblyInfo.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.MvcApplicationPartsAssemblyInfo.cache
