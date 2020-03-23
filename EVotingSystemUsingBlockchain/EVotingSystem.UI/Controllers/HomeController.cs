@@ -15,20 +15,18 @@ namespace EVotingSystem.UI.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpClientFactory httpClientFactory;
-        private readonly IConfiguration configuration;
+        private readonly HttpClient EVotingApi;
 
-        public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             this.httpClientFactory = httpClientFactory;
-            this.configuration = configuration;
+            EVotingApi = httpClientFactory.CreateClient("EVotingSystemApi");
         }
 
         public async Task<IActionResult> Index()
         {
-            var client = httpClientFactory.CreateClient("EVotingSystemApi");
-
-            HttpResponseMessage httpResponse = await client.GetAsync("candidate");
+            HttpResponseMessage httpResponse = await EVotingApi.GetAsync("candidate");
             return View();
         }
 

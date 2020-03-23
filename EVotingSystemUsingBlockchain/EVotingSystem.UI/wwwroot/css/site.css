@@ -63,7 +63,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    background-image: url(../images/voting-using-digital-interface-3d-rendering.jpg);
+    background-color: #f5f5f5;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -129,4 +129,31 @@ hr {
 }
 .titleColor {
     color: aquamarine;
+}
+
+.navbarStyle {
+    background-color:#2b333b !important;
+}
+.menu-container {
+    display: flex;
+    flex-direction: row !important;
+
+
+}
+.left-sideContent {
+    display: flex;
+    flex: 3;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.right-sideContent {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-link {
+    color: #fff !important;
 }

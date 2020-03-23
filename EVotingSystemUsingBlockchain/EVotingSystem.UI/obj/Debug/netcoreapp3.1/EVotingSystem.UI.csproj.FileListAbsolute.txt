@@ -108,5 +108,10 @@ D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcor
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Register\Index.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Vote\Index.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\EVotingSystem.UI.MvcApplicationPartsAssemblyInfo.cache
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Elections\AddElection.cshtml.g.cs
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Elections\Index.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Election\AddElection.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Election\Index.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\Index.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Party\Index.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Blockchain\Transactions.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Blockchain\Blocks.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Results.cshtml.g.cs
