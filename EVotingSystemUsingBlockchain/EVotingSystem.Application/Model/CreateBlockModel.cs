@@ -12,7 +12,7 @@ namespace EVotingSystem.Application.Model
 
         public byte[] PreviousHash { get; set; }
 
-        public string Data { get; set; }//is going to be transaction
+        public TransactionModel Transaction { get; set; }
 
         public int Difficulty { get; set; }
     }

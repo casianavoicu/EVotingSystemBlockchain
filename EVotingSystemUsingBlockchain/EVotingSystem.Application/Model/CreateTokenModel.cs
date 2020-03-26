@@ -2,7 +2,7 @@
 
 namespace EVotingSystem.Application.Model
 {
-    public class CreateToken
+    public class CreateTokenModel
     {
         public int BlockIndex { get; set; }
 

@@ -11,7 +11,9 @@ namespace EVotingSystem.Application
         {
         }
 
-        public byte[] CalculateHash(CreateToken createToken)
+
+
+        public byte[] CalculateHash(CreateTokenModel createToken)
         {
             SHA256 sha256 = SHA256.Create();
 
@@ -23,5 +25,6 @@ namespace EVotingSystem.Application
 
             return sha256.ComputeHash(computeHash);
         }
+
     }
 }
