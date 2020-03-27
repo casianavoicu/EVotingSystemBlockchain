@@ -12,7 +12,7 @@ namespace EVotingSystem.Api.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return Ok();
         }
     }
 }

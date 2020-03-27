@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVotingSystem.UI", "EVotingSystem.UI\EVotingSystem.UI.csproj", "{1C17300D-21EE-47A8-9424-51387122ED55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVotingSystem.UI", "EVotingSystem.UI\EVotingSystem.UI.csproj", "{1C17300D-21EE-47A8-9424-51387122ED55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVotingSystem.Api", "EVotingSystem.Api\EVotingSystem.Api.csproj", "{378E9359-5427-48FB-9E96-1C6E4E2C5641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVotingSystem.Api", "EVotingSystem.Api\EVotingSystem.Api.csproj", "{378E9359-5427-48FB-9E96-1C6E4E2C5641}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVotingSystem.Application", "EVotingSystem.Application\EVotingSystem.Application.csproj", "{C9595005-7EE2-4A10-A3A2-29CB54E09223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVotingSystem.Application", "EVotingSystem.Application\EVotingSystem.Application.csproj", "{C9595005-7EE2-4A10-A3A2-29CB54E09223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVotingSystem.Domain", "EVotingSystem.Domain\EVotingSystem.Domain.csproj", "{986ED4AA-0C09-48F9-A4AB-5925F47CA6F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVotingSystem.Domain", "EVotingSystem.Domain\EVotingSystem.Domain.csproj", "{986ED4AA-0C09-48F9-A4AB-5925F47CA6F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVotingSystem.Blockchain", "EVotingSystem.Blockchain\EVotingSystem.Blockchain.csproj", "{2C4650BD-2C77-42AD-B06D-6C11830F202F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVotingSystem.Blockchain", "EVotingSystem.Blockchain\EVotingSystem.Blockchain.csproj", "{2C4650BD-2C77-42AD-B06D-6C11830F202F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeerToPeer", "PeerToPeer\PeerToPeer.csproj", "{1BC9D088-E131-4F4B-9C01-6DD72188C871}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Node", "Node\Node.csproj", "{1F66C489-BF7C-43E6-B64A-ACE39F578A08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{2C4650BD-2C77-42AD-B06D-6C11830F202F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C4650BD-2C77-42AD-B06D-6C11830F202F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C4650BD-2C77-42AD-B06D-6C11830F202F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BC9D088-E131-4F4B-9C01-6DD72188C871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC9D088-E131-4F4B-9C01-6DD72188C871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC9D088-E131-4F4B-9C01-6DD72188C871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC9D088-E131-4F4B-9C01-6DD72188C871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F66C489-BF7C-43E6-B64A-ACE39F578A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F66C489-BF7C-43E6-B64A-ACE39F578A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F66C489-BF7C-43E6-B64A-ACE39F578A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F66C489-BF7C-43E6-B64A-ACE39F578A08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
