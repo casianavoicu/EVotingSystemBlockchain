@@ -3,5 +3,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Înregistrare candidat nou</h1>
-<p>Selectați un partid</p>
+    <div class="formContainer w-75">
+        <form>
+            <div class="form-group">
+                <label for="candidateLastName">Numele candidatului</label>
+                <input type="text" class="form-control" id="candidateLastName" name="candidateLastName">
+            </div>
+            <div class="form-group">
+                <label for="candidateFirstName">Prenumele candidatului</label>
+                <input type="text" class="form-control" id="candidateFirstName" name="candidateFirstName">
+            </div>
+            <div class="form-group">
+                <label for="endDate">Alegeți data de încheiere</label>
+                <input type="date" class="form-control" id="endDate" name="endDate">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>

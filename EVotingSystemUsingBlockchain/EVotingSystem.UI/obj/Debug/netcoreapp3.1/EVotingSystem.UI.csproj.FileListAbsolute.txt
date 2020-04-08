@@ -106,7 +106,6 @@ D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcor
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\_ViewImports.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\_ViewStart.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Register\Index.cshtml.g.cs
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Vote\Index.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\EVotingSystem.UI.MvcApplicationPartsAssemblyInfo.cache
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Election\AddElection.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Election\Index.cshtml.g.cs
@@ -116,3 +115,7 @@ D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcor
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Blockchain\Blocks.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Results.cshtml.g.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Home\LogIn.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\EVotingSystem.UI.csproj.CoreCompileInputs.cache
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\EVotingSystem.UI.genruntimeconfig.cache
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Voter\Vote.cshtml.g.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.UI\obj\Debug\netcoreapp3.1\Razor\Views\Votes\Index.cshtml.g.cs

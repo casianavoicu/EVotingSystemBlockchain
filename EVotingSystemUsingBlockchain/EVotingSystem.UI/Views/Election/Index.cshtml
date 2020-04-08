@@ -2,15 +2,30 @@
 @{
     ViewData["Title"] = "Index";
 }
+    <div class="formContainer w-75">
+        <form>
+            <div class="form-group">
+                <label for="election">Numele alegerii</label>
+                <input type="text" class="form-control" id="election" name="election">
+            </div>
+            <div class="form-group">
+                <label for="startDate">Alegeți data de începere</label>
+                <input type="date" class="form-control" id="startDate" name="startDate">
+            </div>
+            <div class="form-group">
+                <label for="endDate">Alegeți data de încheiere</label>
+                <input type="date" class="form-control" id="endDate" name="endDate">
+            </div>
+            <div class="checkbox">
+                <label for="endDate">Selectați candidații</label><br />
+                <select id="candidates" multiple="multiple">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 
-    <h1>Înregistrare alegere noua</h1>
-<form action="/action_page.php">
-    <label for="election">Numele alegerii</label>
-    <input type="text" name="election"><br>
-    <label for="startDate">Alegeți data de începere</label>
-    <input type="date" id="startDate" name="startDate"><br>
-    <label for="endDate">Alegeți data de finalizare </label>
-    <input type="date" id="endDate" name="endDate"><br>
-    <button action="submit">Adaugă</button>
-
-</form>

@@ -2,3 +2,18 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your Javascript code.
+$(function () {
+
+    $('#chkveg').multiselect({
+
+        includeSelectAllOption: true
+
+    });
+
+    $('#btnget').click(function () {
+
+        alert($('#chkveg').val());
+
+    })
+
+});

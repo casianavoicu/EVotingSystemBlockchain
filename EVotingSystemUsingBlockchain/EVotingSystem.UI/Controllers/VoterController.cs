@@ -12,5 +12,10 @@ namespace EVotingSystem.UI.Controllers
         {
             return View();
         }
+
+        public IActionResult Vote()
+        {
+            return View();
+        }
     }
 }

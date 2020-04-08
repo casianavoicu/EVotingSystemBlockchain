@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Application\\EVotingSystem.Application.csproj",
+      "projectUniqueName": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Application\\EVotingSystem.Application.csproj",
       "projectName": "EVotingSystem.Application",
-      "projectPath": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Application\\EVotingSystem.Application.csproj",
+      "projectPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Application\\EVotingSystem.Application.csproj",
       "packagesPath": "C:\\Users\\Casiana\\.nuget\\packages\\",
-      "outputPath": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain\\EVotingSystem.Application\\obj\\",
+      "outputPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -236,7 +236,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

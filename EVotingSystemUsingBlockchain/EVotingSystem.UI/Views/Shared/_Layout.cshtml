@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Electronic Voting</a>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Electronic Voting</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,10 +19,10 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Acasă</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Vote" asp-action="Vote">Votează</a>
+                    <a class="nav-link" asp-area="" asp-controller="Voter" asp-action="Vote">Votează</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Home" asp-action="Index">Rezultate voturi</a>
+                    <a class="nav-link text-dark" asp-controller="Votes" asp-action="Index">Rezultate voturi</a>
                 </li>
                 <li class="nav-item dropdown text-dark">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

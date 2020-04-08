@@ -95,3 +95,7 @@ D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netco
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.MvcApplicationPartsAssemblyInfo.cs
 D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.MvcApplicationPartsAssemblyInfo.cache
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\Peer2Peer.dll
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\bin\Debug\netcoreapp3.1\Peer2Peer.pdb
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.csproj.CoreCompileInputs.cache
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Api\obj\Debug\netcoreapp3.1\EVotingSystem.Api.genruntimeconfig.cache
