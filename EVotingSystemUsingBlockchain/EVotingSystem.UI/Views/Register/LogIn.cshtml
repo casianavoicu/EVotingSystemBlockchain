@@ -1,29 +1,29 @@
-﻿
+﻿@model LogInViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-  <main class="main2">
-      <div class="mainHeader">
+<main class="main2">
+    <div class="mainHeader">
         <h1 class="title">Autentificare pentru a <span>Vota!</span></h1>
-      </div>
-      <div class="mainBody">
+    </div>
+    <div class="mainBody">
         <div class="formContainer">
-          <div class="voteImage"></div>
-          <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Card de identitate</label>
-                <input type="text" class="form-control" id="exampleInputEmail1">
-              <label for="exampleInputEmail1">Cheia privată</label>
-                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <small id="emailHelp" class="form-text text-muted">Introduceți cheia privată din fișierul primit</small>
-            </div>
-            <button type="submit" class="btn btn-primary btnSubmit">Autentificare</button>
-            <div class="form-bottom">
-              <span>Sa</span>
-              <a href="./register.html">Înregistrare</a>
-            </div>
-          </form>
+            <div class="voteImage"></div>
+            <form asp-controller="Register" asp-action="LogIn">
+                <div class="form-group">
+                    <label asp-for="IdentityCard">Card de identitate</label>
+                    <input asp-for="IdentityCard" type="text" class="form-control" id="exampleInputEmail1">
+                    <label asp-for="PrivateKey">Cheia privată</label>
+                    <input asp-for="PrivateKey" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">Introduceți cheia privată din fișierul primit</small>
+                </div>
+                <button type="submit" class="btn btn-primary btnSubmit">Autentificare</button>
+                <div class="form-bottom">
+                    <span>Sa</span>
+                    <a href="./register.html">Înregistrare</a>
+                </div>
+            </form>
         </div>
-      </div>
-  </main>
+    </div>
+</main>

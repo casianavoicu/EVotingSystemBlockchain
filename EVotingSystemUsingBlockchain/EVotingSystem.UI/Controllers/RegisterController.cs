@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using EVotingSystem.UI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -36,11 +33,12 @@ namespace EVotingSystem.UI.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             HttpResponseMessage httpResponse = await EVotingApi.GetAsync("candidate");
-            return RedirectToAction("Contact", "Home");
+            //download wallet!!
+            return RedirectToAction("LogIn", "Register");
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogIn(RegisterViewModel model)
+        public async Task<IActionResult> LogIn(LogInViewModel model)
         {
             HttpResponseMessage httpResponse = await EVotingApi.GetAsync("candidate");
             return RedirectToAction("Contact", "Home");
