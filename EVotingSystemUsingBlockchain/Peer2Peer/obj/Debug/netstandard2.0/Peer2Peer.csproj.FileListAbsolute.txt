@@ -1,9 +1,0 @@
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\Peer2Peer\bin\Debug\netstandard2.0\Peer2Peer.deps.json
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\Peer2Peer\bin\Debug\netstandard2.0\Peer2Peer.dll
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\Peer2Peer\bin\Debug\netstandard2.0\Peer2Peer.pdb
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\Peer2Peer\obj\Debug\netstandard2.0\Peer2Peer.csprojAssemblyReference.cache
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\Peer2Peer\obj\Debug\netstandard2.0\Peer2Peer.AssemblyInfoInputs.cache
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\Peer2Peer\obj\Debug\netstandard2.0\Peer2Peer.AssemblyInfo.cs
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\Peer2Peer\obj\Debug\netstandard2.0\Peer2Peer.dll
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\Peer2Peer\obj\Debug\netstandard2.0\Peer2Peer.pdb
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\Peer2Peer\obj\Debug\netstandard2.0\Peer2Peer.csproj.CoreCompileInputs.cache

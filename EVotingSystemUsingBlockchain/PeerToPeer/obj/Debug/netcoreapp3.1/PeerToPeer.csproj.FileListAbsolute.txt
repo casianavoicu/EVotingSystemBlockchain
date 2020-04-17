@@ -1,4 +1,0 @@
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\PeerToPeer\bin\Debug\netcoreapp3.1\PeerToPeer.exe
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\PeerToPeer\obj\Debug\netcoreapp3.1\PeerToPeer.csprojAssemblyReference.cache
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\PeerToPeer\obj\Debug\netcoreapp3.1\PeerToPeer.AssemblyInfoInputs.cache
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\PeerToPeer\obj\Debug\netcoreapp3.1\PeerToPeer.AssemblyInfo.cs

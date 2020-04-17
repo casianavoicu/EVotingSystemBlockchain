@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Peer2Peer;
 
 namespace EVotingSystem.Api
 {
@@ -50,7 +49,7 @@ namespace EVotingSystem.Api
                     }
                 });
             });
-            services.AddSingleton<Node>();
+            //services.AddSingleton<Node>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +78,7 @@ namespace EVotingSystem.Api
                 endpoints.MapControllers();
             });
 
-            app.ApplicationServices.GetService<Node>().Connection();
+            //app.ApplicationServices.GetService<Node>().Connection();
         }
     }
 }
