@@ -22,7 +22,7 @@
                     <a class="nav-link" asp-area="" asp-controller="Voter" asp-action="Vote">Votează</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-controller="Votes" asp-action="Index">Rezultate voturi</a>
+                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Results">Rezultate voturi</a>
                 </li>
                 <li class="nav-item dropdown text-dark">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,7 +47,7 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0 rightSide">
-                <a class="btn btn-outline-secondary btn-sm" asp-area="" asp-controller="Home" asp-action="LogIn" role="button">Autentificare</a>
+                <a class="btn btn-outline-secondary btn-sm" asp-area="" asp-controller="Register" asp-action="LogIn" role="button">Autentificare</a>
                 <a class="btn btn-primary  btn-sm" asp-area="" asp-controller="Register" asp-action="Index" role="button">Înregistrare</a>
             </form>
         </div>

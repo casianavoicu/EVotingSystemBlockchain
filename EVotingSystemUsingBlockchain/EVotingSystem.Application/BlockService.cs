@@ -9,11 +9,19 @@ namespace EVotingSystem.Application
     {
         public BlockService()
         {
+
         }
 
+        public BlockModel GenesisBlock()
+        {
+            BlockModel genesisBlock = new BlockModel()
+            {
 
+            };
+            return genesisBlock;
+        }
 
-        public byte[] CalculateHash(CreateTokenModel createToken)
+        private byte[] ComputeHash256(CreateTokenModel createToken)
         {
             SHA256 sha256 = SHA256.Create();
 
@@ -25,6 +33,8 @@ namespace EVotingSystem.Application
 
             return sha256.ComputeHash(computeHash);
         }
+
+
 
     }
 }

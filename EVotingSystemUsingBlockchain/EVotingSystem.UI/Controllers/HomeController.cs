@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using EVotingSystem.UI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace EVotingSystem.UI.Controllers
@@ -24,9 +20,8 @@ namespace EVotingSystem.UI.Controllers
             EVotingApi = httpClientFactory.CreateClient("EVotingSystemApi");
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            HttpResponseMessage httpResponse = await EVotingApi.GetAsync("candidate");
             return View();
         }
 
@@ -35,13 +30,13 @@ namespace EVotingSystem.UI.Controllers
             return View();
         }
 
-        public IActionResult Register()
+        [HttpGet]
+        public async Task<ActionResult> Results()
         {
-            return View();
-        }
-        public IActionResult LogIn()
-        {
-            return View();
+            HttpResponseMessage httpResponse = await EVotingApi.GetAsync($"Home/GetResults");
+            var a = httpResponse.Content.ReadAsStringAsync().Result;
+           // var b = JsonConvert.DeserializeObject<string[]>(a);
+            return View("Results", a);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

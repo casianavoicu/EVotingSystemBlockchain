@@ -185,9 +185,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\Peer2Peer\\Peer2Peer.csproj",
-      "projectName": "Peer2Peer",
-      "projectPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\Peer2Peer\\Peer2Peer.csproj",
+      "projectUniqueName": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\Peer2Peer\\1.csproj",
+      "projectName": "1",
+      "projectPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\Peer2Peer\\1.csproj",
       "packagesPath": "C:\\Users\\Casiana\\.nuget\\packages\\",
       "outputPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\Peer2Peer\\obj\\",
       "projectStyle": "PackageReference",

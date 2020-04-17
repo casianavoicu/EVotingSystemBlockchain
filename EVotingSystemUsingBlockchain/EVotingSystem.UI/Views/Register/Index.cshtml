@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RegisterViewModel
+@{
     ViewData["Title"] = "Index";
 }
 
@@ -8,25 +9,29 @@
     </div>
     <div class="mainBody">
         <div class="formContainer">
-            <form>
+            <form asp-controller="Account" asp-action="Register">
                 <div class="form-group">
                     <div class="inputContainer">
-                        <label for="exampleInputEmail1">First Name</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label asp-for="LastName">Nume</label>
+                        <input asp-for="LastName" type="text" class="form-control" id="firstName">
                     </div>
                     <div class="inputContainer">
-                        <label for="exampleInputEmail1">Last Name</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label asp-for="FirstName">Prenume</label>
+                        <input asp-for="FirstName" type="text" class="form-control" id="lastName">
                     </div>
                     <div class="inputContainer">
-                        <label for="exampleInputEmail1">Identity Card</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label asp-for="IdentityCard">Card de Identitate</label>
+                        <input asp-for="IdentityCard" type="text" class="form-control" id="idCard">
+                    </div>
+                    <div class="inputContainer">
+                        <label asp-for="Series">Serie</label>
+                        <input asp-for="Series" type="text" class="form-control" id="exampleInputEmail1">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btnSubmit">Create account</button>
+                <button type="submit" class="btn btn-primary btnSubmit">Autentificare</button>
                 <div class="form-bottom">
-                    <span>OR</span>
-                    <a href="./login.html">Log In</a>
+                    <span>Sau</span>
+                    <a href="./login.html">Înregistrare</a>
                 </div>
             </form>
         </div>

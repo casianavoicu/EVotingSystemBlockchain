@@ -4,13 +4,13 @@ namespace EVotingSystem.Application.Model
 {
     public class BlockModel
     {
-        public int BlockIndex { get; set; }
+        public int BlockNumber { get; set; }
 
         public DateTime TimeStamp { get; set; }
 
-        public byte[] Hash { get; set; }
+        public byte[] BlockHash { get; set; }
 
-        public byte[] PreviousHash { get; set; }
+        public byte[] PreviousBlockHash { get; set; }
 
         public TransactionModel Transaction { get; set; }
 

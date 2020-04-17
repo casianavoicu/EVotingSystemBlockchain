@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "T/3m2OzNzIXuEVYv74P+H33cCS7kHsqa+iK0Vy2OstunE3UCy1+e25V2Lv/GwxJ83C8wPpSiKtcA2OSknTlPCQ==",
+  "dgSpecHash": "BQT8RYcNYhhHXjsPZNYuD6Y5eZFxTbFsywIAa1izA6249mnqEQqm1P6QrjViEITC0rf0Ke8WJtmi3xqIgsbqWw==",
   "success": true,
   "projectFilePath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Application\\EVotingSystem.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -9,12 +9,7 @@ namespace EVotingSystem.UI.API
         public EVotingApi(IHttpClientFactory httpClient)
         {
             this.httpClient = httpClient;
-          
-        }
 
-        public HttpClient Create(EVotingApi eVoting)
-        {
-            return httpClient.CreateClient("EVotingSystemApi");
         }
     }
 }
