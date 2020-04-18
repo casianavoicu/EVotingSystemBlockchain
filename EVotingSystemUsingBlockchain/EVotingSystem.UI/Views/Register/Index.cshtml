@@ -28,10 +28,10 @@
                         <input asp-for="Series" type="text" class="form-control" id="exampleInputEmail1">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btnSubmit">Autentificare</button>
+                <button type="submit" class="btn btn-primary btnSubmit">Înregistrare</button>
                 <div class="form-bottom">
                     <span>Sau</span>
-                    <a href="./login.html">Înregistrare</a>
+                    <a href="@Url.Action("LogIn","Register")">Autentificare</a>
                 </div>
             </form>
         </div>

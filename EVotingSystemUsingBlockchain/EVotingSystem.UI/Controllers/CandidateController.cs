@@ -1,4 +1,5 @@
-﻿using EVotingSystem.UI.Models;
+﻿using EVotingSystem.UI.API;
+using EVotingSystem.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
@@ -10,13 +11,13 @@ namespace EVotingSystem.UI.Controllers
     {
         private readonly ILogger<CandidateController> _logger;
         private readonly IHttpClientFactory httpClientFactory;
-        private readonly HttpClient EVotingApi;
+        private readonly EVotingApi EVotingApi;
 
         public CandidateController(ILogger<CandidateController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             this.httpClientFactory = httpClientFactory;
-            EVotingApi = httpClientFactory.CreateClient("EVotingSystemApi");
+            EVotingApi = new EVotingApi(httpClientFactory);
         }
 
         public IActionResult Index()
@@ -27,7 +28,7 @@ namespace EVotingSystem.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCandidate(CreateCandidateViewModel model)
         {
-            HttpResponseMessage httpResponse = await EVotingApi.GetAsync("candidate");
+            var result = await EVotingApi.SendToApi<CreateCandidateViewModel>(model, "Candidate/AddCandidate");
             //download wallet!!
             return RedirectToAction("Index", "Candidate");
         }
