@@ -1,6 +1,6 @@
 ﻿namespace EVotingSystem.Application.Model
 {
-    public class TransactionOutputModel<T>
+    public class CreateTransactionInputModel<T>
     {
         public string Address { get; set; }
 

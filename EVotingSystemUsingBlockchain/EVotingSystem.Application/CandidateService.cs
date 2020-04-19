@@ -5,18 +5,18 @@ namespace EVotingSystem.Application
 {
     public class CandidateService : ICandidateService
     {
-        public TransactionOutputModel<CreateCandidateModel> AddCandidateTransaction(CreateCandidateModel candidateModel)
+        public CreateTransactionInputModel<CreateCandidateModel> AddCandidateTransaction(CreateCandidateModel candidateModel)
         {
-            TransactionOutputModel<CreateCandidateModel> model = new TransactionOutputModel<CreateCandidateModel>
+            CreateTransactionInputModel<CreateCandidateModel> model = new CreateTransactionInputModel<CreateCandidateModel>
             {
-                Address = "test",
+                Address = "test", //probably RSA
                 Transaction = new CreateCandidateModel
                 {
                     Details = candidateModel.Details,
                     FirstName = candidateModel.FirstName,
                     LastName = candidateModel.LastName,
                 },
-                Signature = HashExtention.CalculateTransactionHash()
+                Signature = "test"
             };
             throw new System.NotImplementedException();
         }

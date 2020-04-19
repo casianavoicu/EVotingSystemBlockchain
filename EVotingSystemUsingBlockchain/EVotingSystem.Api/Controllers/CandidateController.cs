@@ -18,12 +18,12 @@ namespace EVotingSystem.Api.Controllers
 
         [HttpPost]
         [Route("AddCandidate")]
-        public async Task<TransactionVoteModel> AddCandidate([FromBody]CreateCandidateModel candidateModel)
+        public async Task<CreateTransactionVoteModel> AddCandidate([FromBody]CreateCandidateModel candidateModel)
         {
 
-            return new TransactionVoteModel()
+            return new CreateTransactionVoteModel()
             {
-                MyProperty = 1
+                //MyProperty = 1
             };
         }
     }

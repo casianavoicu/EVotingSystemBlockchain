@@ -8,18 +8,18 @@ namespace EVotingSystem.Application.Utils
 {
     public static class HashExtention
     {
-        public static byte[] ComputeBlockHash256(CreateTokenModel createToken)
+        public static byte[] ComputeBlockHash256(CreateBlockHeaderModel createToken)
         {
             var format = createToken.BlockIndex.ToString() + createToken.PreviousHash + createToken.TimeStamp.ToString() + createToken.Data;
 
             return EncodeFormat(format);
         }
 
-        public static byte[] CalculateCandidateTransactionHash(TransactionOutputModel<CreateCandidateModel> transaction)
+        public static byte[] CalculateCandidateTransactionHash(CreateTransactionInputModel<CreateCandidateModel> transaction)
         {
             //var format = transaction.Address + transaction. + transaction.Details;
 
-            return 0;//EncodeFormat(format);
+            return null;//EncodeFormat(format);
         }
 
         private static byte[] EncodeFormat(string format)

@@ -4,7 +4,7 @@ namespace EVotingSystem.Application
 {
     public interface ICandidateService
     {
-        TransactionOutputModel<CreateCandidateModel> AddCandidateTransaction(CreateCandidateModel candidateModel);
+        CreateTransactionInputModel<CreateCandidateModel> AddCandidateTransaction(CreateCandidateModel candidateModel);
 
     }
 }
