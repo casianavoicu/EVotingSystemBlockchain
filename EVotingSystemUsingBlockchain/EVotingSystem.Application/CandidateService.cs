@@ -1,10 +1,16 @@
-﻿using EVotingSystem.Application.Model;
+﻿using EVotingSystem.Application.Interface;
+using EVotingSystem.Application.Model;
 using EVotingSystem.Application.Utils;
 
 namespace EVotingSystem.Application
 {
     public class CandidateService : ICandidateService
     {
+        public CandidateService()
+        {
+
+        }
+
         public CreateTransactionInputModel<CreateCandidateModel> AddCandidateTransaction(CreateCandidateModel candidateModel)
         {
             CreateTransactionInputModel<CreateCandidateModel> model = new CreateTransactionInputModel<CreateCandidateModel>

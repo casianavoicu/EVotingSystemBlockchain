@@ -7,5 +7,7 @@
         public string LastName { get; set; }
 
         public string Details { get; set; }
+
+        public string ElectionAddress { get; set; }
     }
 }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EVotingSystem.Application\EVotingSystem.Application.csproj" />
+    <ProjectReference Include="..\EVotingSystem.Blockchain\EVotingSystem.Blockchain.csproj" />
   </ItemGroup>
 
 

@@ -1,4 +1,4 @@
-﻿namespace EVotingSystem.Application
+﻿namespace EVotingSystem.Application.Interface
 {
     public interface IBlockchainService
     {

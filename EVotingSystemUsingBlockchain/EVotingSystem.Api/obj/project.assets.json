@@ -743,6 +743,119 @@
           }
         }
       },
+      "sqlite-net-sqlcipher/1.6.292": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "SQLitePCLRaw.bundle_sqlcipher": "1.1.13"
+        },
+        "compile": {
+          "lib/netstandard1.1/SQLite-net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/SQLite-net.dll": {}
+        }
+      },
+      "SQLitePCLRaw.bundle_sqlcipher/1.1.13": {
+        "type": "package",
+        "dependencies": {
+          "SQLitePCLRaw.core": "1.1.13",
+          "SQLitePCLRaw.lib.sqlcipher.linux": "1.1.13",
+          "SQLitePCLRaw.lib.sqlcipher.osx": "1.1.13",
+          "SQLitePCLRaw.lib.sqlcipher.windows": "1.1.13",
+          "SQLitePCLRaw.provider.sqlcipher.netstandard11": "1.1.13"
+        },
+        "compile": {
+          "lib/netcoreapp/SQLitePCLRaw.batteries_sqlcipher.dll": {},
+          "lib/netcoreapp/SQLitePCLRaw.batteries_v2.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp/SQLitePCLRaw.batteries_sqlcipher.dll": {},
+          "lib/netcoreapp/SQLitePCLRaw.batteries_v2.dll": {}
+        }
+      },
+      "SQLitePCLRaw.core/1.1.13": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/SQLitePCLRaw.core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/SQLitePCLRaw.core.dll": {}
+        }
+      },
+      "SQLitePCLRaw.lib.sqlcipher.linux/1.1.13": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libsqlcipher.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x86/native/libsqlcipher.so": {
+            "assetType": "native",
+            "rid": "linux-x86"
+          }
+        }
+      },
+      "SQLitePCLRaw.lib.sqlcipher.osx/1.1.13": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/osx-x64/native/libsqlcipher.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          }
+        }
+      },
+      "SQLitePCLRaw.lib.sqlcipher.windows/1.1.13": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-arm/native/sqlcipher.dll": {
+            "assetType": "native",
+            "rid": "win-arm"
+          },
+          "runtimes/win-x64/native/sqlcipher.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/sqlcipher.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
+      "SQLitePCLRaw.provider.sqlcipher.netstandard11/1.1.13": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "SQLitePCLRaw.core": "1.1.13"
+        },
+        "compile": {
+          "lib/netstandard1.1/SQLitePCLRaw.provider.sqlcipher.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/SQLitePCLRaw.provider.sqlcipher.dll": {}
+        }
+      },
       "Swashbuckle.AspNetCore/5.2.1": {
         "type": "package",
         "dependencies": {
@@ -1922,6 +2035,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
           "System.ComponentModel.Annotations": "4.7.0"
         },
         "compile": {
@@ -1929,6 +2043,19 @@
         },
         "runtime": {
           "bin/placeholder/EVotingSystem.Application.dll": {}
+        }
+      },
+      "EVotingSystem.Blockchain/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "sqlite-net-sqlcipher": "1.6.292"
+        },
+        "compile": {
+          "bin/placeholder/EVotingSystem.Blockchain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EVotingSystem.Blockchain.dll": {}
         }
       }
     }
@@ -3053,6 +3180,152 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "sqlite-net-sqlcipher/1.6.292": {
+      "sha512": "3MPU7ZQ5+Ox0k8mKHdE6+W6co/r7jIA7li1AF1az1OG+6q2f5FX775zYv1n5/OUBGhIzUwFuqquImnRBJvZa0A==",
+      "type": "package",
+      "path": "sqlite-net-sqlcipher/1.6.292",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.1/SQLite-net.deps.json",
+        "lib/netstandard1.1/SQLite-net.dll",
+        "lib/netstandard1.1/SQLite-net.xml",
+        "sqlite-net-sqlcipher.1.6.292.nupkg.sha512",
+        "sqlite-net-sqlcipher.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.bundle_sqlcipher/1.1.13": {
+      "sha512": "x8lLwCOCAkTQv6+t2vMU9Xspu404R5INi0IldiE2y6chVZSh3LmJ1M0GfQyaGT0BK1N4nySH0YsJfCjQ/6q9Dg==",
+      "type": "package",
+      "path": "sqlitepclraw.bundle_sqlcipher/1.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/MonoAndroid/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/MonoAndroid/SQLitePCLRaw.batteries_v2.dll",
+        "lib/Xamarin.Mac20/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/Xamarin.Mac20/SQLitePCLRaw.batteries_v2.dll",
+        "lib/Xamarin.iOS10/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/Xamarin.iOS10/SQLitePCLRaw.batteries_v2.dll",
+        "lib/net35/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/net35/SQLitePCLRaw.batteries_v2.dll",
+        "lib/net40/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/net40/SQLitePCLRaw.batteries_v2.dll",
+        "lib/net45/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/net45/SQLitePCLRaw.batteries_v2.dll",
+        "lib/netcoreapp/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/netcoreapp/SQLitePCLRaw.batteries_v2.dll",
+        "lib/netstandard1.1/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/netstandard1.1/SQLitePCLRaw.batteries_v2.dll",
+        "lib/portable-net40+sl5+netcore45+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/portable-net40+sl5+netcore45+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/SQLitePCLRaw.batteries_v2.dll",
+        "lib/portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/SQLitePCLRaw.batteries_v2.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/SQLitePCLRaw.batteries_v2.dll",
+        "lib/uap10.0/SQLitePCLRaw.batteries_sqlcipher.dll",
+        "lib/uap10.0/SQLitePCLRaw.batteries_v2.dll",
+        "sqlitepclraw.bundle_sqlcipher.1.1.13.nupkg.sha512",
+        "sqlitepclraw.bundle_sqlcipher.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.core/1.1.13": {
+      "sha512": "I8Q9qL1urPegoyZ5uI32lgqsxl8aPRZAyVBJbO+0T/zlGz/LBc8vhRVyDyCOU9LWWpV8dYpT0nCpuLv1ua6zkA==",
+      "type": "package",
+      "path": "sqlitepclraw.core/1.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/MonoAndroid/SQLitePCLRaw.core.dll",
+        "lib/Xamarin.Mac20/SQLitePCLRaw.core.dll",
+        "lib/Xamarin.iOS10/SQLitePCLRaw.core.dll",
+        "lib/net35/SQLitePCLRaw.core.dll",
+        "lib/net40/SQLitePCLRaw.core.dll",
+        "lib/net45/SQLitePCLRaw.core.dll",
+        "lib/netstandard1.0/SQLitePCLRaw.core.dll",
+        "lib/netstandard1.1/SQLitePCLRaw.core.dll",
+        "lib/portable-net40+sl5+netcore45+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/SQLitePCLRaw.core.dll",
+        "lib/portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/SQLitePCLRaw.core.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/SQLitePCLRaw.core.dll",
+        "lib/uap10.0/SQLitePCLRaw.core.dll",
+        "lib/win8/SQLitePCLRaw.core.dll",
+        "lib/win81/SQLitePCLRaw.core.dll",
+        "lib/wpa81/SQLitePCLRaw.core.dll",
+        "sqlitepclraw.core.1.1.13.nupkg.sha512",
+        "sqlitepclraw.core.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.lib.sqlcipher.linux/1.1.13": {
+      "sha512": "4RFFzfZVBaz2MVASFVtyrof1VgwkHTYyK6zO8nrUny8JwGcCJBsvLhlUBDhNPJvGojmuCxYZ7gAEG3eQw3pORQ==",
+      "type": "package",
+      "path": "sqlitepclraw.lib.sqlcipher.linux/1.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net35/SQLitePCLRaw.lib.sqlcipher.linux.targets",
+        "lib/net35/_._",
+        "lib/netstandard1.0/_._",
+        "lib/netstandard2.0/_._",
+        "lib/uap10.0/_._",
+        "runtimes/linux-x64/native/libsqlcipher.so",
+        "runtimes/linux-x86/native/libsqlcipher.so",
+        "sqlitepclraw.lib.sqlcipher.linux.1.1.13.nupkg.sha512",
+        "sqlitepclraw.lib.sqlcipher.linux.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.lib.sqlcipher.osx/1.1.13": {
+      "sha512": "eBMXf326BotnJ1PZ/NeVdFooPyPspRr36zsnq8qqFNJJx5O887XXCUxki73y/D0+DGWJ1HKlkXRpU7ccN8+vsw==",
+      "type": "package",
+      "path": "sqlitepclraw.lib.sqlcipher.osx/1.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Xamarin.Mac20/SQLitePCLRaw.lib.sqlcipher.osx.targets",
+        "build/net35/SQLitePCLRaw.lib.sqlcipher.osx.targets",
+        "lib/Xamarin.Mac20/_._",
+        "lib/net35/_._",
+        "lib/netstandard1.0/_._",
+        "lib/netstandard2.0/_._",
+        "lib/uap10.0/_._",
+        "runtimes/osx-x64/native/libsqlcipher.dylib",
+        "sqlitepclraw.lib.sqlcipher.osx.1.1.13.nupkg.sha512",
+        "sqlitepclraw.lib.sqlcipher.osx.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.lib.sqlcipher.windows/1.1.13": {
+      "sha512": "mO5Vu18Wj/ytXCJZbT9x8JWmqvwjADFRAyKErtp7auuO4ajY9hwGB20ZxErVDQKxDTr0IVy/fmOGvUVob5X9tA==",
+      "type": "package",
+      "path": "sqlitepclraw.lib.sqlcipher.windows/1.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net35/SQLitePCLRaw.lib.sqlcipher.windows.targets",
+        "lib/net35/_._",
+        "lib/netstandard1.0/_._",
+        "lib/netstandard2.0/_._",
+        "lib/uap10.0/_._",
+        "runtimes/win-arm/native/sqlcipher.dll",
+        "runtimes/win-x64/native/sqlcipher.dll",
+        "runtimes/win-x86/native/sqlcipher.dll",
+        "runtimes/win10-arm/nativeassets/uap10.0/sqlcipher.dll",
+        "runtimes/win10-x64/nativeassets/uap10.0/sqlcipher.dll",
+        "runtimes/win10-x86/nativeassets/uap10.0/sqlcipher.dll",
+        "sqlitepclraw.lib.sqlcipher.windows.1.1.13.nupkg.sha512",
+        "sqlitepclraw.lib.sqlcipher.windows.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.provider.sqlcipher.netstandard11/1.1.13": {
+      "sha512": "+f2gealvyiYCM2joEq4gFdb+gPz3Wj3beM5BZN+hz0Dqhe9Gl9RpopTae0mCEWNCAJoSY1QU4qyoqwOu+rsSew==",
+      "type": "package",
+      "path": "sqlitepclraw.provider.sqlcipher.netstandard11/1.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.1/SQLitePCLRaw.provider.sqlcipher.dll",
+        "sqlitepclraw.provider.sqlcipher.netstandard11.1.1.13.nupkg.sha512",
+        "sqlitepclraw.provider.sqlcipher.netstandard11.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/5.2.1": {
@@ -6370,11 +6643,17 @@
       "type": "project",
       "path": "../EVotingSystem.Application/EVotingSystem.Application.csproj",
       "msbuildProject": "../EVotingSystem.Application/EVotingSystem.Application.csproj"
+    },
+    "EVotingSystem.Blockchain/1.0.0": {
+      "type": "project",
+      "path": "../EVotingSystem.Blockchain/EVotingSystem.Blockchain.csproj",
+      "msbuildProject": "../EVotingSystem.Blockchain/EVotingSystem.Blockchain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "EVotingSystem.Application >= 1.0.0",
+      "EVotingSystem.Blockchain >= 1.0.0",
       "Microsoft.AspNet.WebPages >= 3.2.7",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.1",
       "Newtonsoft.Json >= 12.0.3",
@@ -6413,6 +6692,9 @@
           "projectReferences": {
             "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Application\\EVotingSystem.Application.csproj": {
               "projectPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Application\\EVotingSystem.Application.csproj"
+            },
+            "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Blockchain\\EVotingSystem.Blockchain.csproj": {
+              "projectPath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Blockchain\\EVotingSystem.Blockchain.csproj"
             }
           }
         }

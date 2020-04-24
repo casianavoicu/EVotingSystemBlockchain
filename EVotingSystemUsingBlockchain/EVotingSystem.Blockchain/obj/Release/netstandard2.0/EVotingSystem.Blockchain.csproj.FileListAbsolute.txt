@@ -1,0 +1,9 @@
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Blockchain\bin\Release\netstandard2.0\EVotingSystem.Blockchain.deps.json
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Blockchain\bin\Release\netstandard2.0\EVotingSystem.Blockchain.dll
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Blockchain\bin\Release\netstandard2.0\EVotingSystem.Blockchain.pdb
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Blockchain\obj\Release\netstandard2.0\EVotingSystem.Blockchain.csprojAssemblyReference.cache
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Blockchain\obj\Release\netstandard2.0\EVotingSystem.Blockchain.csproj.CoreCompileInputs.cache
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Blockchain\obj\Release\netstandard2.0\EVotingSystem.Blockchain.AssemblyInfoInputs.cache
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Blockchain\obj\Release\netstandard2.0\EVotingSystem.Blockchain.AssemblyInfo.cs
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Blockchain\obj\Release\netstandard2.0\EVotingSystem.Blockchain.dll
+D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Blockchain\obj\Release\netstandard2.0\EVotingSystem.Blockchain.pdb

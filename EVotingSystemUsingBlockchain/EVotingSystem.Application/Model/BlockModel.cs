@@ -2,11 +2,11 @@
 
 namespace EVotingSystem.Application.Model
 {
-    public class BlockModel
+    public class BlockModel<T>
     {
         public CreateBlockHeaderModel BlockHeader { get; set; }
 
-        public CreateTransactionVoteModel Transaction { get; set; }
+        public T Transaction { get; set; }
 
         public byte[] BlockHash { get; set; }
 

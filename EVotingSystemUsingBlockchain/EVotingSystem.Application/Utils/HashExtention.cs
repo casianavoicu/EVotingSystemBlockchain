@@ -10,7 +10,7 @@ namespace EVotingSystem.Application.Utils
     {
         public static byte[] ComputeBlockHash256(CreateBlockHeaderModel createToken)
         {
-            var format = createToken.BlockIndex.ToString() + createToken.PreviousHash + createToken.TimeStamp.ToString() + createToken.Data;
+            var format = createToken.BlockIndex.ToString() + createToken.PreviousHash + createToken.TimeStamp.ToString();
 
             return EncodeFormat(format);
         }
@@ -30,5 +30,7 @@ namespace EVotingSystem.Application.Utils
 
             return sha256.ComputeHash(computeHash);
         }
+
+       
     }
 }

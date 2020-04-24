@@ -1,4 +1,4 @@
-﻿using EVotingSystem.Application.Model;
+﻿using EVotingSystem.Application.Interface;
 
 namespace EVotingSystem.Application
 {
@@ -9,14 +9,14 @@ namespace EVotingSystem.Application
 
         }
 
-        public BlockModel GenesisBlock()
-        {
-            BlockModel genesisBlock = new BlockModel()
-            {
+        //public BlockModel GenesisBlock()
+        //{
+        //    BlockModel genesisBlock = new BlockModel()
+        //    {
 
-            };
-            return genesisBlock;
-        }
+        //    };
+        //    return genesisBlock;
+        //}
 
     }
 }

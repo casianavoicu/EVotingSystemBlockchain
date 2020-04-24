@@ -6,8 +6,6 @@
 
         public string PrivateKey { get; set; }
 
-        public string ElectionAddress { get; set; }
-
-        public string CandidateAddress { get; set; }
+        public CreateVoteOption Vote { get; set; }
     }
 }

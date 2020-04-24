@@ -1,10 +1,10 @@
 ﻿using EVotingSystem.Application.Model;
 
-namespace EVotingSystem.Application
+namespace EVotingSystem.Application.Interface
 {
     public interface IBlockService
     {
         //BlockModel MineBlock()
-        BlockModel GenesisBlock();
+        //BlockModel GenesisBlock();
     }
 }

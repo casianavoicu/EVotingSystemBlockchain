@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TcljQtERcAfDB8Hpi/CkuoVRQxf2R7d/j/NEzKQvg3/zJCbGoqTIynEUdoRUPhIm37+0yM/7bL9yntTgUKDcBw==",
+  "dgSpecHash": "M7WsTFnPeAu8JocBO113/Qh43Pc8mRsiIRZGrOV0jNoYTjQWxTEMBHFdXACPaGEHQ/VrxfrRE5L4IrD9jgSRrQ==",
   "success": true,
   "projectFilePath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Api\\EVotingSystem.Api.csproj",
   "expectedPackageFiles": [
@@ -51,6 +51,13 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlite-net-sqlcipher\\1.6.292\\sqlite-net-sqlcipher.1.6.292.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlitepclraw.bundle_sqlcipher\\1.1.13\\sqlitepclraw.bundle_sqlcipher.1.1.13.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlitepclraw.core\\1.1.13\\sqlitepclraw.core.1.1.13.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlitepclraw.lib.sqlcipher.linux\\1.1.13\\sqlitepclraw.lib.sqlcipher.linux.1.1.13.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlitepclraw.lib.sqlcipher.osx\\1.1.13\\sqlitepclraw.lib.sqlcipher.osx.1.1.13.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlitepclraw.lib.sqlcipher.windows\\1.1.13\\sqlitepclraw.lib.sqlcipher.windows.1.1.13.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlitepclraw.provider.sqlcipher.netstandard11\\1.1.13\\sqlitepclraw.provider.sqlcipher.netstandard11.1.1.13.nupkg.sha512",
     "C:\\Users\\Casiana\\.nuget\\packages\\swashbuckle.aspnetcore\\5.2.1\\swashbuckle.aspnetcore.5.2.1.nupkg.sha512",
     "C:\\Users\\Casiana\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.2.1\\swashbuckle.aspnetcore.swagger.5.2.1.nupkg.sha512",
     "C:\\Users\\Casiana\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.2.1\\swashbuckle.aspnetcore.swaggergen.5.2.1.nupkg.sha512",

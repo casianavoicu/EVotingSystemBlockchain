@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EVotingSystem.Application;
+using EVotingSystem.Application.Interface;
+using EVotingSystem.Blockchain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,14 +36,13 @@ namespace EVotingSystem.Api
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "ToDo API",
-                    Description = "A simple example ASP.NET Core Web API",
+                    Title = "EVotingSystem API",
+                    Description = "Digital Voting based on Blockchain Tehnology",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Shayne Boyer",
-                        Email = string.Empty,
-                        Url = new Uri("https://twitter.com/spboyer"),
+                        Name = "Casiana Voicu",
+
                     },
                     License = new OpenApiLicense
                     {
@@ -49,7 +51,8 @@ namespace EVotingSystem.Api
                     }
                 });
             });
-            //services.AddSingleton<Node>();
+            services.AddScoped<ICandidateService, CandidateService>();
+            services.AddScoped<IDigitalSignatureService, DigitalSignatureService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,7 +81,6 @@ namespace EVotingSystem.Api
                 endpoints.MapControllers();
             });
 
-            //app.ApplicationServices.GetService<Node>().Connection();
         }
     }
 }

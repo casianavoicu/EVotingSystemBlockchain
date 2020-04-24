@@ -10,5 +10,7 @@ namespace EVotingSystem.Application.Model
 
         public DateTime EndDate { get; set; }
 
+        public bool Started { get; set; }
+
     }
 }
