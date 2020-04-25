@@ -1,8 +1,0 @@
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Domain\bin\Release\netstandard2.0\EVotingSystem.Domain.deps.json
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Domain\bin\Release\netstandard2.0\EVotingSystem.Domain.dll
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Domain\bin\Release\netstandard2.0\EVotingSystem.Domain.pdb
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Domain\obj\Release\netstandard2.0\EVotingSystem.Domain.csproj.CoreCompileInputs.cache
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Domain\obj\Release\netstandard2.0\EVotingSystem.Domain.AssemblyInfoInputs.cache
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Domain\obj\Release\netstandard2.0\EVotingSystem.Domain.AssemblyInfo.cs
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Domain\obj\Release\netstandard2.0\EVotingSystem.Domain.dll
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Domain\obj\Release\netstandard2.0\EVotingSystem.Domain.pdb
