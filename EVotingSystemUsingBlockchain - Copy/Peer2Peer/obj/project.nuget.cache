@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "4JDsHciQux4l3o5SBnali21QVVof2Hixn8Rwkg4gsoMHcgrKoiWfEI0jkbRB2HVkRM2g1559ujgsLrj2cUtdQw==",
+  "success": true,
+  "projectFilePath": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain - Copy\\Peer2Peer\\Peer2Peer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Casiana\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\websocketsharp-netstandard\\1.0.1\\websocketsharp-netstandard.1.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "EKJR/7fSONMospGtakUkAhPxDcJvJzFHFX8ic4D36iyyy7HXbsaBTU3mM6Qj66VWFI3Zh/+z2G92lAJ6NIFELg==",
+  "success": true,
+  "projectFilePath": "D:\\Licenta\\Voting\\EVotingSystemUsingBlockchain - Copy\\EVotingSystem.Blockchain\\EVotingSystem.Blockchain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlite-net-sqlcipher\\1.6.292\\sqlite-net-sqlcipher.1.6.292.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlitepclraw.bundle_sqlcipher\\1.1.13\\sqlitepclraw.bundle_sqlcipher.1.1.13.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\sqlitepclraw.core\\1.1.13\\sqlitepclraw.core.1.1.13.nupkg.sha512"
+  ],
+  "logs": []
+}

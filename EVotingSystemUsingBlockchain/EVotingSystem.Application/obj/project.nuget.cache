@@ -1,12 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "SWxY6vbOow9Y7VQpDDfBM6WKwek2nbZmBVFLba+Ykd79R3uXOwgdcLdvftrrpCHPYkAds0BeGItr7hO+bOLyIQ==",
+  "dgSpecHash": "5c70I9b/3leYh5fLmTE/6l/ngLkFE592h/odbjQwC3QNiADTvzm+nsPf+owT7MUkXsoM+58p6B3jUmxay9RPQw==",
   "success": true,
   "projectFilePath": "D:\\Licenta\\Voting\\EvotingSystemUsingBlockchain\\EVotingSystem.Application\\EVotingSystem.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\nethereum.hex\\3.7.1\\nethereum.hex.3.7.1.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\nethereum.model\\3.7.1\\nethereum.model.3.7.1.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\nethereum.rlp\\3.7.1\\nethereum.rlp.3.7.1.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\nethereum.signer\\3.7.1\\nethereum.signer.3.7.1.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\nethereum.util\\3.7.1\\nethereum.util.3.7.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\Casiana\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Casiana\\.nuget\\packages\\portable.bouncycastle\\1.8.2\\portable.bouncycastle.1.8.2.nupkg.sha512",
     "C:\\Users\\Casiana\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
   ],
   "logs": []
