@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EVotingSystem.Application\EVotingSystem.Application.csproj" />
     <ProjectReference Include="..\Peer2Peer\Peer2Peer.csproj" />
   </ItemGroup>
 

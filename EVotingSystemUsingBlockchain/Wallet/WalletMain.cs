@@ -1,4 +1,4 @@
-﻿using EVotingSystem.Application;
+﻿using Peer2Peer;
 using System;
 using System.IO;
 
@@ -6,12 +6,12 @@ namespace Wallet
 {
     class WalletMain
     {
+        private static readonly NodeClient Client = new NodeClient();
+
         static void Main(string[] args)
         {
             string password = null;
             int selector = 0;
-            //byte[] privateKey = null;
-            //byte[] publicKey = null;
             (byte[], byte[]) keyPair = (null, null);
 
             if (File.Exists("keys.txt"))
@@ -48,9 +48,10 @@ namespace Wallet
                         Console.WriteLine("Receiver:");
                         var receiver = Console.ReadLine();
                         Transaction vote = new Transaction();
-                        var a = vote.CreateNewTransaction(receiver, keyPair);
-                        TransactionService blockchainService = new TransactionService(a);
-                        blockchainService.ReceiveTransactionFromWallet();
+                        var transaction = vote.CreateNewTransaction(receiver, keyPair);
+                        string serverUrl = "ws://127.0.0.1:6001/Wallet";
+                        Client.Initialize(serverUrl);
+                        Client.SendTransaction(transaction);
                         break;
                     case 2:
                         //Check the balance;

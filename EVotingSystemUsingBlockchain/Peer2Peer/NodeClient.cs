@@ -29,7 +29,12 @@ namespace Peer2Peer
                 {
                     if (e.Data == "Hi Client")
                     {
-                        Console.WriteLine(e.Data);
+                        //Wallet.ReceiveTransaction(e.Data);
+                        //foreach (var item in wsDict)
+                        //{
+                        //    item.Value.Send(data);
+                        //}
+
                     }
                     else
                     {
@@ -39,6 +44,13 @@ namespace Peer2Peer
                 ws.Connect();
                 ws.Send("Hi Server");
                 wsDict.Add(url, ws);
+            }
+        }
+        public void SendTransaction(string data)
+        {
+            foreach (var item in wsDict)
+            {
+                item.Value.Send(data);
             }
         }
     }

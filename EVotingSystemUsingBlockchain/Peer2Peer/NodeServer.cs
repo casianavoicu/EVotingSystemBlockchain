@@ -21,7 +21,13 @@ namespace Peer2Peer
                 Console.WriteLine(e.Data);
                 Send("Hi Client");
             }
+            else
+            {
+                var data = e.Data;
+            }
 
         }
+
+
     }
 }

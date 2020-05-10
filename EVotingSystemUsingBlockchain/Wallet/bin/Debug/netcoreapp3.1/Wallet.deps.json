@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v3.1": {
       "Wallet/1.0.0": {
         "dependencies": {
-          "EVotingSystem.Application": "1.0.0",
           "Nethereum.Hex": "3.7.1",
           "Nethereum.Signer": "3.7.1",
           "Newtonsoft.Json": "12.0.3",
@@ -127,6 +126,7 @@
       },
       "Peer2Peer/1.0.0": {
         "dependencies": {
+          "EVotingSystem.Application": "1.0.0",
           "Newtonsoft.Json": "12.0.3",
           "WebSocketSharp-netstandard": "1.0.1"
         },
