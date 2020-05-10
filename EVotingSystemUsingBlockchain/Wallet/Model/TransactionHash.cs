@@ -9,5 +9,7 @@ namespace Wallet.Model
         public string Vote { get; set; }
 
         public DateTime Time { get; set; }
+
+        public int Type { get; set; }
     }
 }

@@ -20,7 +20,5 @@ namespace EVotingSystem.Blockchain
         [NotNull]
         public int TransactionId { get; set; }
 
-        [NotNull]
-        public int TransactionType { get; set; }
     }
 }

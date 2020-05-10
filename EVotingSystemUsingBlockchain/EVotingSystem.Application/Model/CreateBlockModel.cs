@@ -2,7 +2,7 @@
 
 namespace EVotingSystem.Application.Model
 {
-    public class CreateBlockModel<T>
+    public class CreateBlockModel
     {
         public int BlockIndex { get; set; }
 
@@ -10,7 +10,7 @@ namespace EVotingSystem.Application.Model
 
         public byte[] PreviousHash { get; set; }
 
-        public T Transaction { get; set; }
+        public CreateTransactionModel Transaction { get; set; }
 
         public byte[] BlockHash { get; set; }
 

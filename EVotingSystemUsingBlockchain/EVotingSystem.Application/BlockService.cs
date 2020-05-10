@@ -9,7 +9,7 @@ namespace EVotingSystem.Application
 
         }
 
-        public BlockModel<CreateTransactionVoteModel> GenesisBlock()
+        public CreateBlockModel GenesisBlock()
         {
             //BlockModel<CreateTransactionVoteModel> genesisBlock = new BlockModel<CreateTransactionVoteModel>()
             //{
@@ -24,8 +24,11 @@ namespace EVotingSystem.Application
             return null;
         }
 
-        public BlockModel<CreateTransactionVoteModel> CreateBlock(CreateTransactionVoteModel transaction)
+        public CreateBlockModel CreateBlock(CreateTransactionModel transaction)
         {
+            //create blockModel
+            //hash block
+            //insert into db
             return null;
         }
     }

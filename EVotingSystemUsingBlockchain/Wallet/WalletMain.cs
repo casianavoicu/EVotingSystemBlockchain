@@ -50,7 +50,7 @@ namespace Wallet
                         Transaction vote = new Transaction();
                         var a = vote.CreateNewTransaction(receiver, keyPair);
                         TransactionService blockchainService = new TransactionService(a);
-                        blockchainService.ReceiveVoteTransactionFromWallet();
+                        blockchainService.ReceiveTransactionFromWallet();
                         break;
                     case 2:
                         //Check the balance;

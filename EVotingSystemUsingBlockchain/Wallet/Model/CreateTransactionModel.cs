@@ -17,6 +17,8 @@ namespace Wallet.Model
 
         public string HashedData { get; set; }
 
+        public int Type { get; set; }
+
         public string Serialize()
         {
             var deserializeSettings = new JsonSerializerSettings
@@ -33,7 +35,8 @@ namespace Wallet.Model
                 HashedData = HashedData,
                 Signature = Signature,
                 Timestamp = Timestamp,
-                Vote = Vote
+                Vote = Vote,
+                Type = Type
             };
 
             return JsonConvert.SerializeObject(model, deserializeSettings);

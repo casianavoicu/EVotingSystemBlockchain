@@ -1,8 +1,5 @@
 ﻿using EVotingSystem.Application.Model;
 using EVotingSystem.Application.Utils;
-using Nethereum.Hex.HexConvertors.Extensions;
-using Nethereum.Signer;
-using System;
 
 namespace EVotingSystem.Application
 {
@@ -15,28 +12,17 @@ namespace EVotingSystem.Application
             this.Transaction = Transaction;
         }
 
-        public CreateTransactionVoteModel ReceiveVoteTransactionFromWallet()
+        public CreateTransactionModel ReceiveTransactionFromWallet()
         {
-            CreateTransactionVoteModel model = new CreateTransactionVoteModel();
-            CreateTransactionVoteModel transaction = model.Deserialize(Transaction);
+            CreateTransactionModel model = new CreateTransactionModel();
+            CreateTransactionModel transaction = model.Deserialize(Transaction);
 
-            if (EccUtils.ValidateTransaction(model.FromAddress, model.HashedData, model.Signature))
+            if (EccUtils.ValidateTransaction(transaction.FromAddress, transaction.HashedData, transaction.Signature))
                 return transaction;
             else
                 return null;
-
-        }
-
-        public CreateTransactionInputModel ReceiveInputTransactionFromWallet()
-        {
-            CreateTransactionInputModel model = new CreateTransactionInputModel();
-            CreateTransactionInputModel transaction = model.Deserialize(Transaction);
-
-            if (EccUtils.ValidateTransaction(model.FromAddress, model.HashedData, model.Signature))
-                return transaction;
-            else
-                return null;
-
+            //save into local db
+            //verify if transaction is type=1 =>increase balance
         }
 
     }

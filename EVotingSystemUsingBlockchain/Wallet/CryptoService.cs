@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Transactions;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Signer;
 using Newtonsoft.Json;
@@ -22,13 +23,14 @@ namespace Wallet
             return Convert.ToBase64String(ethECKey.Sign(hashedData).ToDER());
         }
 
-        public static string CalculateTransactionHash(string vote, string address, DateTime dateTime)
+        public static string CalculateTransactionHash(string vote, string address, DateTime dateTime, int type)
         {
             TransactionHash transactionHash = new TransactionHash
             {
                 Candidate = address,
                 Vote = vote,
-                Time = dateTime
+                Time = dateTime,
+                Type = type
             };
 
             return Convert.ToBase64String(CryptoService.CreateHash(JsonConvert.SerializeObject(transactionHash)));

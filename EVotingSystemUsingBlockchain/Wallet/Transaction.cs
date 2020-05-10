@@ -13,8 +13,9 @@ namespace Wallet
                 ToAddress = receiverPublicKey,
                 Vote = "test", //zknp
                 Timestamp = DateTime.Now.ToUniversalTime(),
+                Type = 1
             };
-            model.HashedData = CryptoService.CalculateTransactionHash(model.Vote, model.ToAddress, model.Timestamp);
+            model.HashedData = CryptoService.CalculateTransactionHash(model.Vote, model.ToAddress, model.Timestamp, model.Type);
             model.Signature = CryptoService.CreateSignature(Convert.FromBase64String(model.HashedData), keyPair.Item1);
 
             return model.Serialize();
