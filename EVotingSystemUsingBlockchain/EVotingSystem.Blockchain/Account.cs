@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace EVotingSystem.Blockchain
 {
@@ -12,5 +13,8 @@ namespace EVotingSystem.Blockchain
 
         [NotNull]
         public string PublicKey { get; set; }
+
+        [NotNull]
+        public int Balance { get; set; }
     }
 }

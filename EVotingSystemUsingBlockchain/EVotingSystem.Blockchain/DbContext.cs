@@ -15,15 +15,26 @@ namespace EVotingSystem.Blockchain
         private static void CreateDB(SQLiteConnection connection)
         {
             connection.CreateTable<Block>();
-            connection.CreateTable<TransactionCandidateInput>();
-            connection.CreateTable<TransactionElectionInput>();
-            connection.CreateTable<TransactionVoteInput>();
+            connection.CreateTable<Transaction>();
             connection.CreateTable<Account>();
         }
 
-        public static void InsertCandidate(TransactionCandidateInput candidateInput)
-        {
-            connection.Insert(candidateInput);
-        }
+        //public static void InsertTransaction(Transaction transaction)
+        //{
+        //    connection.Insert(transaction);
+        //}
+        //public static void InsertAccount(Account account)
+        //{
+        //    connection.Insert(account);
+        //}
+        //public static void InsertBlock(Block block)
+        //{
+        //    connection.Insert(block);
+        //}
+
+        //select transactions,accounts,blocks
+        //select balance by public key
+        //select all users with type 2 <-candidates
+
     }
 }

@@ -1,12 +1,18 @@
-﻿using EVotingSystem.Application.Interface;
-
-namespace EVotingSystem.Application
+﻿namespace EVotingSystem.Application
 {
-    public class BlockchainService : IBlockchainService
+    public class BlockchainService
     {
-        public BlockchainService()
+        private readonly string Transaction = null;
+
+        public BlockchainService(string Transaction)
+        {
+            this.Transaction = Transaction;
+        }
+
+        public string CreateNewBlock()
         {
 
+            return null;
         }
     }
 
