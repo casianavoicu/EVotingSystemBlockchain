@@ -1,9 +1,0 @@
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Application\bin\Debug\netstandard2.0\EVotingSystem.Application.deps.json
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Application\bin\Debug\netstandard2.0\EVotingSystem.Application.dll
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Application\bin\Debug\netstandard2.0\EVotingSystem.Application.pdb
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Application\obj\Debug\netstandard2.0\EVotingSystem.Application.AssemblyInfoInputs.cache
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Application\obj\Debug\netstandard2.0\EVotingSystem.Application.AssemblyInfo.cs
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Application\obj\Debug\netstandard2.0\EVotingSystem.Application.dll
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Application\obj\Debug\netstandard2.0\EVotingSystem.Application.pdb
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Application\obj\Debug\netstandard2.0\EVotingSystem.Application.csprojAssemblyReference.cache
-D:\Licenta\Voting\EvotingSystemUsingBlockchain\EVotingSystem.Application\obj\Debug\netstandard2.0\EVotingSystem.Application.csproj.CoreCompileInputs.cache
