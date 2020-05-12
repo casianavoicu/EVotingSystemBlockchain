@@ -3,7 +3,7 @@ using Wallet.Model;
 
 namespace Wallet
 {
-    public class Transaction
+    public class TransactionService
     {
         public string CreateNewTransaction(string receiverPublicKey, (byte[], byte[]) keyPair)
         {

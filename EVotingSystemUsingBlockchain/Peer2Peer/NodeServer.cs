@@ -21,13 +21,12 @@ namespace Peer2Peer
                 Console.WriteLine(e.Data);
                 Send("Hi Client");
             }
-            else
+            else if(e.Data.StartsWith("Transaction"))
             {
-                var data = e.Data;
+                Console.WriteLine(e.Data);
+                Wallet.ReceiveTransaction(e.Data);
+                Send("Transaction registered");
             }
-
         }
-
-
     }
 }

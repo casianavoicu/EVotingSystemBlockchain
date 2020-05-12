@@ -12,13 +12,17 @@ namespace EVotingSystem.Application
             this.Transaction = Transaction;
         }
 
-        public CreateTransactionModel ReceiveTransactionFromWallet()
+        public string ReceiveTransactionFromWallet()
         {
             CreateTransactionModel model = new CreateTransactionModel();
             CreateTransactionModel transaction = model.Deserialize(Transaction);
 
-            if (EccUtils.ValidateTransaction(transaction.FromAddress, transaction.HashedData, transaction.Signature))
-                return transaction;
+            if (CryptoUtils.ValidateTransaction(transaction.FromAddress, transaction.HashedData, transaction.Signature))
+            {
+                BlockService block = new BlockService();
+                block.CreateBlock(transaction);
+                return "Verified";
+            }
             else
                 return null;
             //save into local db

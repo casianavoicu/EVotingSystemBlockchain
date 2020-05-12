@@ -11,7 +11,6 @@
 
         public string CreateNewBlock()
         {
-
             return null;
         }
     }

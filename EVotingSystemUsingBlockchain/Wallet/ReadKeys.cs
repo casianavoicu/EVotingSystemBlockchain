@@ -1,7 +1,5 @@
-﻿using Nethereum.Signer;
-using System;
+﻿using System;
 using System.IO;
-using System.Text;
 
 namespace Wallet
 {

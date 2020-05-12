@@ -1,12 +1,10 @@
-﻿using Nethereum.Hex.HexConvertors.Extensions;
-using Nethereum.Signer;
+﻿using Nethereum.Signer;
 using System;
 using System.IO;
-using System.Text;
 
 namespace Wallet
 {
-    public static class GenerateKeys
+    public static class GenerateKeysService
     {
         public static (string, string) CreateKeyPair(string password)
         {

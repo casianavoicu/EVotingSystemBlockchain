@@ -2,7 +2,7 @@
 
 namespace Wallet.Model
 {
-    public class TransactionHash
+    public class TransactionHashModel
     {
         public string Candidate { get; set; }
 

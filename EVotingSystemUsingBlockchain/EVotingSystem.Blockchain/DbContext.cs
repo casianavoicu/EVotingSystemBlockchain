@@ -8,7 +8,7 @@ namespace EVotingSystem.Blockchain
 
         static DbContext()
         {
-            connection = new SQLiteConnection("blockchain");
+            connection = new SQLiteConnection("Blockchain.sqlite");
             CreateDB(connection);
         }
 
@@ -19,18 +19,18 @@ namespace EVotingSystem.Blockchain
             connection.CreateTable<Account>();
         }
 
-        //public static void InsertTransaction(Transaction transaction)
-        //{
-        //    connection.Insert(transaction);
-        //}
+        public static void InsertTransaction(Transaction transaction)
+        {
+            connection.Insert(transaction);
+        }
         //public static void InsertAccount(Account account)
         //{
         //    connection.Insert(account);
         //}
-        //public static void InsertBlock(Block block)
-        //{
-        //    connection.Insert(block);
-        //}
+        public static void InsertBlock(Block block)
+        {
+            connection.Insert(block);
+        }
 
         //select transactions,accounts,blocks
         //select balance by public key

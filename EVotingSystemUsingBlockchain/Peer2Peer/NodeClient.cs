@@ -12,7 +12,7 @@ namespace Peer2Peer
         IDictionary<string, WebSocket> wsDict = new Dictionary<string, WebSocket>();
         public static List<string> Ports = new List<string>()
         {
-            "1001",
+            "6001",
             "1002",
         };
         public void Initialize(string port)
@@ -36,9 +36,9 @@ namespace Peer2Peer
                         //}
 
                     }
-                    else
+                    else if(e.Data == "Transaction registered")
                     {
-
+                        Console.WriteLine("Transaction registered");
                     }
                 };
                 ws.Connect();
@@ -48,9 +48,10 @@ namespace Peer2Peer
         }
         public void SendTransaction(string data)
         {
+            var itemToSend = "Transaction" + data;
             foreach (var item in wsDict)
             {
-                item.Value.Send(data);
+                item.Value.Send(itemToSend);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace EVotingSystem.Application.Model
 {
@@ -10,10 +11,16 @@ namespace EVotingSystem.Application.Model
 
         public byte[] PreviousHash { get; set; }
 
-        public CreateTransactionModel Transaction { get; set; }
+        public string Transaction { get; set; }
 
         public byte[] BlockHash { get; set; }
 
-        public int Nonce { get; set; }
+        public CreateBlockModel Deserialize(string content)
+        {
+
+            var result = JsonConvert.DeserializeObject<CreateBlockModel>(content);
+
+            return result;
+        }
     }
 }

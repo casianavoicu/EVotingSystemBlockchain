@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
-using System.Text;
+using System
+    .Text;
 using System.Transactions;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Signer;
@@ -25,7 +26,7 @@ namespace Wallet
 
         public static string CalculateTransactionHash(string vote, string address, DateTime dateTime, int type)
         {
-            TransactionHash transactionHash = new TransactionHash
+            TransactionHashModel transactionHash = new TransactionHashModel
             {
                 Candidate = address,
                 Vote = vote,
@@ -33,7 +34,7 @@ namespace Wallet
                 Type = type
             };
 
-            return Convert.ToBase64String(CryptoService.CreateHash(JsonConvert.SerializeObject(transactionHash)));
+            return Convert.ToBase64String(CreateHash(JsonConvert.SerializeObject(transactionHash)));
         }
     }
 }

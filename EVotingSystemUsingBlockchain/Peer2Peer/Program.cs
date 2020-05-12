@@ -10,7 +10,7 @@ namespace Peer2Peer
         private static string _name = "Unknown";
         public static void Main(string[] args)
         {
-
+            Port = Convert.ToInt32("6001");
             if (args.Length >= 1)
                 Port = int.Parse(args[0]);
             if (args.Length >= 2)
@@ -26,12 +26,10 @@ namespace Peer2Peer
                 Console.WriteLine($"Current user is {_name}");
             }
 
-            Console.WriteLine("=========================");
             Console.WriteLine("1. Connect to a server");
             Console.WriteLine("2. Add a transaction");
             Console.WriteLine("3. Display Blockchain");
             Console.WriteLine("4. Exit");
-            Console.WriteLine("=========================");
 
             int selection = 0;
             while (selection != 4)

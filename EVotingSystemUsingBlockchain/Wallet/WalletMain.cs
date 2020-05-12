@@ -23,7 +23,7 @@ namespace Wallet
             }
             else
             {
-                Console.WriteLine("You have enter a password in order to register:");
+                Console.WriteLine("You have to enter a password in order to register:");
                 Console.WriteLine("Enter a password:");
                 password = Console.ReadLine();
                 Console.WriteLine("Confirm password:");
@@ -35,39 +35,40 @@ namespace Wallet
                     Console.WriteLine("Confirm password:");
                     confirm = Console.ReadLine();
                 }
-                GenerateKeys.CreateKeyPair(password);
-                Console.WriteLine("You have been registered into our system");
+                GenerateKeysService.CreateKeyPair(password);
+                Console.WriteLine("You have been registered in the system");
                 Console.WriteLine("Choose another actions:");
             }
 
-            while (selector != 5)
+            while (selector != 6)
             {
+                Console.WriteLine("Please select an action");
+                selector = Convert.ToInt32(Console.ReadLine());
                 switch (selector)
                 {
                     case 1:
                         Console.WriteLine("Receiver:");
-                        var receiver = Console.ReadLine();
-                        Transaction vote = new Transaction();
-                        var transaction = vote.CreateNewTransaction(receiver, keyPair);
+                        string receiver = Console.ReadLine();
+                        TransactionService vote = new TransactionService();
+                        //make it random
                         string serverUrl = "ws://127.0.0.1:6001/Wallet";
                         Client.Initialize(serverUrl);
-                        Client.SendTransaction(transaction);
+                        Client.SendTransaction(vote.CreateNewTransaction(receiver, keyPair));
                         break;
                     case 2:
                         //Check the balance;
                         break;
                     case 3:
-                        //send transactions to peers(request);
-                        //Create Transaction
                         //View all address
                         Console.WriteLine("Sender:");
                         break;
                     case 4:
-                        //request transactions
+                        //view all transactions for you
+                        break;
+                    case 5:
+                        //view all transactions from you
                         break;
                 }
-
-                selector = Convert.ToInt32(Console.ReadLine());
             }
         }
     }
