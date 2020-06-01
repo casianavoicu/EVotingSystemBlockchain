@@ -15,8 +15,10 @@ namespace Wallet
                 Timestamp = DateTime.Now.ToUniversalTime(),
                 Type = 1
             };
-            model.HashedData = CryptoService.CalculateTransactionHash(model.Vote, model.ToAddress, model.Timestamp, model.Type);
-            model.Signature = CryptoService.CreateSignature(Convert.FromBase64String(model.HashedData), keyPair.Item1);
+
+            string hashedData = CryptoService.CalculateTransactionHash(model.Vote, model.ToAddress, model.Timestamp, model.Type);
+
+            model.Signature = CryptoService.CreateSignature(Convert.FromBase64String(hashedData), keyPair.Item1);
 
             return model.Serialize();
         }

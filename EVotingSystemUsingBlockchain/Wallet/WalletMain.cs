@@ -1,13 +1,12 @@
-﻿using Peer2Peer;
+﻿using Nodes;
 using System;
 using System.IO;
+using System.Threading;
 
 namespace Wallet
 {
     class WalletMain
     {
-        private static readonly NodeClient Client = new NodeClient();
-
         static void Main(string[] args)
         {
             string password = null;
@@ -17,10 +16,18 @@ namespace Wallet
             if (File.Exists("keys.txt"))
             {
                 Console.WriteLine("Enter your password:");
-                password = Console.ReadLine();
-                keyPair = ReadKeys.ReadKeysFromFile(password);
+                while (keyPair.Item1==null)
+                {
+                    password = Console.ReadLine();
+                    keyPair = ReadKeys.ReadKeysFromFile(password);
+                    if (keyPair.Item1 == null)
+                    {
+                        Console.WriteLine("Enter a valid password");
+                    }
+                }
                 Console.WriteLine("Send Transaction: 1");
             }
+
             else
             {
                 Console.WriteLine("You have to enter a password in order to register:");
@@ -40,34 +47,55 @@ namespace Wallet
                 Console.WriteLine("Choose another actions:");
             }
 
-            while (selector != 6)
+            while (selector != 5)
             {
                 Console.WriteLine("Please select an action");
-                selector = Convert.ToInt32(Console.ReadLine());
-                switch (selector)
+                try
                 {
-                    case 1:
-                        Console.WriteLine("Receiver:");
-                        string receiver = Console.ReadLine();
-                        TransactionService vote = new TransactionService();
-                        //make it random
-                        string serverUrl = "ws://127.0.0.1:6001/Wallet";
-                        Client.Initialize(serverUrl);
-                        Client.SendTransaction(vote.CreateNewTransaction(receiver, keyPair));
-                        break;
-                    case 2:
-                        //Check the balance;
-                        break;
-                    case 3:
-                        //View all address
-                        Console.WriteLine("Sender:");
-                        break;
-                    case 4:
-                        //view all transactions for you
-                        break;
-                    case 5:
-                        //view all transactions from you
-                        break;
+                    selector = Convert.ToInt32(Console.ReadLine());
+                    switch (selector)
+                    {
+                        case 1:
+                            Console.WriteLine("Receiver:");
+                            //receive addresses;
+                            string receiver = Console.ReadLine();
+                            Console.WriteLine("Port:");
+                            int port = Convert.ToInt32(Console.ReadLine());
+                            TransactionService vote = new TransactionService();
+                            //make it random
+                            new Thread(() =>
+                            {
+                                Thread.CurrentThread.IsBackground = true;
+                                Client.Connect("127.0.0.1", vote.CreateNewTransaction(receiver, keyPair), 1, port);
+                            }).Start();
+
+                            break;
+                        case 2:
+                            new Thread(() =>
+                            {
+                                Thread.CurrentThread.IsBackground = true;
+                                Client.Connect("127.0.0.1", "Balance", 1, 13000);
+                            }).Start();
+                            break;
+                        case 3:
+                            new Thread(() =>
+                            {
+                                Thread.CurrentThread.IsBackground = true;
+                                Client.Connect("127.0.0.1", "TPublicKey+key-ul", 1, 13000);
+                            }).Start();
+                            break;
+                        case 4:
+                            new Thread(() =>
+                            {
+                                Thread.CurrentThread.IsBackground = true;
+                                Client.Connect("127.0.0.1", "FPublicKey+key-ul", 1, 13000);
+                            }).Start();
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Please insert a valid number");
                 }
             }
         }

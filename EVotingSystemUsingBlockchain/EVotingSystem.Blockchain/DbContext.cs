@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System.Collections.Generic;
 
 namespace EVotingSystem.Blockchain
 {
@@ -23,18 +24,56 @@ namespace EVotingSystem.Blockchain
         {
             connection.Insert(transaction);
         }
-        //public static void InsertAccount(Account account)
-        //{
-        //    connection.Insert(account);
-        //}
+
+        public static void InsertAccount(Account account)
+        {
+            connection.Insert(account);
+        }
+
         public static void InsertBlock(Block block)
         {
             connection.Insert(block);
         }
 
-        //select transactions,accounts,blocks
-        //select balance by public key
-        //select all users with type 2 <-candidates
+        public static int GetAccountBalance(string publicKey)
+        {
+            return connection.Table<Account>().
+                FirstOrDefault(p => p.AccountAddress == publicKey).Balance;
+        }
 
+        public static Account GetAccount(string publicKey)
+        {
+            return connection.Table<Account>().
+                FirstOrDefault(p => p.AccountAddress == publicKey);
+        }
+
+        public static IEnumerable<Transaction> GetTransactionFromAddress(string publicKey)
+        {
+            return connection.Table<Transaction>().
+                Where(row => row.FromAddress == publicKey);
+        }
+
+        public static IEnumerable<Transaction> GetTransactionToAddress(string publicKey)
+        {
+            return connection.Table<Transaction>().
+                Where(row => row.ToAddress == publicKey);
+        }
+
+        public static void UpdateBalance(Account account)
+        {
+            connection.Update(account);
+        }
+
+        public static Block PreviousBlock()
+        {
+            return connection.Table<Block>().OrderByDescending(s => s.BlockIndex)
+                .FirstOrDefault();
+        }
+
+        public static int BlockId(int index)
+        {
+            return connection.Table<Block>().
+                FirstOrDefault(i => i.BlockIndex == index).BlockId;
+        }
     }
 }

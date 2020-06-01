@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
+using System.Threading.Tasks;
 using WebSocketSharp;
 namespace Peer2Peer
 {
@@ -15,28 +12,29 @@ namespace Peer2Peer
             "6001",
             "1002",
         };
-        public void Initialize(string port)
+        public async Task Initialize(string port)
         {
-            ConnectToNodes(port);
+            await ConnectToNodes(port);
         }
 
-        private void ConnectToNodes(string url)
+        private async Task ConnectToNodes(string url)
         {
             if (!wsDict.ContainsKey(url))
             {
-                WebSocket ws = new WebSocket(url);
+                var ws = new WebSocket(url);
                 ws.OnMessage += (sender, e) =>
                 {
                     if (e.Data == "Hi Client")
                     {
-                        //Wallet.ReceiveTransaction(e.Data);
-                        //foreach (var item in wsDict)
-                        //{
-                        //    item.Value.Send(data);
-                        //}
+                            //Wallet.ReceiveTransaction(e.Data);
+                            //foreach (var item in wsDict)
+                            //{
+                            //    item.Value.Send(data);
+                            //}
+                            Console.WriteLine("Hi Client");
 
                     }
-                    else if(e.Data == "Transaction registered")
+                    else if (e.Data == "Transaction registered")
                     {
                         Console.WriteLine("Transaction registered");
                     }
@@ -46,6 +44,7 @@ namespace Peer2Peer
                 wsDict.Add(url, ws);
             }
         }
+
         public void SendTransaction(string data)
         {
             var itemToSend = "Transaction" + data;
@@ -53,6 +52,19 @@ namespace Peer2Peer
             {
                 item.Value.Send(itemToSend);
             }
+        }
+
+        public void SendA(string a)
+        {
+            foreach (var item in wsDict)
+            {
+                item.Value.Send("Hi");
+            }
+        }
+
+        public void Send(string a, WebSocket webSocket)
+        {
+            webSocket.Send(a);
         }
     }
 }

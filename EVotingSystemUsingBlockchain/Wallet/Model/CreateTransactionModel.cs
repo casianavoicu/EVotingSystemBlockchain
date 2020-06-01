@@ -15,13 +15,11 @@ namespace Wallet.Model
 
         public DateTime Timestamp { get; set; }
 
-        public string HashedData { get; set; }
-
         public int Type { get; set; }
 
         public string Serialize()
         {
-            var deserializeSettings = new JsonSerializerSettings
+            var serializeSettings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.All,
                 Formatting = Formatting.Indented,
@@ -32,14 +30,13 @@ namespace Wallet.Model
             {
                 FromAddress = FromAddress,
                 ToAddress = ToAddress,
-                HashedData = HashedData,
                 Signature = Signature,
                 Timestamp = Timestamp,
                 Vote = Vote,
                 Type = Type
             };
 
-            return JsonConvert.SerializeObject(model, deserializeSettings);
+            return JsonConvert.SerializeObject(model, serializeSettings);
         }
     }
 }

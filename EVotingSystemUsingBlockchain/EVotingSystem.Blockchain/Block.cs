@@ -14,10 +14,10 @@ namespace EVotingSystem.Blockchain
         [NotNull]
         public DateTime TimeStamp { get; set; }
 
-        public byte[] PreviousHash { get; set; }
+        public string PreviousHash { get; set; }
 
-        [NotNull]
-        public string Transaction { get; set; }
+        public string Hash { get; set; }
 
+        public string StateRootHash { get; set; }
     }
 }

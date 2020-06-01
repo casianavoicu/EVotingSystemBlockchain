@@ -1,11 +1,95 @@
-﻿namespace EVotingSystem.Application
+﻿using EVotingSystem.Application.Model;
+using EVotingSystem.Blockchain;
+using System.Collections.Generic;
+
+namespace EVotingSystem.Application
 {
     public class AccountService
     {
-        public string CreateAccount(string account)
+        public void CreateAccount(string voterPublicKey, string address)
+        {
+            Account account = new Account
+            {
+                AccountAddress = address,
+                PublicKey = voterPublicKey,
+                Balance = 0
+            };
+            DbContext.InsertAccount(account);
+
+        }
+
+        public int CheckBalance(string voterPublicKey)
+        {
+            int balance = DbContext.GetAccountBalance(voterPublicKey);
+            return balance;
+        }
+
+        public AccountModel VerifyIfVoterExists(string voterPublicKey)
+        {
+            var voter = DbContext.GetAccount(voterPublicKey);
+
+            if (voter == null)
+                return null;
+
+            AccountModel account = new AccountModel
+            {
+                AccountAddress = voter.AccountAddress,
+                Balance = voter.Balance,
+                PublicKey = voter.PublicKey
+            };
+
+            return account;
+        }
+
+        public IEnumerable<string> GetAccountSentTransactions(string voterPublicKey)
+        {
+            IEnumerable<Transaction> transactions = DbContext.GetTransactionFromAddress(voterPublicKey);
+            if (transactions == null)
+                return null;
+
+            List<string> result = new List<string>();
+            foreach (var item in transactions)
+            {
+                result.Add(item.ToAddress);
+            }
+
+            return result;
+        }
+
+        public IEnumerable<string> GetAccountReceivedTransactions(string voterPublicKey)
         {
 
-            return null;
+            var transactions = DbContext.GetTransactionToAddress(voterPublicKey);
+            if (transactions == null)
+                return null;
+
+            List<string> result = new List<string>();
+            foreach (var item in transactions)
+            {
+                result.Add(item.FromAddress);
+            }
+
+            return result;
+        }
+
+        public void UpdateBalanceAfterVote(AccountModel account)
+        {
+            DbContext.UpdateBalance(new Account
+            {
+                AccountAddress = account.AccountAddress,
+                Balance = account.Balance--,
+                PublicKey = account.PublicKey
+            });
+        }
+
+        public void UpdateBalanceBeforeVote(AccountModel account)
+        {
+            DbContext.UpdateBalance(new Account
+            {
+                AccountAddress = account.AccountAddress,
+                Balance = account.Balance++,
+                PublicKey = account.PublicKey
+            });
         }
     }
 }

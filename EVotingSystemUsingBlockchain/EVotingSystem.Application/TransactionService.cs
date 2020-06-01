@@ -1,33 +1,86 @@
 ﻿using EVotingSystem.Application.Model;
 using EVotingSystem.Application.Utils;
+using EVotingSystem.Blockchain;
 
 namespace EVotingSystem.Application
 {
     public class TransactionService
     {
-        private readonly string Transaction = null;
+        private readonly string transaction = null;
 
-        public TransactionService(string Transaction)
+        public TransactionService(string transaction)
         {
-            this.Transaction = Transaction;
+            this.transaction = transaction;
         }
 
-        public string ReceiveTransactionFromWallet()
+        public (TransactionModel, string) ReceiveTransactionFromWallet()
         {
-            CreateTransactionModel model = new CreateTransactionModel();
-            CreateTransactionModel transaction = model.Deserialize(Transaction);
+            TransactionModel model = new TransactionModel();
+            TransactionModel deserializedTransaction = model.Deserialize(transaction);
+            AccountService accountService = new AccountService();
 
-            if (CryptoUtils.ValidateTransaction(transaction.FromAddress, transaction.HashedData, transaction.Signature))
+            if (VerifyVoter(deserializedTransaction.FromAddress))
             {
-                BlockService block = new BlockService();
-                block.CreateBlock(transaction);
-                return "Verified";
+                string hash = "";
+
+                if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, transaction, deserializedTransaction.Signature, out hash))
+                {
+                    accountService.UpdateBalanceAfterVote(accountService.
+                        VerifyIfVoterExists(deserializedTransaction.FromAddress));
+                    return (deserializedTransaction, hash);
+                }
             }
-            else
-                return null;
-            //save into local db
-            //verify if transaction is type=1 =>increase balance
+
+            return (null, null);
         }
 
+        public void ReceiveTransactionFromBlock(string data)
+        {
+            TransactionModel model = new TransactionModel();
+            TransactionModel deserializedTransaction = model.Deserialize(transaction);
+            string hash = "";
+
+            if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, transaction, deserializedTransaction.Signature, out hash))
+            {
+                InsertIntoDatabase(deserializedTransaction, hash);
+                AccountService account = new AccountService();
+                AccountModel accountModel = new AccountModel
+                {
+                    PublicKey = deserializedTransaction.FromAddress,
+                };
+            }
+
+        }
+
+        private void InsertIntoDatabase(TransactionModel transaction, string hash)
+        {
+            DbContext.InsertTransaction(new Transaction
+            {
+                FromAddress = transaction.FromAddress,
+                ToAddress = transaction.ToAddress,
+                HashedData = hash,
+                Signature = transaction.Signature,
+                Timestamp = transaction.Timestamp,
+                Type = transaction.Type,
+                Vote = transaction.Vote,
+            });
+        }
+
+        private bool VerifyVoter(string publickKey)
+        {
+            AccountService account = new AccountService();
+
+            if (account.VerifyIfVoterExists(publickKey) == null)
+            {
+                return false;
+            }
+
+            if (account.CheckBalance(publickKey) == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

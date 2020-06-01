@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
-using System
-    .Text;
-using System.Transactions;
+using System.Text;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Signer;
 using Newtonsoft.Json;

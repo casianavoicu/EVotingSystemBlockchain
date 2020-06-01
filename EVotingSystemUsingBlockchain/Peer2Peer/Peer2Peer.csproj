@@ -14,8 +14,4 @@
     <ProjectReference Include="..\EVotingSystem.Application\EVotingSystem.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mapper\" />
-  </ItemGroup>
-
 </Project>

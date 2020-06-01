@@ -19,17 +19,13 @@ namespace Peer2Peer
             if (Port > 0)
             {
                 _server = new NodeServer();
-                _server.Start();
+                _server.Start(Port);
             }
             if (_name != "Unkown")
             {
                 Console.WriteLine($"Current user is {_name}");
             }
 
-            Console.WriteLine("1. Connect to a server");
-            Console.WriteLine("2. Add a transaction");
-            Console.WriteLine("3. Display Blockchain");
-            Console.WriteLine("4. Exit");
 
             int selection = 0;
             while (selection != 4)
@@ -42,13 +38,10 @@ namespace Peer2Peer
                         Client.Initialize($"{serverUrl}/Wallet");
                         break;
                     case 2:
-                        Console.WriteLine("Please enter the receiver name");
-                        string receiverName = Console.ReadLine();
-                        Console.WriteLine("Please enter the amount");
-                        string amount = Console.ReadLine();
+
                         break;
                     case 3:
-                        Console.WriteLine("Blockchain");
+
                         break;
 
                 }

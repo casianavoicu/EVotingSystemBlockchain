@@ -28,5 +28,8 @@ namespace EVotingSystem.Blockchain
 
         [NotNull]
         public int Type { get; set; }
+
+        [NotNull]
+        public int BlockId { get; set; }
     }
 }

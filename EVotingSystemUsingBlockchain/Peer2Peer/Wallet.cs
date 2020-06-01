@@ -12,6 +12,11 @@ namespace Peer2Peer
             TransactionService blockchainService = new TransactionService(transaction);
 
             blockchainService.ReceiveTransactionFromWallet();
+           // System.Threading.Thread.Sleep(10000);
+           //NodeClient node = new NodeClient();
+           // //var _server = new NodeServer();
+           // //_server.Start(6003);
+           //node.Initialize("ws://127.0.0.1:6003/Wallet");
         }
 
         public static string CheckBalance(string publicKey)

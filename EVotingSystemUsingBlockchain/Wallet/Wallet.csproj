@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Peer2Peer\Peer2Peer.csproj" />
+    <ProjectReference Include="..\Nodes\Nodes.csproj" />
   </ItemGroup>
 
 </Project>
