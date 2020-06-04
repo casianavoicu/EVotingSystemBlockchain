@@ -6,7 +6,7 @@ namespace EVotingSystem.Application
 {
     public class AccountService
     {
-        public void CreateAccount(string voterPublicKey, string address)
+        public AccountModel CreateAccount(string voterPublicKey, string address)
         {
             Account account = new Account
             {
@@ -16,6 +16,12 @@ namespace EVotingSystem.Application
             };
             DbContext.InsertAccount(account);
 
+            return new AccountModel
+            {
+                AccountAddress = account.AccountAddress,
+                PublicKey = account.PublicKey,
+                Balance = account.Balance
+            };
         }
 
         public int CheckBalance(string voterPublicKey)
@@ -84,12 +90,13 @@ namespace EVotingSystem.Application
 
         public void UpdateBalanceBeforeVote(AccountModel account)
         {
-            DbContext.UpdateBalance(new Account
+            Account accountModel = new Account
             {
                 AccountAddress = account.AccountAddress,
-                Balance = account.Balance++,
                 PublicKey = account.PublicKey
-            });
+            };
+            accountModel.Balance = account.Balance + 1;
+            DbContext.UpdateBalance(accountModel);
         }
     }
 }

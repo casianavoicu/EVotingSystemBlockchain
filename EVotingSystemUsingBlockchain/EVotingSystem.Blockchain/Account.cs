@@ -14,7 +14,6 @@ namespace EVotingSystem.Blockchain
         [NotNull]
         public string PublicKey { get; set; }
 
-        [NotNull]
         public int Balance { get; set; }
     }
 }

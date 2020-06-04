@@ -61,7 +61,10 @@ namespace EVotingSystem.Blockchain
 
         public static void UpdateBalance(Account account)
         {
-            connection.Update(account);
+            Account result = connection.Table<Account>().
+                Where(row => row.AccountAddress == account.AccountAddress).FirstOrDefault();
+            result.Balance = account.Balance;
+            connection.Update(result);
         }
 
         public static Block PreviousBlock()
@@ -74,6 +77,12 @@ namespace EVotingSystem.Blockchain
         {
             return connection.Table<Block>().
                 FirstOrDefault(i => i.BlockIndex == index).BlockId;
+        }
+
+        public static Block GenesisBlock()
+        {
+            return connection.Table<Block>().
+                FirstOrDefault(e => e.BlockIndex == 0);
         }
     }
 }

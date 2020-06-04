@@ -10,31 +10,38 @@ namespace EVotingSystem.Application.Utils
 {
     public static class CryptoUtils
     {
-        public static bool ValidateTransaction(string fromAddress, string data, string signature, out string hashedData)
+        public static bool ValidateTransaction(string fromAddress, TransactionModel data, string signature, out string hashedData)
         {
             var sign = Convert.FromBase64String(fromAddress).ToHex();
             var eth = new EthECKey(sign.HexToByteArray(), false);
-            var hashed = ComputeHash(data);
+            var hashed = ComputeHash(data.Vote + data.ToAddress + Convert.ToString(data.Timestamp) + Convert.ToString(data.Type));
             hashedData = Convert.ToBase64String(hashed);
+            var t = Convert.FromBase64String(hashedData);
             return eth.Verify(hashed, EthECDSASignature.FromDER(Convert.FromBase64String(signature)));
         }
 
         public static byte[] ComputeHash(string data)
         {
-            HMACSHA256 sha = new HMACSHA256();
-            return sha.ComputeHash(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data)));
+            using (SHA256 sHA256 = SHA256.Create())
+            {
+                return sHA256.ComputeHash(Encoding.UTF8.GetBytes(data));
+            }
         }
 
         public static byte[] ComputeHashBlock(CreateHashBlockModel model)
         {
-            HMACSHA256 sha = new HMACSHA256();
-            return sha.ComputeHash(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(model.Serialize())));
+            using (SHA256 sHA256 = SHA256.Create())
+            {
+                return sHA256.ComputeHash(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(model.Serialize())));
+            }
         }
 
         public static byte[] ComputeStateRootHashBlock(CreateBlockStateRootHashModel model)
         {
-            HMACSHA256 sha = new HMACSHA256();
-            return sha.ComputeHash(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(model.Serialize())));
+            using (SHA256 sHA256 = SHA256.Create())
+            {
+                return sHA256.ComputeHash(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(model.Serialize())));
+            }
         }
     }
 }

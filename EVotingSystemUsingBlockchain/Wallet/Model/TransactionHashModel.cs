@@ -4,7 +4,7 @@ namespace Wallet.Model
 {
     public class TransactionHashModel
     {
-        public string Candidate { get; set; }
+        public string Address { get; set; }
 
         public string Vote { get; set; }
 

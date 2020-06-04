@@ -13,6 +13,34 @@ namespace EVotingSystem.Application
             this.transaction = transaction;
         }
 
+        public (TransactionModel, string) ReceiveTransactionAccount()
+        {
+            TransactionModel model = new TransactionModel();
+            TransactionModel deserializedTransaction = model.Deserialize(transaction);
+            AccountService accountService = new AccountService();
+            AccountModel account = new AccountModel();
+
+            string hash = "";
+
+            if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out hash))
+            {
+                var acc = accountService.VerifyIfVoterExists(deserializedTransaction.ToAddress);
+                if (acc != null)
+                {
+                    account = acc;
+                }
+                else
+                {
+                    account = accountService.CreateAccount(deserializedTransaction.ToAddress, deserializedTransaction.ToAddress);
+                }
+                accountService.UpdateBalanceBeforeVote(account);
+
+                return (deserializedTransaction, hash);
+            }
+
+            return (null, null);
+        }
+
         public (TransactionModel, string) ReceiveTransactionFromWallet()
         {
             TransactionModel model = new TransactionModel();
@@ -23,7 +51,7 @@ namespace EVotingSystem.Application
             {
                 string hash = "";
 
-                if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, transaction, deserializedTransaction.Signature, out hash))
+                if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out hash))
                 {
                     accountService.UpdateBalanceAfterVote(accountService.
                         VerifyIfVoterExists(deserializedTransaction.FromAddress));
@@ -40,7 +68,7 @@ namespace EVotingSystem.Application
             TransactionModel deserializedTransaction = model.Deserialize(transaction);
             string hash = "";
 
-            if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, transaction, deserializedTransaction.Signature, out hash))
+            if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out hash))
             {
                 InsertIntoDatabase(deserializedTransaction, hash);
                 AccountService account = new AccountService();
@@ -51,7 +79,6 @@ namespace EVotingSystem.Application
             }
 
         }
-
         private void InsertIntoDatabase(TransactionModel transaction, string hash)
         {
             DbContext.InsertTransaction(new Transaction

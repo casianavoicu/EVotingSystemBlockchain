@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EVotingSystem.Application;
+using EVotingSystem.Blockchain;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -20,6 +22,8 @@ namespace Nodes
 
         TcpListener server = null;
         int currentPort = 0;
+        public static List<string> Transactions = new List<string>();
+        public static List<string> TransactionsAccount = new List<string>();
 
         public Server(string ip, int port)
         {
@@ -38,6 +42,12 @@ namespace Nodes
         {
             try
             {
+                BlockchainService blockchainService = new BlockchainService();
+               if (!blockchainService.VerifyIfGenesisBlockExists())
+                {
+                   blockchainService.GenesisBlock();
+
+                }
                 while (true)
                 {
                     Console.WriteLine("Waiting for a connection...");
@@ -60,10 +70,13 @@ namespace Nodes
             var stream = client.GetStream();
             string imei = String.Empty;
             string data = null;
-            Byte[] bytes = new Byte[256];
+            Byte[] bytes = new Byte[1024];
             int i;
             try
             {
+                BlockchainService blockchainService = new BlockchainService();
+                //sync
+
                 while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                 {
                     string hex = BitConverter.ToString(bytes);
@@ -76,7 +89,7 @@ namespace Nodes
                         stream.Write(reply, 0, reply.Length);
                         Console.WriteLine("Sent: {0}", str);
                         //process the transaction and create a block
-                       
+
                         foreach (var item in Ports)
                         {
                             new Thread(() =>
@@ -88,10 +101,43 @@ namespace Nodes
 
                         Console.WriteLine("Message sent to peers");
                     }
+                    else if (data.StartsWith("Account"))
+                    {
+                        int temp = data.IndexOf("Account") + 7;
+                        string transaction = data.Substring(temp);
+                        string str = "Account Registered";
+                        Byte[] reply = System.Text.Encoding.ASCII.GetBytes(str);
+                        stream.Write(reply, 0, reply.Length);
+                        Console.WriteLine("Sent: {0}", str);
+                        TransactionsAccount.Add(transaction);
+                        var result = blockchainService.ReceiveTransactionWithNewAccount(TransactionsAccount);
+                        foreach (var item in Ports)
+                        {
+                            new Thread(() =>
+                            {
+                                Thread.CurrentThread.IsBackground = true;
+                                Client.Connect("127.0.0.1", result, 7, item);
+                            }).Start();
+                        }
+
+                        Console.WriteLine("Message sent to peers");
+                    }
                     else if (data.StartsWith("Peers"))
                     {
                         Console.WriteLine("ReceivedBlock: {0}", data);
                     }
+
+                    //else if (data.StartsWith("Block"))
+                    //{
+                    //    int temp = data.IndexOf("Block") + 5;
+                    //    string transaction = data.Substring(temp);
+                    //    string str = "Block Registered";
+                    //    Byte[] reply = Encoding.ASCII.GetBytes(str);
+                    //    Console.WriteLine("ReceivedBlock: {0}", data);
+                    //    stream.Write(reply, 0, reply.Length);
+                    //    Console.WriteLine("Sent: {0}", str);
+                    //    BlockchainService blockchainService = new BlockchainService();
+                    //}
                 }
             }
             catch (Exception e)

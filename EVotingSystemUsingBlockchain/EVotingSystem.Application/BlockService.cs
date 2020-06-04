@@ -15,7 +15,7 @@ namespace EVotingSystem.Application
             CreateHashBlockModel genesisBlock = new CreateHashBlockModel
             {
                 BlockIndex = 0,
-                TimeStamp = DateTime.Now.ToUniversalTime(),//at a specific time
+                TimeStamp = new DateTime(2020, 7, 1, 14, 0, 0),
                 PreviousHash = null,
                 Transactions = null,
             };
@@ -38,6 +38,7 @@ namespace EVotingSystem.Application
                 PreviousHash = genesisBlock.PreviousHash,
                 TimeStamp = genesisBlock.TimeStamp,
                 StateRootHash = finalBlock.StateRootHash,
+                Hash = rootHashModel.Hash
             });
 
 
@@ -151,6 +152,24 @@ namespace EVotingSystem.Application
                 //insert transaction
             }
             return "Success";
+        }
+
+        public CreateBlockModel GetGenesisBlock()
+        {
+            var result = DbContext.GenesisBlock();
+            if (result != null)
+                return new CreateBlockModel
+                {
+                    Block = new CreateHashBlockModel
+                    {
+                        BlockIndex =result.BlockIndex,
+                        PreviousHash = result.PreviousHash,
+                        TimeStamp = result.TimeStamp,
+                        Transactions = null
+                    }
+                };
+
+            return null;
         }
 
     }
