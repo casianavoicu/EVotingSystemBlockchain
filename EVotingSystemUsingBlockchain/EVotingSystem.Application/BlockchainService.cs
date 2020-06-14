@@ -1,10 +1,14 @@
 ﻿using EVotingSystem.Application.Model;
+using Models;
 using System.Collections.Generic;
 
 namespace EVotingSystem.Application
 {
     public class BlockchainService
     {
+        private static readonly List<CreateTransactionModel> verifiedTransactions = new List<CreateTransactionModel>();
+        private static readonly List<BallotTransactionModel> verifiedBallotTransactions = new List<BallotTransactionModel>();
+
         public BlockchainService()
         {
         }
@@ -41,42 +45,26 @@ namespace EVotingSystem.Application
             return blockService.GenesisBlock();
         }
 
-        public string ReceiveTransaction(List<string> transaction)
+        public void ReceiveTransactionAccount(CreateTransactionModel transaction)
         {
-            List <(TransactionModel,string)> verifiedTransactions= new List<(TransactionModel,string)>();
-            foreach (var item in transaction)
+            TransactionService transactionService = new TransactionService();
+            var transactionVerified = transactionService.ReceiveTransactionAccount(transaction);
+
+            if (transactionVerified != null)
             {
-                TransactionService transactionService = new TransactionService(item);
-                var transactionVerified = transactionService.ReceiveTransactionFromWallet();
-
-                if (transactionVerified != (null, null))
-                {
-                    verifiedTransactions.Add((transactionVerified.Item1, transactionVerified.Item2));
-                }
+                verifiedTransactions.Add(transactionVerified);
             }
-
-            var blockService = new BlockService();
-
-            return blockService.CreateBlock(verifiedTransactions);
         }
 
-        public string ReceiveTransactionWithNewAccount(List<string> transaction, bool fromWallet)
+        public void ReceiveTransactionBallot(BallotTransactionModel transaction)
         {
-            List<(TransactionModel, string)> verifiedTransactions = new List<(TransactionModel, string)>();
-            foreach (var item in transaction)
+            TransactionService transactionService = new TransactionService();
+            var transactionVerified = transactionService.ReceiveTransactionBallot(transaction);
+
+            if (transactionVerified != null)
             {
-                TransactionService transactionService = new TransactionService(item);
-                var transactionVerified = transactionService.ReceiveTransactionAccount();
-
-                if (transactionVerified != (null, null))
-                {
-                    verifiedTransactions.Add((transactionVerified.Item1, transactionVerified.Item2));
-                }
+                verifiedBallotTransactions.Add(transactionVerified);
             }
-
-            var blockService = new BlockService();
-
-            return blockService.CreateBlock(verifiedTransactions);
         }
     }
 

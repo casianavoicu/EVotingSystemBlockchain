@@ -21,6 +21,7 @@ namespace EVotingSystem.Blockchain
             connection.CreateTable<Block>();
             connection.CreateTable<Transaction>();
             connection.CreateTable<Account>();
+            connection.CreateTable<Candidate>();
         }
 
         public static void InsertTransaction(Transaction transaction)
@@ -30,12 +31,20 @@ namespace EVotingSystem.Blockchain
 
         public static void InsertAccount(Account account)
         {
-            connection.Insert(account);
+            if (GetAccount(account.PublicKey) == null)
+            {
+                connection.Insert(account);
+            }
         }
 
         public static void InsertBlock(Block block)
         {
             connection.Insert(block);
+        }
+
+        public static void InsertCandidate(Candidate candidate)
+        {
+            connection.Insert(candidate);
         }
 
         public static int GetAccountBalance(string publicKey)
@@ -93,20 +102,24 @@ namespace EVotingSystem.Blockchain
             var accounts = connection.Table<Account>().ToList();
             var blocks = connection.Table<Block>().ToList();
             var transactions = connection.Table<Transaction>().ToList();
+            var candidates = connection.Table<Candidate>().ToList();
 
             var accountsJson = Newtonsoft.Json.JsonConvert.SerializeObject(accounts);
             var blocksJson = Newtonsoft.Json.JsonConvert.SerializeObject(blocks);
             var transactionsJson = Newtonsoft.Json.JsonConvert.SerializeObject(transactions);
+            var candidatesJson = Newtonsoft.Json.JsonConvert.SerializeObject(candidates);
 
             var stringBuilder = new StringBuilder();
 
             stringBuilder.Append(accountsJson);
             stringBuilder.Append(blocksJson);
             stringBuilder.Append(transactionsJson);
+            stringBuilder.Append(candidatesJson);
 
             stringBuilder.Append(nameof(Account));
             stringBuilder.Append(nameof(Block));
             stringBuilder.Append(nameof(Transaction));
+            stringBuilder.Append(nameof(Candidate));
 
             stringBuilder.Append(file_name);
 

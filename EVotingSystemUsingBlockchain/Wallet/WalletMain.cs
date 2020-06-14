@@ -67,7 +67,7 @@ namespace Wallet
                             new Thread(() =>
                             {
                                 Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", vote.CreateNewTransaction(receiver, keyPair, candidate), 1, port);
+                                Client.Connect("127.0.0.1", vote.CreateNewTransaction(receiver, keyPair, candidate, "Vote"), 1, port);
                             }).Start();
 
                             break;

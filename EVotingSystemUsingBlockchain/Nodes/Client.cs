@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Crypto.Engines;
+using System;
 using System.Net.Sockets;
 using System.Text;
 
@@ -10,43 +11,43 @@ namespace Nodes
         {
             try
             {
-                TcpClient client = new TcpClient(server, port);
-                NetworkStream stream = client.GetStream();
-                Byte[] data = new Byte[256];
-                switch (messageType)
+                using (var tcpClient = new TcpClient(server, port))
                 {
-                    case 1:
-                        Console.WriteLine("Pending: {0}", "Transaction");
-                        break;
-                    case 2:
-                        Console.WriteLine("Wait: {0}", "Checking your balance");
-                        break;
-                    case 3:
-                        Console.WriteLine("Wait: {0}", "Checking your transactions");
-                        break;
-                    case 4:
-                        Console.WriteLine("Wait: {0}", "Checking your transactions");
-                        break;
-                    case 5:
-                        Console.WriteLine("Wait: {0}", "Register Account");
-                        break;
-                    case 6:
-                        Console.WriteLine("Broadcasting: {0}", "Blocks");
-                        break;
-                    case 7:
-                        Console.WriteLine("Broadcasting: {0}", "AccountBlocks");
-                        break;
+                    using (var stream = tcpClient.GetStream())
+                    {
+                        switch (messageType)
+                        {
+                            case 1:
+                                Console.WriteLine("Pending: {0}", "Transaction");
+                                break;
+                            case 2:
+                                Console.WriteLine("Wait: {0}", "Checking your balance");
+                                break;
+                            case 3:
+                                Console.WriteLine("Wait: {0}", "Checking your transactions");
+                                break;
+                            case 4:
+                                Console.WriteLine("Wait: {0}", "Checking your transactions");
+                                break;
+                            case 5:
+                                Console.WriteLine("Wait: {0}", "Register Account");
+                                break;
+                            case 6:
+                                Console.WriteLine("Broadcasting: {0}", "Blocks");
+                                break;
+                            case 7:
+                                Console.WriteLine("Broadcasting: {0}", "AccountBlocks");
+                                break;
+                        }
+
+                        var data = Encoding.ASCII.GetBytes(message);
+                        stream.Write(data, 0, data.Length);
+                        String response = String.Empty;
+                        Int32 bytes = stream.Read(data, 0, data.Length);
+                        response = Encoding.ASCII.GetString(data, 0, bytes);
+                        Console.WriteLine("Your response: {0}", response);
+                    }
                 }
-                    data = Encoding.ASCII.GetBytes(message);
-                    //data = Convert.FromBase64String(message);
-                    stream.Write(data, 0, data.Length);
-                    data = new Byte[256];
-                    String response = String.Empty;
-                    Int32 bytes = stream.Read(data, 0, data.Length);
-                    response = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-                    Console.WriteLine("Your response: {0}", response);
-                stream.Close();
-                client.Close();
             }
             catch (Exception e)
             {

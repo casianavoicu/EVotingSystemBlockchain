@@ -1,33 +1,29 @@
-﻿using System;
-using System.Text;
-using Wallet.Services.Model;
+﻿using Models;
+using System;
 
 namespace Wallet.Services
 {
     public class TransactionService
     {
-        public string CreateNewTransaction(string receiverPublicKey, (byte[], byte[]) keyPair, string vote)
+        public string CreateNewTransaction(string receiverPublicKey, (byte[], byte[]) keyPair, string vote, string type)
         {
-            CreateTransactionModel model = new CreateTransactionModel
+            var model = new CreateTransactionModelWithoutSignature
             {
                 FromAddress = Convert.ToBase64String(keyPair.Item2),
                 ToAddress = receiverPublicKey,
                 Vote = vote,
                 Timestamp = DateTime.Now.ToUniversalTime(),
                 Details = null,
-                Type = "Vote"
+                Type = type
             };
 
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(model.Vote);
-            stringBuilder.Append(model.ToAddress);
-            stringBuilder.Append(Convert.ToString(model.Timestamp));
+            var hash = CryptoService.CreateHash(model.Serialize());
 
-            var hash = CryptoService.CreateHash(stringBuilder.ToString());
+            var signature = CryptoService.CreateSignature(hash, keyPair.Item1);
 
-            model.Signature = CryptoService.CreateSignature(hash, keyPair.Item1);
+            var modelWithSignature = new CreateTransactionModel(model, signature);
 
-            return model.Serialize();
+            return modelWithSignature.Serialize();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using Wallet.Services;
 
@@ -70,35 +71,25 @@ namespace Wallet.PrivateApplication
                             new Thread(() =>
                             {
                                 Thread.CurrentThread.IsBackground = true;
-                                var finalTransaction = accountTransaction.CreateNewTransaction(accountPk, keyPair, ammount);
+                                var finalTransaction = accountTransaction.CreateNewTransaction(accountPk, keyPair, ammount, "Account");
                                 Client.Connect("127.0.0.1", finalTransaction, 5, port2);
                             }).Start();
                             break;
 
                         case 2:
-                            Console.WriteLine("Insert the final date yyyy/MM/dd HH:mm:ss");
-                            var test = new DateTime(2020, 5, 1, 14, 0, 0);
-                            var year = int.Parse(Console.ReadLine());
-                            var month = int.Parse(Console.ReadLine());
-                            var day = int.Parse(Console.ReadLine());
-                            var hour = int.Parse(Console.ReadLine());
-                            var minute = int.Parse(Console.ReadLine());
-                            var second = int.Parse(Console.ReadLine());
+                            Console.WriteLine("enter file name");
+                            var fileName = Console.ReadLine();
 
-                            Console.WriteLine("Insert all candidates and press x key at the end of the list:");
-                            string candidateName;
-                            var key = "x";
-                            List<string> candidates = new List<string>();
+                            var lines =  File.ReadLines(fileName).ToList();
 
-                            while (((candidateName = Console.ReadLine()) != key.ToLower()))
-                            {
-                                candidates.Add(candidateName);
-                            }
+                            var endDate = DateTime.ParseExact(lines[0], "yyyy/MM/dd HH:mm", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+                            var ballotName = lines[1];
+                            var candidates = lines.Skip(2).ToList();
 
                             new Thread(() =>
                             {
                                 Thread.CurrentThread.IsBackground = true;
-                                var finalTransaction = transaction.CreateBallotTransaction(keyPair, candidates, new DateTime(year, month, day, hour, minute, second));
+                                var finalTransaction = transaction.CreateBallotTransaction(keyPair, candidates, ballotName, endDate);
                                 Client.Connect("127.0.0.1", finalTransaction, 5, 13000);
                             }).Start();
                             break;

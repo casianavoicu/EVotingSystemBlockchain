@@ -1,4 +1,5 @@
 ﻿using EVotingSystem.Application.Model;
+using Models;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Signer;
 using Newtonsoft.Json;
@@ -10,12 +11,11 @@ namespace EVotingSystem.Application.Utils
 {
     public static class CryptoUtils
     {
-        public static bool ValidateTransaction(string fromAddress, TransactionModel data, string signature, out string hashedData)
+        public static bool ValidateTransaction(string fromAddress, string data, string signature)
         {
             var sign = Convert.FromBase64String(fromAddress).ToHex();
             var eth = new EthECKey(sign.HexToByteArray(), false);
-            var hashed = ComputeHash(data.Vote + data.ToAddress + Convert.ToString(data.Timestamp) + Convert.ToString(data.Type));
-            hashedData = Convert.ToBase64String(hashed);
+            var hashed = ComputeHash(data);
             return eth.Verify(hashed, EthECDSASignature.FromDER(Convert.FromBase64String(signature)));
         }
 

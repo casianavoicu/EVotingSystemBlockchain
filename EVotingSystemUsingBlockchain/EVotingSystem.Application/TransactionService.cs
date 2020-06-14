@@ -1,67 +1,68 @@
 ﻿using EVotingSystem.Application.Model;
 using EVotingSystem.Application.Utils;
 using EVotingSystem.Blockchain;
+using Models;
 
 namespace EVotingSystem.Application
 {
     public class TransactionService
     {
-        private readonly string transaction = null;
-
-        public TransactionService(string transaction)
+        public CreateTransactionModel ReceiveTransactionAccount(CreateTransactionModel transaction)
         {
-            this.transaction = transaction;
-        }
-
-        public (TransactionModel, string) ReceiveTransactionAccount()
-        {
-            TransactionModel model = new TransactionModel();
-            TransactionModel deserializedTransaction = model.Deserialize(transaction);
             AccountService accountService = new AccountService();
             AccountModel account;
 
-            if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out string hash))
+            var transactionWithoutSignature = new CreateTransactionModelWithoutSignature(transaction);
+            var serializedTransaction = transactionWithoutSignature.Serialize();
+
+            if (CryptoUtils.ValidateTransaction(transaction.FromAddress, serializedTransaction, transaction.Signature))
             {
-                var acc = accountService.VerifyIfVoterExists(deserializedTransaction.ToAddress);
-                if (acc != null)
+                var acc = accountService.VerifyAccount(transaction.ToAddress);
+                if (transaction.Type == "Account")
                 {
-                    account = acc;
+                    if (acc != null)
+                    {
+                        account = acc;
+                    }
+                    else
+                    {
+                        account = accountService.CreateAccount(transaction.ToAddress, transaction.ToAddress);
+                    }
+
+                    accountService.UpdateBalanceBeforeVote(account);
                 }
                 else
                 {
-                    account = accountService.CreateAccount(deserializedTransaction.ToAddress, deserializedTransaction.ToAddress);
+                    accountService.UpdateBalanceAfterVote(acc);
                 }
-                accountService.UpdateBalanceBeforeVote(account);
 
-                return (deserializedTransaction, hash);
+                return transaction;
             }
 
-            return (null, null);
+            return null;
         }
 
-        public (TransactionModel, string) ReceiveTransactionFromWallet()
+        public BallotTransactionModel ReceiveTransactionBallot(BallotTransactionModel transactionBallot)
         {
-            TransactionModel model = new TransactionModel();
-            TransactionModel deserializedTransaction = model.Deserialize(transaction);
-            AccountService accountService = new AccountService();
+            var ballotService = new BallotService();
 
-            if (VerifyVoter(deserializedTransaction.FromAddress))
+            var transactionWithoutSignature = new BallotTransactionModelWithoutSignature(transactionBallot);
+            var serializedTransaction = transactionWithoutSignature.Serialize();
+
+            if (CryptoUtils.ValidateTransaction(transactionBallot.FromAddress, serializedTransaction, transactionBallot.Signature))
             {
+                var candidates = transactionBallot.Candidates;
+                var ballotName = transactionBallot.BallotName;
 
-                if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out string hash))
-                {
-                    accountService.UpdateBalanceAfterVote(accountService.
-                        VerifyIfVoterExists(deserializedTransaction.FromAddress));
-                    return (deserializedTransaction, hash);
-                }
+                ballotService.AddCandidates(candidates, ballotName, transactionBallot.ToAddress);
             }
 
-            return (null, null);
+            return null;
         }
 
         public void ReceiveTransactionFromBlock(string data)
         {
-            TransactionModel model = new TransactionModel();
+            /*TransactionModel model = new TransactionModel();
             TransactionModel deserializedTransaction = model.Deserialize(transaction);
 
             if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out string hash))
@@ -73,7 +74,7 @@ namespace EVotingSystem.Application
                     PublicKey = deserializedTransaction.FromAddress,
                 };
             }
-
+            */
         }
 
         private void InsertIntoDatabase(TransactionModel transaction, string hash)
@@ -90,11 +91,11 @@ namespace EVotingSystem.Application
             });
         }
 
-        private bool VerifyVoter(string publickKey)
+        private bool VerifyAccount(string publickKey)
         {
             AccountService account = new AccountService();
 
-            if (account.VerifyIfVoterExists(publickKey) == null)
+            if (account.VerifyAccount(publickKey) == null)
             {
                 return false;
             }

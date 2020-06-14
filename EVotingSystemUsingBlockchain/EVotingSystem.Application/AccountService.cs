@@ -30,7 +30,7 @@ namespace EVotingSystem.Application
             return balance;
         }
 
-        public AccountModel VerifyIfVoterExists(string voterPublicKey)
+        public AccountModel VerifyAccount(string voterPublicKey)
         {
             var voter = DbContext.GetAccount(voterPublicKey);
 
