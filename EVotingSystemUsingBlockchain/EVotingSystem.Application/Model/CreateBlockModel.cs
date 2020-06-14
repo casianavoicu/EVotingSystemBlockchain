@@ -8,6 +8,8 @@ namespace EVotingSystem.Application.Model
 
         public string StateRootHash { get; set; }
 
+        public string Signature { get; set; }
+
         public CreateBlockModel Deserialize(string content)
         {
             var result = JsonConvert.DeserializeObject<CreateBlockModel>(content);

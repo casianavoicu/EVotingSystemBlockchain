@@ -18,11 +18,9 @@ namespace EVotingSystem.Application
             TransactionModel model = new TransactionModel();
             TransactionModel deserializedTransaction = model.Deserialize(transaction);
             AccountService accountService = new AccountService();
-            AccountModel account = new AccountModel();
+            AccountModel account;
 
-            string hash = "";
-
-            if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out hash))
+            if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out string hash))
             {
                 var acc = accountService.VerifyIfVoterExists(deserializedTransaction.ToAddress);
                 if (acc != null)
@@ -49,9 +47,8 @@ namespace EVotingSystem.Application
 
             if (VerifyVoter(deserializedTransaction.FromAddress))
             {
-                string hash = "";
 
-                if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out hash))
+                if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out string hash))
                 {
                     accountService.UpdateBalanceAfterVote(accountService.
                         VerifyIfVoterExists(deserializedTransaction.FromAddress));
@@ -66,19 +63,19 @@ namespace EVotingSystem.Application
         {
             TransactionModel model = new TransactionModel();
             TransactionModel deserializedTransaction = model.Deserialize(transaction);
-            string hash = "";
 
-            if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out hash))
+            if (CryptoUtils.ValidateTransaction(deserializedTransaction.FromAddress, deserializedTransaction, deserializedTransaction.Signature, out string hash))
             {
                 InsertIntoDatabase(deserializedTransaction, hash);
-                AccountService account = new AccountService();
-                AccountModel accountModel = new AccountModel
+                // AccountService account = new AccountService();
+                var accountModel = new AccountModel
                 {
                     PublicKey = deserializedTransaction.FromAddress,
                 };
             }
 
         }
+
         private void InsertIntoDatabase(TransactionModel transaction, string hash)
         {
             DbContext.InsertTransaction(new Transaction

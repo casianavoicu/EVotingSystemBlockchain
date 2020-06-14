@@ -1,15 +1,18 @@
 ﻿using SQLite;
 using System.Collections.Generic;
+using System.Text;
 
 namespace EVotingSystem.Blockchain
 {
     public static class DbContext
     {
+        private const string file_name = "Blockchain.sqlite";
+
         public static SQLiteConnection connection;
 
         static DbContext()
         {
-            connection = new SQLiteConnection("Blockchain.sqlite");
+            connection = new SQLiteConnection(file_name);
             CreateDB(connection);
         }
 
@@ -83,6 +86,31 @@ namespace EVotingSystem.Blockchain
         {
             return connection.Table<Block>().
                 FirstOrDefault(e => e.BlockIndex == 0);
+        }
+
+        public static string GetHash()
+        {
+            var accounts = connection.Table<Account>().ToList();
+            var blocks = connection.Table<Block>().ToList();
+            var transactions = connection.Table<Transaction>().ToList();
+
+            var accountsJson = Newtonsoft.Json.JsonConvert.SerializeObject(accounts);
+            var blocksJson = Newtonsoft.Json.JsonConvert.SerializeObject(blocks);
+            var transactionsJson = Newtonsoft.Json.JsonConvert.SerializeObject(transactions);
+
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.Append(accountsJson);
+            stringBuilder.Append(blocksJson);
+            stringBuilder.Append(transactionsJson);
+
+            stringBuilder.Append(nameof(Account));
+            stringBuilder.Append(nameof(Block));
+            stringBuilder.Append(nameof(Transaction));
+
+            stringBuilder.Append(file_name);
+
+            return stringBuilder.ToString();
         }
     }
 }

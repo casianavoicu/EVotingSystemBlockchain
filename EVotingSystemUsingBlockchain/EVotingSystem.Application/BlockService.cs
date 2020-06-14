@@ -15,7 +15,7 @@ namespace EVotingSystem.Application
             CreateHashBlockModel genesisBlock = new CreateHashBlockModel
             {
                 BlockIndex = 0,
-                TimeStamp = new DateTime(2020, 7, 1, 14, 0, 0),
+                TimeStamp = new DateTime(2020, 6, 1, 14, 0, 0),
                 PreviousHash = null,
                 Transactions = null,
             };
@@ -133,7 +133,7 @@ namespace EVotingSystem.Application
             var previousBlock = DbContext.PreviousBlock();
 
             if (previousBlock.Hash != receivedBlock.Block.PreviousHash &&
-                finalBlock.StateRootHash != receivedBlock.StateRootHash &&
+                finalBlock.StateRootHash != receivedBlock.StateRootHash && ///
                 (previousBlock.BlockIndex++) != receivedBlock.Block.BlockIndex)
             {
                 return "Invalid";

@@ -95,6 +95,7 @@ namespace EVotingSystem.Application
                 AccountAddress = account.AccountAddress,
                 PublicKey = account.PublicKey
             };
+
             accountModel.Balance = account.Balance + 1;
             DbContext.UpdateBalance(accountModel);
         }

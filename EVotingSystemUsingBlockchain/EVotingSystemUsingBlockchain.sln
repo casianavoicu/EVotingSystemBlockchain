@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVotingSystem.Blockchain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wallet", "Wallet\Wallet.csproj", "{57E3F2BA-9050-443C-BAF2-0C0062F3D6A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nodes", "Nodes\Nodes.csproj", "{23C59142-5A2F-44ED-88C6-D4B8C349D7A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nodes", "Nodes\Nodes.csproj", "{23C59142-5A2F-44ED-88C6-D4B8C349D7A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContract", "SmartContract\SmartContract.csproj", "{67A35FF8-4B18-4FE4-8D5B-0B0338A786DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Services", "Wallet.Services\Wallet.Services.csproj", "{C3B164DA-15C3-47ED-81C0-93D502E3C830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.PrivateApplication", "Wallet.PrivateApplication\Wallet.PrivateApplication.csproj", "{4FA63832-FEA6-436B-A831-EF70E388E691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +43,14 @@ Global
 		{23C59142-5A2F-44ED-88C6-D4B8C349D7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23C59142-5A2F-44ED-88C6-D4B8C349D7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23C59142-5A2F-44ED-88C6-D4B8C349D7A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67A35FF8-4B18-4FE4-8D5B-0B0338A786DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67A35FF8-4B18-4FE4-8D5B-0B0338A786DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67A35FF8-4B18-4FE4-8D5B-0B0338A786DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67A35FF8-4B18-4FE4-8D5B-0B0338A786DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B164DA-15C3-47ED-81C0-93D502E3C830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B164DA-15C3-47ED-81C0-93D502E3C830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B164DA-15C3-47ED-81C0-93D502E3C830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B164DA-15C3-47ED-81C0-93D502E3C830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA63832-FEA6-436B-A831-EF70E388E691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA63832-FEA6-436B-A831-EF70E388E691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA63832-FEA6-436B-A831-EF70E388E691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA63832-FEA6-436B-A831-EF70E388E691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

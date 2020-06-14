@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using Wallet.Services;
 
 namespace Wallet
 {
@@ -42,13 +43,12 @@ namespace Wallet
                     Console.WriteLine("Enter a valid password");
                 }
             }
-            Console.WriteLine("Send Transaction: 1");
+            Console.WriteLine("Vote: 1");
             Console.WriteLine("Check Balance: 2");
             Console.WriteLine("View sent transactions: 3");
             Console.WriteLine("View received transactions: 1");
 
-            //randomize
-            while (selector != 6)
+            while (selector != 7)
             {
                 Console.WriteLine("Please select an action");
                 try
@@ -62,11 +62,12 @@ namespace Wallet
                             Console.WriteLine("Port:");
                             int port = Convert.ToInt32(Console.ReadLine());
                             TransactionService vote = new TransactionService();
-                            //make it random
+                            //request for candidates
+                            var candidate = "test";
                             new Thread(() =>
                             {
                                 Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", "Transaction" + vote.CreateNewTransaction(receiver, keyPair), 1, port);
+                                Client.Connect("127.0.0.1", vote.CreateNewTransaction(receiver, keyPair, candidate), 1, port);
                             }).Start();
 
                             break;
@@ -91,19 +92,7 @@ namespace Wallet
                                 Client.Connect("127.0.0.1", "FPublicKey+key-ul", 1, 13000);
                             }).Start();
                             break;
-                        case 5:
-                            Console.WriteLine("Account:");
-                            string accountPk = Console.ReadLine();
-                            Console.WriteLine("Port:");
-                            int port2 = Convert.ToInt32(Console.ReadLine());
-                            TransactionService accountTransaction = new TransactionService();
-                            new Thread(() =>
-                            {
-                                Thread.CurrentThread.IsBackground = true;
-                                var trans = accountTransaction.CreateNewTransaction(accountPk, keyPair);
-                                Client.Connect("127.0.0.1", "Account" + trans, 5, port2);
-                            }).Start();
-                            break;
+
                     }
                 }
                 catch (Exception)

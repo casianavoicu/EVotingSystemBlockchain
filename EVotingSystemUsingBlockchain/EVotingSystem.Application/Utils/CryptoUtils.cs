@@ -16,7 +16,6 @@ namespace EVotingSystem.Application.Utils
             var eth = new EthECKey(sign.HexToByteArray(), false);
             var hashed = ComputeHash(data.Vote + data.ToAddress + Convert.ToString(data.Timestamp) + Convert.ToString(data.Type));
             hashedData = Convert.ToBase64String(hashed);
-            var t = Convert.FromBase64String(hashedData);
             return eth.Verify(hashed, EthECDSASignature.FromDER(Convert.FromBase64String(signature)));
         }
 
@@ -42,6 +41,13 @@ namespace EVotingSystem.Application.Utils
             {
                 return sHA256.ComputeHash(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(model.Serialize())));
             }
+        }
+
+        public static string CreateSignature(byte[] hashedData, byte[] privateKey)
+        {
+            EthECKey ethECKey = new EthECKey(privateKey.ToHex());
+
+            return Convert.ToBase64String(ethECKey.Sign(hashedData).ToDER());
         }
     }
 }

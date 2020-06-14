@@ -20,22 +20,21 @@ namespace Nodes
            13004
         };
 
-        TcpListener server = null;
-        int currentPort = 0;
+        readonly TcpListener server = null;
+        readonly int currentPort = 0;
         public static List<string> Transactions = new List<string>();
         public static List<string> TransactionsAccount = new List<string>();
 
         public Server(string ip, int port)
         {
             currentPort = port;
+            Ports.Remove(currentPort);
+
             IPAddress localAddr = IPAddress.Parse(ip);
             server = new TcpListener(localAddr, port);
             server.Start();
+
             StartListener();
-            if (Ports.Contains(currentPort))
-            {
-                Ports.RemoveAt(Ports.IndexOf(currentPort));
-            }
         }
 
         public void StartListener()
@@ -43,11 +42,12 @@ namespace Nodes
             try
             {
                 BlockchainService blockchainService = new BlockchainService();
-               if (!blockchainService.VerifyIfGenesisBlockExists())
+                if (!blockchainService.VerifyIfGenesisBlockExists())
                 {
-                   blockchainService.GenesisBlock();
+                    blockchainService.GenesisBlock();
 
                 }
+
                 while (true)
                 {
                     Console.WriteLine("Waiting for a connection...");
@@ -75,12 +75,21 @@ namespace Nodes
             try
             {
                 BlockchainService blockchainService = new BlockchainService();
-                //sync
 
                 while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                 {
                     string hex = BitConverter.ToString(bytes);
                     data = Encoding.ASCII.GetString(bytes, 0, i);
+
+                    try
+                    {
+                        var model = 
+                    }
+                    catch
+                    {
+
+                    }
+
                     if (data.StartsWith("Transaction"))
                     {
                         //Console.WriteLine("{1}: Received: {0}", data);
@@ -110,15 +119,15 @@ namespace Nodes
                         stream.Write(reply, 0, reply.Length);
                         Console.WriteLine("Sent: {0}", str);
                         TransactionsAccount.Add(transaction);
-                        var result = blockchainService.ReceiveTransactionWithNewAccount(TransactionsAccount);
-                        foreach (var item in Ports)
-                        {
-                            new Thread(() =>
-                            {
-                                Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", result, 7, item);
-                            }).Start();
-                        }
+                        //var result = blockchainService.ReceiveTransactionWithNewAccount(TransactionsAccount);
+                        //foreach (var item in Ports)
+                        //{
+                        //    new Thread(() =>
+                        //    {
+                        //        Thread.CurrentThread.IsBackground = true;
+                        //        Client.Connect("127.0.0.1", result, 7, item);
+                        //    }).Start();
+                        //}
 
                         Console.WriteLine("Message sent to peers");
                     }

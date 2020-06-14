@@ -19,5 +19,7 @@ namespace EVotingSystem.Blockchain
         public string Hash { get; set; }
 
         public string StateRootHash { get; set; }
+
+        public string Signature { get; set; }
     }
 }
