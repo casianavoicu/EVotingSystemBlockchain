@@ -64,27 +64,32 @@ namespace Wallet
                         case 1:
 
                             TransactionService vote = new TransactionService();
-                            //Client.Connect("127.0.0.1", "Ballot", 8, 13000).Wait();
+                            Client.Connect("127.0.0.1", "Ballot", 8, 13000);
 
-                            //if (Client.responseFinal == null)
-                            //{
-                            //    break;
-                            //}
-                            //var candidateList = DeserializeCandidates(Client.responseFinal);
-                            //Console.WriteLine("Candidates:");
-                            //foreach (var item in candidateList)
-                            //{
-                            //    Console.WriteLine(item.Value + " " + item.Key);
+                            if (Client.responseFinal == null)
+                            {
+                                break;
+                            }
 
-                            //}
-                            //var choice = Console.ReadLine();
-                            //var candidate = candidateList.FirstOrDefault(p => p.Key == choice);
+                            var candidateList = JsonConvert.DeserializeObject<List<string>>(Client.responseFinal);
+                            var finalCandidates = new Dictionary<int, string>();
+                            Console.WriteLine("Candidates:");
+                            int ct = 0;
+                            for (int i = 0; i < candidateList.Count(); i++)
+                            {
+                                finalCandidates.Add(ct, candidateList[i]);
+                                Console.WriteLine(candidateList + " " + ct);
+                            }
 
-                            //if (candidate.Value == null)
-                            //{
-                            //    break;
-                            //}
-                            Client.Connect("127.0.0.1", vote.CreateNewTransaction("asda", keyPair, "Popescu Andrei", "Vote"), 1, 13000);
+                            var choice = Console.ReadLine();
+                            var candidate = finalCandidates.FirstOrDefault(p => p.Key == Convert.ToInt32(choice)).Value;
+
+                            if (candidate == null)
+                            {
+                                break;
+                            }
+
+                            Client.Connect("127.0.0.1", vote.CreateNewTransaction("asda", keyPair, candidate, "Vote"), 1, 13000);
                             break;
                         case 2:
                             Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, 13000);
@@ -93,7 +98,7 @@ namespace Wallet
                             Client.Connect("127.0.0.1", "TPublicKey+key-ul", 1, 13000);
                             break;
                         case 4:
-                            Client.Connect("127.0.0.1", "FPublicKey+key-ul", 1, 13000);
+                            Client.Connect("127.0.0.1", "FPublicKey+key-ul", 1, 13001);
                             break;
                         case 5:
                             Console.WriteLine(Convert.ToBase64String(keyPair.Item2));

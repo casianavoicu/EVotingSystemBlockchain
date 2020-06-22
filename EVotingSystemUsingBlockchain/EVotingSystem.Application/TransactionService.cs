@@ -8,7 +8,7 @@ namespace EVotingSystem.Application
 {
     public class TransactionService
     {
-        public (CreateTransactionModel, string) ReceiveTransactionAccount(CreateTransactionModel transaction)
+        public (CreateTransactionModel, string) ReceiveTransactionVote(CreateTransactionModel transaction)
         {
             AccountService accountService = new AccountService();
 
@@ -94,6 +94,16 @@ namespace EVotingSystem.Application
                 Details = finalTransaction.Item1.Details,
                 Vote = finalTransaction.Item1.Vote
             });
+
+            var candidates = DbContext.GetAllCandidates();
+            foreach (var item in candidates)
+            {
+                if (item.Name == finalTransaction.Item1.Vote)
+                {
+                    DbContext.UpdateCandidateVote(item.Name);
+                    return;
+                }
+            }
         }
     }
 }

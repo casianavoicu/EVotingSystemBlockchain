@@ -1,5 +1,7 @@
 ﻿using EVotingSystem.Application.Model;
+using EVotingSystem.Blockchain;
 using Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -11,6 +13,18 @@ namespace EVotingSystem.Application
         public BlockchainService()
         {
 
+        }
+
+        public string GetCandidates()
+        {
+            var candidates = DbContext.GetAllCandidates();
+            List<string> candidatesName= new List<string>();
+            foreach (var item in candidates)
+            {
+                candidatesName.Add(item.Name);
+            }
+
+            return JsonConvert.SerializeObject(candidatesName);
         }
 
         public string ReceiveBlock(CreateBlockModel model)
@@ -48,7 +62,7 @@ namespace EVotingSystem.Application
                 else
                 {
                     TransactionVoteModel trans = (TransactionVoteModel)transactions[i];
-                    var voteProcessed =  transService.ReceiveTransactionAccount(new CreateTransactionModel
+                    var voteProcessed =  transService.ReceiveTransactionVote(new CreateTransactionModel
                     {
                         Details = trans.Details,
                         FromAddress = trans.FromAddress,
@@ -82,7 +96,7 @@ namespace EVotingSystem.Application
         public void ReceiveTransactionVote(CreateTransactionModel transaction)
         {
             TransactionService transactionService = new TransactionService();
-            var transactionVerified = transactionService.ReceiveTransactionAccount(transaction);
+            var transactionVerified = transactionService.ReceiveTransactionVote(transaction);
 
             if (transactionVerified.Item1 != null)
             {

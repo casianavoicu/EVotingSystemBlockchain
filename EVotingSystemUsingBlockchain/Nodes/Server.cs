@@ -103,7 +103,7 @@ namespace Nodes
             var stream = client.GetStream();
             string imei = String.Empty;
             string data = null;
-            Byte[] bytes = new Byte[1024];
+            Byte[] bytes = new Byte[60000];
             int i;
             try
 
@@ -112,7 +112,6 @@ namespace Nodes
                 {
                     string hex = BitConverter.ToString(bytes);
                     data = Encoding.ASCII.GetString(bytes, 0, i);
-
 
                     if (data.StartsWith("Balance"))
                     {
@@ -137,7 +136,6 @@ namespace Nodes
                     {
                         blockchainService.CheckBalance(data.Substring(8));
                     }
-
                     else if (GetRequestType(data) is CreateTransactionModel createTransactionModel)
                     {
                         blockchainService.ReceiveTransactionVote(createTransactionModel);
@@ -157,8 +155,6 @@ namespace Nodes
                             }).Start();
                         }
 
-
-
                         Console.WriteLine("Message sent to peers");
                     }
                     else if (GetRequestType(data) is CreateBallotTransactionModel ballotTransactionModel)
@@ -166,6 +162,7 @@ namespace Nodes
                         blockchainService.ReceiveTransactionBallot(ballotTransactionModel);
 
                         var result = blockchainService.ProposeBlock(keyPair);
+                        var a = Encoding.ASCII.GetBytes(result);
 
                         foreach (var port in Ports)
                         {
@@ -178,7 +175,7 @@ namespace Nodes
 
                         Console.WriteLine("Message sent to peers");
                     }
-                    else if(GetRequestType(data) is CreateBlockModel blockModel)
+                    else if (GetRequestType(data) is CreateBlockModel blockModel)
                     {
                         if (blockchainService.ReceiveBlock(blockModel) == null)
                         {
@@ -189,6 +186,12 @@ namespace Nodes
                         {
                             Console.WriteLine("Valid Block");
                         }
+                    }
+
+                    else if(data.StartsWith("Ballot"))
+                    {
+                        Byte[] reply = new Byte[128];
+                        reply = Encoding.ASCII.GetBytes(blockchainService.GetCandidates());
                     }
 
                 }
@@ -231,7 +234,8 @@ namespace Nodes
 
             if (block.StateRootHash != null)
             {
-                return block;
+                CreateBlockModel model = new CreateBlockModel();
+                return model.Deserialize(data);
             }
             else if (ballot.Type != "Ballot")
             {
@@ -244,7 +248,7 @@ namespace Nodes
             }
             else
             {
-                return null; ///block
+                return null;
             }
         }
     }

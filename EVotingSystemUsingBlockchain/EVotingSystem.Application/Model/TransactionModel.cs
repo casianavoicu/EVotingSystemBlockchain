@@ -23,6 +23,11 @@ namespace EVotingSystem.Application.Model
             return result;
         }
 
+        public TransactionModel()
+        {
+
+        }
+
     }
 
     public class TransactionBallotModel : TransactionModel

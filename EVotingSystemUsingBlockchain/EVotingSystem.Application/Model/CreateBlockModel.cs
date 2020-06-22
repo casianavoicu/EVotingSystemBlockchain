@@ -13,7 +13,6 @@ namespace EVotingSystem.Application.Model
 
         public CreateBlockModel()
         {
-
         }
 
         public CreateBlockModel(CreateBlockModelWithoutSignatureAndRootHash model, string stateRootHash, string signature)
@@ -27,6 +26,10 @@ namespace EVotingSystem.Application.Model
             PublicKey = model.PublicKey;
         }
 
+        public CreateBlockModel Deserialize(string model)
+        {
+            return JsonConvert.DeserializeObject<CreateBlockModel>(model);
+        }
     }
 
     public class CreateBlockModelWithoutSignatureAndRootHash

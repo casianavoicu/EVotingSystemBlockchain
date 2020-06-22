@@ -1,5 +1,7 @@
 ﻿using SQLite;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EVotingSystem.Blockchain
@@ -70,6 +72,18 @@ namespace EVotingSystem.Blockchain
             return connection.Table<Transaction>().
                 Where(row => row.ToAddress == publicKey);
         }
+
+        public static IEnumerable<Candidate> GetAllCandidates()
+        {
+            var transactionBallot = connection.Table<Transaction>()
+                .Where(p => p.ToAddress == p.FromAddress
+                && p.Details != null && Convert.ToDateTime(p.Details) <= DateTime.Now).LastOrDefault();
+
+            var account = connection.Table<Account>().Where(a => a.PublicKey == transactionBallot.FromAddress).FirstOrDefault();
+
+            return connection.Table<Candidate>()
+                .Where(r => r.AccountId == account.AccountId);
+        }
         public static void DeleteTransactions(string hash)
         {
             connection.Table<Transaction>(). Where(row => row.HashedData == hash).Delete();
@@ -85,6 +99,14 @@ namespace EVotingSystem.Blockchain
             Account result = connection.Table<Account>().
                 Where(row => row.PublicKey == account.PublicKey).FirstOrDefault();
             result.Balance = account.Balance;
+            connection.Update(result);
+        }
+
+        public static void UpdateCandidateVote(string name)
+        {
+            Candidate result = connection.Table<Candidate>().
+                Where(row => row.Name == name).FirstOrDefault();
+            result.Votes = (++result.Votes);
             connection.Update(result);
         }
 
