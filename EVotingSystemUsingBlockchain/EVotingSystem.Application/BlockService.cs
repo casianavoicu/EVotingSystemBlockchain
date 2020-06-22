@@ -1,7 +1,7 @@
 ﻿using EVotingSystem.Application.Model;
 using EVotingSystem.Application.Utils;
 using EVotingSystem.Blockchain;
-using Newtonsoft.Json;
+using KeyPairServices;
 using System;
 using System.Collections.Generic;
 
@@ -9,10 +9,9 @@ namespace EVotingSystem.Application
 {
     public class BlockService
     {
-        public string GenesisBlock()
+        public void GenesisBlock()
         {
-
-            CreateHashBlockModel genesisBlock = new CreateHashBlockModel
+            CreateBlockModelWithoutSignatureAndRootHash genesisBlock = new CreateBlockModelWithoutSignatureAndRootHash
             {
                 BlockIndex = 0,
                 TimeStamp = new DateTime(2020, 6, 1, 14, 0, 0),
@@ -20,156 +19,166 @@ namespace EVotingSystem.Application
                 Transactions = null,
             };
 
-            CreateBlockStateRootHashModel rootHashModel = new CreateBlockStateRootHashModel
-            {
-                Block = genesisBlock,
-                Hash = Convert.ToBase64String(CryptoUtils.ComputeHashBlock(genesisBlock)),
-            };
-
-            CreateBlockModel finalBlock = new CreateBlockModel
-            {
-                Block = genesisBlock,
-                StateRootHash = Convert.ToBase64String(CryptoUtils.ComputeStateRootHashBlock(rootHashModel))
-            };
+            var hash = CryptoService.CreateHash(genesisBlock.Serialize());
 
             DbContext.InsertBlock(new Block
             {
                 BlockIndex = genesisBlock.BlockIndex,
                 PreviousHash = genesisBlock.PreviousHash,
                 TimeStamp = genesisBlock.TimeStamp,
-                StateRootHash = finalBlock.StateRootHash,
-                Hash = rootHashModel.Hash
+                Hash = Convert.ToBase64String(hash),
+                PublicKey = null,
+                Signature = null,
             });
 
-
-            return JsonConvert.SerializeObject(genesisBlock);
+            var databaseState = DbContext.GetHash();
+            var stateRootHash = CryptoService.CreateHash(databaseState);
+            DbContext.UpdateStateRootHash(genesisBlock.BlockIndex, Convert.ToBase64String(stateRootHash));
         }
 
-        public string CreateBlock(List<(TransactionModel, string)> transaction)
+        public string CreateBlock(List<(TransactionModel, string)> transaction, (byte[], byte[]) keyPair)
         {
             var previousBlock = DbContext.PreviousBlock();
-            List<TransactionModel> transactionsReceived = new List<TransactionModel>();
-            foreach (var item in transaction)
+            var tempList = new List<TransactionModel>();
+
+            for (int i = 0; i < transaction.Count; i++)
             {
-                transactionsReceived.Add(item.Item1);
+                tempList.Add(transaction[i].Item1);
             }
 
-            CreateHashBlockModel model = new CreateHashBlockModel
+            var model = new CreateBlockModelWithoutSignatureAndRootHash
             {
-                BlockIndex = previousBlock.BlockIndex++,
-                TimeStamp = DateTime.Now.ToUniversalTime(),
+                BlockIndex = (++previousBlock.BlockIndex),
                 PreviousHash = previousBlock.Hash,
-                Transactions = transactionsReceived
+                TimeStamp = DateTime.Now,
+                Transactions = tempList,
+                PublicKey = Convert.ToBase64String(keyPair.Item2)
             };
 
+            var hash = CryptoService.CreateHash(model.Serialize());
 
-            CreateBlockStateRootHashModel rootHashModel = new CreateBlockStateRootHashModel
-            {
-                Block = model,
-                Hash = Convert.ToBase64String(CryptoUtils.ComputeHashBlock(model)),
-            };
-
-            CreateBlockModel finalBlock = new CreateBlockModel
-            {
-                Block = model,
-                StateRootHash = Convert.ToBase64String(CryptoUtils.ComputeStateRootHashBlock(rootHashModel))
-            };
+            var signature = CryptoService.CreateSignature(hash, keyPair.Item1);
 
             DbContext.InsertBlock(new Block
             {
                 BlockIndex = model.BlockIndex,
+                Hash = Convert.ToBase64String(hash),
                 PreviousHash = model.PreviousHash,
+                PublicKey = model.PublicKey,
+                Signature = signature,
                 TimeStamp = model.TimeStamp,
-                StateRootHash = finalBlock.StateRootHash,
-                Hash = rootHashModel.Hash
             });
 
             var blockId = DbContext.BlockId(model.BlockIndex);
-
-            foreach (var item in transaction)
+            var transService = new TransactionService();
+            for (int i = 0; i < transaction.Count; i++)
             {
-                Transaction trans = new Transaction
+                if (transaction[i].Item1.Type == "Ballot")
                 {
-                    BlockId = blockId,
-                    FromAddress = item.Item1.FromAddress,
-                    ToAddress = item.Item1.ToAddress,
-                    Signature = item.Item1.Signature,
-                    Timestamp = item.Item1.Timestamp,
-                    Type = item.Item1.Type,
-                    HashedData = item.Item2,
-                    Vote = item.Item1.Vote,
-                };
-                DbContext.InsertTransaction(trans);
-            }
+                    TransactionBallotModel trans = (TransactionBallotModel)transaction[i].Item1;
 
-            return finalBlock.Serialize();
+                    transService.InsertBallotTransactions((trans, transaction[i].Item2), blockId);
+                }
+                else
+                {
+                    TransactionVoteModel trans = (TransactionVoteModel)transaction[i].Item1;
+                    transService.InsertVoteTransactions((trans, transaction[i].Item2), blockId);
+                }
+            }
+            var databaseState = DbContext.GetHash();
+            var stateRootHash = CryptoService.CreateHash(databaseState);
+            DbContext.UpdateStateRootHash(model.BlockIndex, Convert.ToBase64String(stateRootHash));
+            return (new CreateBlockModel
+            {
+                BlockIndex = model.BlockIndex,
+                PreviousHash = model.PreviousHash,
+                PublicKey = model.PublicKey,
+                Signature = signature,
+                TimeStamp = model.TimeStamp,
+                StateRootHash = Convert.ToString(stateRootHash),
+                Transactions = tempList,
+            }).Serialize();
         }
 
-        public string ReceiveBlock(string block)
+        public string ReceiveBlock(CreateBlockModel block, List<(TransactionModel, string)> verifiedTransactions)
         {
-            CreateBlockModel blockModel = new CreateBlockModel();
-            CreateBlockModel receivedBlock = blockModel.Deserialize(block);
-
-            receivedBlock.Block = new CreateHashBlockModel
-            {
-                BlockIndex = receivedBlock.Block.BlockIndex,
-                PreviousHash = receivedBlock.Block.PreviousHash,
-                Transactions = receivedBlock.Block.Transactions,
-                TimeStamp = receivedBlock.Block.TimeStamp,
-            };
-
-            CreateBlockStateRootHashModel rootHashModel = new CreateBlockStateRootHashModel
-            {
-                Block = receivedBlock.Block,
-                Hash = Convert.ToBase64String(CryptoUtils.ComputeHashBlock(receivedBlock.Block)),
-            };
-
-            CreateBlockModel finalBlock = new CreateBlockModel
-            {
-                Block = receivedBlock.Block,
-                StateRootHash = Convert.ToBase64String(CryptoUtils.ComputeStateRootHashBlock(rootHashModel))
-            };
-
             var previousBlock = DbContext.PreviousBlock();
+            var tempList = new List<TransactionModel>();
 
-            if (previousBlock.Hash != receivedBlock.Block.PreviousHash &&
-                finalBlock.StateRootHash != receivedBlock.StateRootHash && ///
-                (previousBlock.BlockIndex++) != receivedBlock.Block.BlockIndex)
+            for (int i = 0; i < block.Transactions.Count; i++)
             {
-                return "Invalid";
+                tempList.Add(block.Transactions[i]);
+            }
+
+            var model = new CreateBlockModelWithoutSignatureAndRootHash
+            {
+                BlockIndex = (++previousBlock.BlockIndex),
+                PreviousHash = previousBlock.Hash,
+                TimeStamp = DateTime.Now,
+                Transactions = tempList,
+                PublicKey = block.PublicKey
+            };
+
+            var signature = CryptoUtils.ValidateSignature(block.PublicKey, model.Serialize(), block.Signature, out string hash);
+            var hashedData = hash;
+            if ((previousBlock.Hash == block.PreviousHash)
+                || previousBlock.BlockIndex == model.BlockIndex
+                || !signature)
+            {
+                return null;
             }
             else
             {
                 DbContext.InsertBlock(new Block
                 {
-                    BlockIndex = receivedBlock.Block.BlockIndex,
-                    PreviousHash = receivedBlock.Block.PreviousHash,
-                    TimeStamp = receivedBlock.Block.TimeStamp,
-                    StateRootHash = finalBlock.StateRootHash,
-                    Hash = rootHashModel.Hash
+                    BlockIndex = model.BlockIndex,
+                    Hash = hashedData,
+                    PreviousHash = model.PreviousHash,
+                    PublicKey = model.PublicKey,
+                    Signature = block.Signature,
+                    TimeStamp = model.TimeStamp,
                 });
 
-                //insert transaction
+                var blockId = DbContext.BlockId(model.BlockIndex);
+                var transService = new TransactionService();
+                for (int i = 0; i < verifiedTransactions.Count; i++)
+                {
+                    if (verifiedTransactions[i].Item1.Type == "Ballot")
+                    {
+                        TransactionBallotModel trans = (TransactionBallotModel)verifiedTransactions[i].Item1;
+
+                        transService.InsertBallotTransactions((trans, verifiedTransactions[i].Item2), blockId);
+                    }
+                    else
+                    {
+                        TransactionVoteModel trans = (TransactionVoteModel)verifiedTransactions[i].Item1;
+                        transService.InsertVoteTransactions((trans, verifiedTransactions[i].Item2), blockId);
+                    }
+                }
+                var databaseState = DbContext.GetHash();
+                var stateRootHash = Convert.ToBase64String(CryptoService.CreateHash(databaseState));
+                if (stateRootHash != block.StateRootHash)
+                {
+                    for (int i = 0; i < verifiedTransactions.Count; i++)
+                    {
+                        DbContext.DeleteTransactions(verifiedTransactions[i].Item2);
+                    }
+                    DbContext.DeleteBlock(hashedData);
+                    return null;
+                }
+                else
+                {
+                    DbContext.UpdateStateRootHash(model.BlockIndex, stateRootHash);
+                }
+                return "Success";
             }
-            return "Success";
         }
 
-        public CreateBlockModel GetGenesisBlock()
+        public void GetGenesisBlock()
         {
             var result = DbContext.GenesisBlock();
-            if (result != null)
-                return new CreateBlockModel
-                {
-                    Block = new CreateHashBlockModel
-                    {
-                        BlockIndex =result.BlockIndex,
-                        PreviousHash = result.PreviousHash,
-                        TimeStamp = result.TimeStamp,
-                        Transactions = null
-                    }
-                };
-
-            return null;
+            if (result == null)
+                GenesisBlock();
         }
 
     }

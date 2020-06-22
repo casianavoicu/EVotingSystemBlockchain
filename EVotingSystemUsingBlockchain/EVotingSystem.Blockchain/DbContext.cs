@@ -31,10 +31,7 @@ namespace EVotingSystem.Blockchain
 
         public static void InsertAccount(Account account)
         {
-            if (GetAccount(account.PublicKey) == null)
-            {
-                connection.Insert(account);
-            }
+            connection.Insert(account);
         }
 
         public static void InsertBlock(Block block)
@@ -49,14 +46,17 @@ namespace EVotingSystem.Blockchain
 
         public static int GetAccountBalance(string publicKey)
         {
+            if (GetAccount(publicKey) == null)
+                return -1;
+
             return connection.Table<Account>().
-                FirstOrDefault(p => p.AccountAddress == publicKey).Balance;
+                FirstOrDefault(p => p.PublicKey == publicKey).Balance;
         }
 
         public static Account GetAccount(string publicKey)
         {
             return connection.Table<Account>().
-                FirstOrDefault(p => p.AccountAddress == publicKey);
+                FirstOrDefault(p => p.PublicKey == publicKey);
         }
 
         public static IEnumerable<Transaction> GetTransactionFromAddress(string publicKey)
@@ -70,12 +70,29 @@ namespace EVotingSystem.Blockchain
             return connection.Table<Transaction>().
                 Where(row => row.ToAddress == publicKey);
         }
+        public static void DeleteTransactions(string hash)
+        {
+            connection.Table<Transaction>(). Where(row => row.HashedData == hash).Delete();
+        }
+
+        public static void DeleteBlock(string hash)
+        {
+            connection.Table<Block>().Where(row => row.Hash == hash).Delete();
+        }
 
         public static void UpdateBalance(Account account)
         {
             Account result = connection.Table<Account>().
-                Where(row => row.AccountAddress == account.AccountAddress).FirstOrDefault();
+                Where(row => row.PublicKey == account.PublicKey).FirstOrDefault();
             result.Balance = account.Balance;
+            connection.Update(result);
+        }
+
+        public static void UpdateStateRootHash(int blockIndex, string stateRootHash)
+        {
+            Block result = connection.Table<Block>()
+                .Where(row => row.BlockIndex == blockIndex).FirstOrDefault();
+            result.StateRootHash = stateRootHash;
             connection.Update(result);
         }
 

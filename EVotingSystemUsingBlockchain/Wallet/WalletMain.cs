@@ -1,6 +1,10 @@
-﻿using Nodes;
+﻿using KeyPairServices;
+using Newtonsoft.Json;
+using Nodes;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using Wallet.Services;
 
@@ -8,13 +12,13 @@ namespace Wallet
 {
     class WalletMain
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            string password = null;
+            string password;
             int selector = 0;
             (byte[], byte[]) keyPair = (null, null);
 
-            if(!File.Exists("keys.txt"))
+            if (!File.Exists("keys.txt"))
             {
                 Console.WriteLine("You have to enter a password in order to register:");
                 Console.WriteLine("Enter a password:");
@@ -29,7 +33,7 @@ namespace Wallet
                     confirm = Console.ReadLine();
                 }
                 GenerateKeysService.CreateKeyPair(password);
-                Console.WriteLine("You have been registered in the system");
+                Console.WriteLine("Your Wallet is ready");
                 Console.WriteLine("Choose another actions:");
             }
 
@@ -46,60 +50,74 @@ namespace Wallet
             Console.WriteLine("Vote: 1");
             Console.WriteLine("Check Balance: 2");
             Console.WriteLine("View sent transactions: 3");
-            Console.WriteLine("View received transactions: 1");
+            Console.WriteLine("View received transactions: 4");
+            Console.WriteLine("Get public key: 5");
+            Console.WriteLine("Please select an action");
 
             while (selector != 7)
             {
-                Console.WriteLine("Please select an action");
                 try
                 {
                     selector = Convert.ToInt32(Console.ReadLine());
                     switch (selector)
                     {
                         case 1:
-                            Console.WriteLine("Receiver:");
-                            string receiver = Console.ReadLine();
-                            Console.WriteLine("Port:");
-                            int port = Convert.ToInt32(Console.ReadLine());
-                            TransactionService vote = new TransactionService();
-                            //request for candidates
-                            var candidate = "test";
-                            new Thread(() =>
-                            {
-                                Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", vote.CreateNewTransaction(receiver, keyPair, candidate, "Vote"), 1, port);
-                            }).Start();
 
+                            TransactionService vote = new TransactionService();
+                            //Client.Connect("127.0.0.1", "Ballot", 8, 13000).Wait();
+
+                            //if (Client.responseFinal == null)
+                            //{
+                            //    break;
+                            //}
+                            //var candidateList = DeserializeCandidates(Client.responseFinal);
+                            //Console.WriteLine("Candidates:");
+                            //foreach (var item in candidateList)
+                            //{
+                            //    Console.WriteLine(item.Value + " " + item.Key);
+
+                            //}
+                            //var choice = Console.ReadLine();
+                            //var candidate = candidateList.FirstOrDefault(p => p.Key == choice);
+
+                            //if (candidate.Value == null)
+                            //{
+                            //    break;
+                            //}
+                            Client.Connect("127.0.0.1", vote.CreateNewTransaction("asda", keyPair, "Popescu Andrei", "Vote"), 1, 13000);
                             break;
                         case 2:
-                            new Thread(() =>
-                            {
-                                Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", "Balance", 1, 13000);
-                            }).Start();
+                            Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, 13000);
                             break;
                         case 3:
-                            new Thread(() =>
-                            {
-                                Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", "TPublicKey+key-ul", 1, 13000);
-                            }).Start();
+                            Client.Connect("127.0.0.1", "TPublicKey+key-ul", 1, 13000);
                             break;
                         case 4:
-                            new Thread(() =>
-                            {
-                                Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", "FPublicKey+key-ul", 1, 13000);
-                            }).Start();
+                            Client.Connect("127.0.0.1", "FPublicKey+key-ul", 1, 13000);
                             break;
-
+                        case 5:
+                            Console.WriteLine(Convert.ToBase64String(keyPair.Item2));
+                            break;
                     }
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Please insert a valid number");
                 }
+                    Console.WriteLine("Please select an action");
             }
+        }
+    }
+
+    internal class CandidatesFinal
+    {
+        public List<string> Candidates{ get; set; }
+
+        public CandidatesFinal Deserialize(string content)
+        {
+            var result = JsonConvert.DeserializeObject<CandidatesFinal>(content);
+
+            return result;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Nodes;
+﻿using KeyPairServices;
+using Nodes;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -10,7 +10,7 @@ namespace Wallet.PrivateApplication
 {
     class WalletMainApp
     {
-        static void Main(string[] args)
+        static void Main()
         {
             string password = null;
             int selector = 0;
@@ -77,7 +77,7 @@ namespace Wallet.PrivateApplication
                             break;
 
                         case 2:
-                            Console.WriteLine("enter file name");
+                            Console.WriteLine("Enter a file name in order to add candidates");
                             var fileName = Console.ReadLine();
 
                             var lines =  File.ReadLines(fileName).ToList();
@@ -86,11 +86,24 @@ namespace Wallet.PrivateApplication
                             var ballotName = lines[1];
                             var candidates = lines.Skip(2).ToList();
 
+                            Console.WriteLine("Date and Time");
+                            Console.WriteLine(lines[0]);
+
+                            Console.WriteLine("Ballot Name:");
+                            Console.WriteLine(lines[1]);
+
+                            Console.WriteLine("Candidates:");
+                            foreach (var item in candidates)
+                            {
+                                Console.WriteLine(item);
+                            }
+                            Console.WriteLine("Your transaction has been registerd");
+                            Console.WriteLine();
                             new Thread(() =>
                             {
                                 Thread.CurrentThread.IsBackground = true;
                                 var finalTransaction = transaction.CreateBallotTransaction(keyPair, candidates, ballotName, endDate);
-                                Client.Connect("127.0.0.1", finalTransaction, 5, 13000);
+                                Client.Connect("127.0.0.1", finalTransaction, 5, 13001);
                             }).Start();
                             break;
 
