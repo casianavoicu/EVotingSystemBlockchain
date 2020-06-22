@@ -28,7 +28,35 @@ namespace EVotingSystem.Application.Model
 
         public CreateBlockModel Deserialize(string model)
         {
-            return JsonConvert.DeserializeObject<CreateBlockModel>(model);
+            var jObject = Newtonsoft.Json.Linq.JObject.Parse(model);
+
+            var transactionsJObject = jObject["Transactions"];
+
+            var transactionChildren = transactionsJObject.Children();
+
+            var createBlockModel = JsonConvert.DeserializeObject<CreateBlockModel>(model);
+
+            createBlockModel.Transactions.Clear();
+
+            foreach (var transaction in transactionChildren)
+            {
+                var baseTransaction = Newtonsoft.Json.JsonConvert.DeserializeObject<TransactionModel>(transaction.ToString());
+
+                if (baseTransaction.Type == "Ballot")
+                {
+                    var ballotTransaction = JsonConvert.DeserializeObject<TransactionBallotModel>(transaction.ToString());
+
+                    createBlockModel.Transactions.Add(ballotTransaction);
+                }
+                else if (baseTransaction.Type == "Vote")
+                {
+                    var voteTransaction = JsonConvert.DeserializeObject<TransactionVoteModel>(transaction.ToString());
+
+                    createBlockModel.Transactions.Add(voteTransaction);
+                }
+            }
+
+            return createBlockModel;
         }
     }
 

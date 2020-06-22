@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Nodes
 {
@@ -21,7 +22,7 @@ namespace Nodes
            13000,
            13001,
            13002,
-           13003,
+           13003
         };
 
         readonly TcpListener server = null;
@@ -64,6 +65,8 @@ namespace Nodes
                     Console.WriteLine("Enter a valid password");
                 }
             }
+
+            StartTimer(port, Ports.Count);
 
             currentPort = port;
             Ports.Remove(currentPort);
@@ -113,6 +116,8 @@ namespace Nodes
                     string hex = BitConverter.ToString(bytes);
                     data = Encoding.ASCII.GetString(bytes, 0, i);
 
+                    var requestObject = GetRequestType(data);
+
                     if (data.StartsWith("Balance"))
                     {
                         var result = blockchainService.CheckBalance(data.Substring(7));
@@ -136,7 +141,11 @@ namespace Nodes
                     {
                         blockchainService.CheckBalance(data.Substring(8));
                     }
-                    else if (GetRequestType(data) is CreateTransactionModel createTransactionModel)
+                    else if (data.StartsWith("123"))
+                    {
+
+                    }
+                    else if (requestObject is CreateTransactionModel createTransactionModel)
                     {
                         blockchainService.ReceiveTransactionVote(createTransactionModel);
 
@@ -157,25 +166,15 @@ namespace Nodes
 
                         Console.WriteLine("Message sent to peers");
                     }
-                    else if (GetRequestType(data) is CreateBallotTransactionModel ballotTransactionModel)
+                    else if (requestObject is CreateBallotTransactionModel ballotTransactionModel)
                     {
                         blockchainService.ReceiveTransactionBallot(ballotTransactionModel);
 
-                        var result = blockchainService.ProposeBlock(keyPair);
-                        var a = Encoding.ASCII.GetBytes(result);
-
-                        foreach (var port in Ports)
-                        {
-                            new Thread(() =>
-                            {
-                                Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", result, 6, port);
-                            }).Start();
-                        }
+                        
 
                         Console.WriteLine("Message sent to peers");
                     }
-                    else if (GetRequestType(data) is CreateBlockModel blockModel)
+                    else if (requestObject is CreateBlockModel blockModel)
                     {
                         if (blockchainService.ReceiveBlock(blockModel) == null)
                         {
@@ -203,29 +202,58 @@ namespace Nodes
             }
         }
 
-        //private void StartTimer(int port)
-        //{
-        //    var order = port % 5;
+        private void SendToPeers()
+        {
+            Console.WriteLine("Sending to nodes");
 
-        //    var second = DateTime.Now.Second;
+            var result = blockchainService.ProposeBlock(keyPair);
+            var a = Encoding.ASCII.GetBytes(result);
 
-        //    var whenToStart = DateTime.Now.AddSeconds(60 - second);
+            foreach (var port in Ports)
+            {
+                new Thread(() =>
+                {
+                    Thread.CurrentThread.IsBackground = true;
+                    Client.Connect("127.0.0.1", result, 6, port);
+                }).Start();
+            }
+        }
 
-        //    var timeToWait = whenToStart - DateTime.Now;
+        private void StartTimer(int port, int numberOfNodes)
+        {
+            port = 13003;
 
-        //    Thread.Sleep(timeToWait);
+            var order = (port % numberOfNodes) + 1;
 
-        //    var timer = new Timer(new TimerCallback(Tick));
+            var secondsPerNode = 60 / numberOfNodes;
 
-        //    var index = port * 12;
+            var secondWhenToSend = secondsPerNode * order;
 
-        //    timer.Change(index, 60);
-        //}
+            var now = DateTime.UtcNow;
+            var nowSecond = DateTime.UtcNow.Second;
 
-        //private void Tick(object? state)
-        //{
+            var timeToSleep = (int)(now - now.AddSeconds(nowSecond)).TotalSeconds + secondWhenToSend;
 
-        //}
+            timeToSleep = (timeToSleep + 60) % 60;
+
+            Console.WriteLine(timeToSleep);
+
+            Task.Run(() =>
+            {
+                Thread.Sleep(timeToSleep * 1000);
+
+                Console.WriteLine(DateTime.Now.Second);
+
+                var timer = new Timer(new TimerCallback(Tick));
+
+                timer.Change(0, 60000);
+            });
+        }
+
+        private void Tick(object? state)
+        {
+            SendToPeers();
+        }
 
         private object GetRequestType(string data)
         {

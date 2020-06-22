@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using Wallet.Services;
 
@@ -12,8 +13,28 @@ namespace Wallet
 {
     class WalletMain
     {
+        private const int numberOfPorts = 4;
+
+        public static int Port
+        {
+            get
+            {
+                var timePerPort = 60 / numberOfPorts;
+
+                return 13000 + (DateTime.Now.Second / timePerPort);
+            }
+        }
+
         static void Main()
         {
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine(DateTime.Now.Second);
+                Console.WriteLine(Port);
+
+                Thread.Sleep(1000);
+            }
+
             string password;
             int selector = 0;
             (byte[], byte[]) keyPair = (null, null);
@@ -64,7 +85,7 @@ namespace Wallet
                         case 1:
 
                             TransactionService vote = new TransactionService();
-                            Client.Connect("127.0.0.1", "Ballot", 8, 13000);
+                            Client.Connect("127.0.0.1", "Ballot", 8, Port);
 
                             if (Client.responseFinal == null)
                             {
@@ -89,10 +110,10 @@ namespace Wallet
                                 break;
                             }
 
-                            Client.Connect("127.0.0.1", vote.CreateNewTransaction("asda", keyPair, candidate, "Vote"), 1, 13000);
+                            Client.Connect("127.0.0.1", vote.CreateNewTransaction("asda", keyPair, candidate, "Vote"), 1, Port);
                             break;
                         case 2:
-                            Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, 13000);
+                            Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, Port);
                             break;
                         case 3:
                             Client.Connect("127.0.0.1", "TPublicKey+key-ul", 1, 13000);

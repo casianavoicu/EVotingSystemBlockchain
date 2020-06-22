@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wallet.PrivateApplication",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{3ACEFE6F-2BB3-49EC-ABED-D2E3F5B8A348}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyPairServices", "KeyPairServices\KeyPairServices.csproj", "{432E5654-7B87-4E96-8A2A-8AC45FC757F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyPairServices", "KeyPairServices\KeyPairServices.csproj", "{432E5654-7B87-4E96-8A2A-8AC45FC757F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nodes2", "Nodes2\Nodes2.csproj", "{8415AFB6-05FF-40B7-AAEF-0C485ADEC88A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{432E5654-7B87-4E96-8A2A-8AC45FC757F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{432E5654-7B87-4E96-8A2A-8AC45FC757F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{432E5654-7B87-4E96-8A2A-8AC45FC757F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8415AFB6-05FF-40B7-AAEF-0C485ADEC88A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8415AFB6-05FF-40B7-AAEF-0C485ADEC88A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8415AFB6-05FF-40B7-AAEF-0C485ADEC88A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8415AFB6-05FF-40B7-AAEF-0C485ADEC88A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
