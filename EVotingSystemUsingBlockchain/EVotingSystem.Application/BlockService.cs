@@ -87,8 +87,8 @@ namespace EVotingSystem.Application
                 }
             }
             var databaseState = DbContext.GetHash();
-            var stateRootHash = CryptoService.CreateHash(databaseState);
-            DbContext.UpdateStateRootHash(model.BlockIndex, Convert.ToBase64String(stateRootHash));
+            var stateRootHash = Convert.ToBase64String(CryptoService.CreateHash(databaseState));
+            DbContext.UpdateStateRootHash(model.BlockIndex, stateRootHash);
 
             return (new CreateBlockModel
             {
@@ -124,7 +124,7 @@ namespace EVotingSystem.Application
             var signature = CryptoUtils.ValidateSignature(block.PublicKey, model.Serialize(), block.Signature, out string hash);
             var hashedData = hash;
             if ((previousBlock.Hash != block.PreviousHash)
-                || previousBlock.BlockIndex != model.BlockIndex
+                || block.BlockIndex != model.BlockIndex
                 || !signature)
             {
                 return null;
@@ -157,8 +157,12 @@ namespace EVotingSystem.Application
                         transService.InsertVoteTransactions((trans, verifiedTransactions[i].Item2), blockId);
                     }
                 }
+
+
+
                 var databaseState = DbContext.GetHash();
                 var stateRootHash = Convert.ToBase64String(CryptoService.CreateHash(databaseState));
+
                 if (stateRootHash != block.StateRootHash)
                 {
                     for (int i = 0; i < verifiedTransactions.Count; i++)

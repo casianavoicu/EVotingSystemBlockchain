@@ -11,7 +11,7 @@ namespace Wallet
 {
     class WalletMain
     {
-        private const int numberOfPorts = 4;
+        private const int numberOfPorts = 2;
 
         public static int Port
         {
@@ -76,21 +76,21 @@ namespace Wallet
                         case 1:
 
                             TransactionService vote = new TransactionService();
-                            Client.Connect("127.0.0.1", "Ballot", 8, Port);
+                            var ballotResponse = Client.Connect("127.0.0.1", "Ballot", 8, Port);
 
-                            if (Client.responseFinal == null)
+                            if (ballotResponse == null)
                             {
                                 break;
                             }
 
-                            var candidateList = JsonConvert.DeserializeObject<List<string>>(Client.responseFinal);
+                            var candidateList = JsonConvert.DeserializeObject<List<string>>(ballotResponse);
                             var finalCandidates = new Dictionary<int, string>();
                             Console.WriteLine("Candidates:");
                             int ct = 0;
                             for (int i = 0; i < candidateList.Count(); i++)
                             {
-                                finalCandidates.Add(ct, candidateList[i]);
-                                Console.WriteLine(candidateList + " " + ct);
+                                finalCandidates.Add(ct++, candidateList[i]);
+                                Console.WriteLine(candidateList[i] + " " + ct);
                             }
 
                             var choice = Console.ReadLine();

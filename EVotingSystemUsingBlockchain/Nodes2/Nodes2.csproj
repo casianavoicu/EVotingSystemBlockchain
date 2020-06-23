@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EVotingSystem.Application\EVotingSystem.Application.csproj" />
-    <ProjectReference Include="..\KeyPairServices\KeyPairServices.csproj" />
+    <ProjectReference Include="..\KeyPairServices\CryptographyServices.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 

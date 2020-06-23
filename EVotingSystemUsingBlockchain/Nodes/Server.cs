@@ -107,7 +107,6 @@ namespace Nodes
             Byte[] bytes = new Byte[60000];
             int i;
             try
-
             {
                 while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                 {
@@ -131,6 +130,12 @@ namespace Nodes
 
                         stream.Write(reply, 0, reply.Length);
                     }
+                    else if (data.StartsWith("Ballot"))
+                    {
+                        var candidates = blockchainService.GetCandidates();
+                        var reply = Encoding.ASCII.GetBytes(candidates);
+                        stream.Write(reply, 0, reply.Length);
+                    }
                     else if (data.StartsWith("HistoryF"))
                     {
                         blockchainService.CheckBalance(data.Substring(8));
@@ -146,29 +151,12 @@ namespace Nodes
                     else if (requestObject is CreateTransactionModel createTransactionModel)
                     {
                         blockchainService.ReceiveTransactionVote(createTransactionModel);
-
-                        string str = "Transaction Registered";
-                        Byte[] reply = Encoding.ASCII.GetBytes(str);
+                        var reply = Encoding.ASCII.GetBytes("OK");
                         stream.Write(reply, 0, reply.Length);
-                        Console.WriteLine("Sent: {0}", str);
-                        var result = blockchainService.ProposeBlock(keyPair);
-
-                        foreach (var port in Ports)
-                        {
-                            new Thread(() =>
-                            {
-                                Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", result, 6, port);
-                            }).Start();
-                        }
-
-                        Console.WriteLine("Message sent to peers");
                     }
                     else if (requestObject is CreateBallotTransactionModel ballotTransactionModel)
                     {
                         blockchainService.ReceiveTransactionBallot(ballotTransactionModel);
-
-
 
                         Console.WriteLine("Message sent to peers");
                     }
@@ -184,13 +172,6 @@ namespace Nodes
                             Console.WriteLine("Valid Block");
                         }
                     }
-
-                    else if(data.StartsWith("Ballot"))
-                    {
-                        Byte[] reply = new Byte[128];
-                        reply = Encoding.ASCII.GetBytes(blockchainService.GetCandidates());
-                    }
-
                 }
             }
             catch (Exception e)
@@ -202,7 +183,7 @@ namespace Nodes
 
         private void SendToPeers()
         {
-            if (BlockchainService.transactionModels == null)
+            if (BlockchainService.transactionModels.Count == 0)
             {
                 return;
             }
@@ -210,7 +191,6 @@ namespace Nodes
             Console.WriteLine("Sending to nodes");
 
             var result = blockchainService.ProposeBlock(keyPair);
-            var a = Encoding.ASCII.GetBytes(result);
 
             foreach (var port in Ports)
             {
@@ -220,12 +200,12 @@ namespace Nodes
                     Client.Connect("127.0.0.1", result, 6, port);
                 }).Start();
             }
+
+            BlockchainService.transactionModels.Clear();
         }
 
         private void StartTimer(int port, int numberOfNodes)
         {
-            port = 13003;
-
             var order = (port % numberOfNodes) + 1;
 
             var secondsPerNode = 60 / numberOfNodes;
@@ -260,24 +240,31 @@ namespace Nodes
 
         private object GetRequestType(string data)
         {
-            var ballot = JsonConvert.DeserializeObject<CreateBallotTransactionModel>(data);
-            var block = JsonConvert.DeserializeObject<CreateBlockModel>(data);
+            try
+            {
+                var ballot = JsonConvert.DeserializeObject<CreateBallotTransactionModel>(data);
+                var block = JsonConvert.DeserializeObject<CreateBlockModel>(data);
 
-            if (block.StateRootHash != null)
-            {
-                CreateBlockModel model = new CreateBlockModel();
-                return model.Deserialize(data);
-            }
-            else if (ballot.Type != "Ballot")
-            {
-                return JsonConvert.DeserializeObject<CreateTransactionModel>(data);
-            }
+                if (block.StateRootHash != null)
+                {
+                    CreateBlockModel model = new CreateBlockModel();
+                    return model.Deserialize(data);
+                }
+                else if (ballot.Type != "Ballot")
+                {
+                    return JsonConvert.DeserializeObject<CreateTransactionModel>(data);
+                }
 
-            else if (ballot.Type == "Ballot")
-            {
-                return ballot;
+                else if (ballot.Type == "Ballot")
+                {
+                    return ballot;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch
             {
                 return null;
             }
