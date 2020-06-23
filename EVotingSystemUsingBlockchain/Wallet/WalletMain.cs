@@ -13,7 +13,7 @@ namespace Wallet
 {
     class WalletMain
     {
-        private const int numberOfPorts = 2;
+        private const int numberOfPorts = 4;
 
         public static int Port
         {
@@ -27,6 +27,13 @@ namespace Wallet
 
         static void Main()
         {
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine(DateTime.Now.Second);
+                Console.WriteLine(Port);
+
+                Thread.Sleep(1000);
+            }
 
             string password;
             int selector = 0;
@@ -78,8 +85,7 @@ namespace Wallet
                         case 1:
 
                             TransactionService vote = new TransactionService();
-
-                            Client.Connect("127.0.0.1", "Ballot", 8, GetRandomNodes());
+                            Client.Connect("127.0.0.1", "Ballot", 8, Port);
 
                             if (Client.responseFinal == null)
                             {
@@ -104,16 +110,16 @@ namespace Wallet
                                 break;
                             }
 
-                            Client.Connect("127.0.0.1", vote.CreateNewTransaction("asda", keyPair, candidate, "Vote"), 1, GetRandomNodes());
+                            Client.Connect("127.0.0.1", vote.CreateNewTransaction("asda", keyPair, candidate, "Vote"), 1, Port);
                             break;
                         case 2:
-                            Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, GetRandomNodes());
+                            Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, Port);
                             break;
                         case 3:
-                            Client.Connect("127.0.0.1", "TPublicKey+key-ul", 1, GetRandomNodes());
+                            Client.Connect("127.0.0.1", "TPublicKey+key-ul", 1, 13000);
                             break;
                         case 4:
-                            Client.Connect("127.0.0.1", "FPublicKey+key-ul", 1, GetRandomNodes());
+                            Client.Connect("127.0.0.1", "FPublicKey+key-ul", 1, 13001);
                             break;
                         case 5:
                             Console.WriteLine(Convert.ToBase64String(keyPair.Item2));
@@ -127,22 +133,8 @@ namespace Wallet
                     Console.WriteLine("Please select an action");
             }
         }
-
-        private static int GetRandomNodes()
-        {
-            List<int> ports = new List<int>
-            {
-                13000,
-                13001,
-            };
-
-            ports.Remove(Port);
-            Random random = new Random();
-            int index = random.Next(ports.Count);
-
-            return ports[index];
-        }
     }
+
     internal class CandidatesFinal
     {
         public List<string> Candidates{ get; set; }

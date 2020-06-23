@@ -95,7 +95,7 @@ namespace EVotingSystem.Application
                 PublicKey = model.PublicKey,
                 Signature = signature,
                 TimeStamp = model.TimeStamp,
-                StateRootHash = Convert.ToBase64String(stateRootHash),
+                StateRootHash = Convert.ToString(stateRootHash),
                 Transactions = tempList,
             }).Serialize();
         }
@@ -114,15 +114,15 @@ namespace EVotingSystem.Application
             {
                 BlockIndex = (++previousBlock.BlockIndex),
                 PreviousHash = previousBlock.Hash,
-                TimeStamp = block.TimeStamp,
+                TimeStamp = DateTime.Now,
                 Transactions = tempList,
                 PublicKey = block.PublicKey
             };
 
             var signature = CryptoUtils.ValidateSignature(block.PublicKey, model.Serialize(), block.Signature, out string hash);
             var hashedData = hash;
-            if ((previousBlock.Hash != block.PreviousHash)
-                || previousBlock.BlockIndex != model.BlockIndex
+            if ((previousBlock.Hash == block.PreviousHash)
+                || previousBlock.BlockIndex == model.BlockIndex
                 || !signature)
             {
                 return null;

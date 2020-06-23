@@ -46,11 +46,9 @@ namespace Nodes
                         var data = Encoding.ASCII.GetBytes(message);
                         stream.Write(data, 0, data.Length);
                         String response = String.Empty;
-                        data = new Byte[128];
-                        var bytes = stream.Read(data, 0, data.Length);
+                        Int32 bytes = stream.Read(data, 0, data.Length);
                         response = Encoding.ASCII.GetString(data, 0, bytes);
-                        responseFinal = response;
-                        //Console.WriteLine("Your response: {0}", response);
+                        Console.WriteLine("Your response: {0}", response);
                     }
                 }
             }

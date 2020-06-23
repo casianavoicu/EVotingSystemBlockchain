@@ -2,13 +2,14 @@
 using EVotingSystem.Blockchain;
 using Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace EVotingSystem.Application
 {
     public class BlockchainService
     {
-        public static readonly List<(TransactionModel, string hash)> transactionModels = new List<(TransactionModel, string)>();
+        private static readonly List<(TransactionModel, string hash)> transactionModels = new List<(TransactionModel, string)>();
         public BlockchainService()
         {
 
