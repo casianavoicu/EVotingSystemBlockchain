@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wallet.PrivateApplication",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{3ACEFE6F-2BB3-49EC-ABED-D2E3F5B8A348}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyPairServices", "KeyPairServices\KeyPairServices.csproj", "{432E5654-7B87-4E96-8A2A-8AC45FC757F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptographyServices", "KeyPairServices\CryptographyServices.csproj", "{432E5654-7B87-4E96-8A2A-8AC45FC757F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

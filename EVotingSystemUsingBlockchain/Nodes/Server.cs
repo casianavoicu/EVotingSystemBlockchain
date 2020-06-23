@@ -20,9 +20,7 @@ namespace Nodes
         private static readonly List<int> Ports = new List<int>
         {
            13000,
-           13001,
-           13002,
-           13003
+           13001
         };
 
         readonly TcpListener server = null;
@@ -52,7 +50,7 @@ namespace Nodes
                 }
                 GenerateKeysService.CreateKeyPair(password);
                 Console.WriteLine("You have been registered in the system");
-                Console.WriteLine("Choose another actions:");
+                //adaugarea cheilor in db
             }
 
             Console.WriteLine("Enter your password:");
@@ -170,7 +168,7 @@ namespace Nodes
                     {
                         blockchainService.ReceiveTransactionBallot(ballotTransactionModel);
 
-                        
+
 
                         Console.WriteLine("Message sent to peers");
                     }
@@ -204,6 +202,11 @@ namespace Nodes
 
         private void SendToPeers()
         {
+            if (BlockchainService.transactionModels == null)
+            {
+                return;
+            }
+
             Console.WriteLine("Sending to nodes");
 
             var result = blockchainService.ProposeBlock(keyPair);

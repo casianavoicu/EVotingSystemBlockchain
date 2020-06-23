@@ -9,7 +9,7 @@ namespace EVotingSystem.Application
 {
     public class BlockchainService
     {
-        private static readonly List<(TransactionModel, string hash)> transactionModels = new List<(TransactionModel, string)>();
+        public static readonly List<(TransactionModel, string hash)> transactionModels = new List<(TransactionModel, string)>();
         public BlockchainService()
         {
 
@@ -19,11 +19,13 @@ namespace EVotingSystem.Application
         {
             var candidates = DbContext.GetAllCandidates();
             List<string> candidatesName= new List<string>();
+            string ballotName = "";
             foreach (var item in candidates)
             {
                 candidatesName.Add(item.Name);
+                ballotName = item.Ballot;
             }
-
+            candidatesName.Add(ballotName);
             return JsonConvert.SerializeObject(candidatesName);
         }
 

@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EVotingSystem.Blockchain\EVotingSystem.Blockchain.csproj" />
-    <ProjectReference Include="..\KeyPairServices\KeyPairServices.csproj" />
+    <ProjectReference Include="..\KeyPairServices\CryptographyServices.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 

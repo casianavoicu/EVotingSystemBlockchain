@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Threading;
 using Wallet.Services;
 
 namespace Wallet
@@ -27,13 +25,6 @@ namespace Wallet
 
         static void Main()
         {
-            for (int i = 0; i < 100; i++)
-            {
-                Console.WriteLine(DateTime.Now.Second);
-                Console.WriteLine(Port);
-
-                Thread.Sleep(1000);
-            }
 
             string password;
             int selector = 0;
@@ -55,7 +46,7 @@ namespace Wallet
                 }
                 GenerateKeysService.CreateKeyPair(password);
                 Console.WriteLine("Your Wallet is ready");
-                Console.WriteLine("Choose another actions:");
+                Console.WriteLine("Choose another action:");
             }
 
             Console.WriteLine("Enter your password:");

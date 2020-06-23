@@ -3,6 +3,7 @@ using EVotingSystem.Application.Utils;
 using EVotingSystem.Blockchain;
 using Models;
 using System;
+using System.Security.Cryptography;
 
 namespace EVotingSystem.Application
 {
@@ -42,6 +43,7 @@ namespace EVotingSystem.Application
             if (CryptoUtils.ValidateSignature(transactionBallot.FromAddress, serializedTransaction, transactionBallot.Signature, out string hash))
             {
                 accountService.VerifyAccount(transactionBallot.ToAddress);
+
                 return (transactionBallot, hash);
             }
 

@@ -47,7 +47,7 @@ namespace EVotingSystem.Application
             return new AccountModel
             {
                 Balance = voter.Balance,
-                PublicKey = voter.PublicKey
+                PublicKey = voter.PublicKey,
             };
         }
 

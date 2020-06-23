@@ -32,8 +32,8 @@ namespace Wallet.PrivateApplication
                     confirm = Console.ReadLine();
                 }
                 GenerateKeysService.CreateKeyPair(password);
-                Console.WriteLine("You have been registered in the system");
-                Console.WriteLine("Choose another actions:");
+                Console.WriteLine("Your Wallet is ready");
+                Console.WriteLine("Choose another action:");
             }
 
             Console.WriteLine("Enter your password:");
@@ -52,7 +52,6 @@ namespace Wallet.PrivateApplication
 
             TransactionInstitutionService transaction = new TransactionInstitutionService();
             TransactionService accountTransaction = new TransactionService();
-            //randomize
             while (selector != 4)
             {
                 Console.WriteLine("Please select an action");
@@ -64,15 +63,13 @@ namespace Wallet.PrivateApplication
                         case 1:
                             Console.WriteLine("Account:");
                             string accountPk = Console.ReadLine();
-                            Console.WriteLine("Port:");
-                            int port2 = Convert.ToInt32(Console.ReadLine());
                             Console.WriteLine("Amount:");
-                            string ammount = Console.ReadLine();
+                            string amount = Console.ReadLine();
                             new Thread(() =>
                             {
                                 Thread.CurrentThread.IsBackground = true;
-                                var finalTransaction = accountTransaction.CreateNewTransaction(accountPk, keyPair, ammount, "Account");
-                                Client.Connect("127.0.0.1", finalTransaction, 5, port2);
+                                var finalTransaction = accountTransaction.CreateNewTransaction(accountPk, keyPair, amount, "Vote");
+                                Client.Connect("127.0.0.1", finalTransaction, 5, 13000);
                             }).Start();
                             break;
 
@@ -109,7 +106,7 @@ namespace Wallet.PrivateApplication
 
                         case 3:
                             Console.WriteLine("View final:");
-                            //request catre
+                            //request pentru a vizualiza voturile
                             break;
                     }
                 }

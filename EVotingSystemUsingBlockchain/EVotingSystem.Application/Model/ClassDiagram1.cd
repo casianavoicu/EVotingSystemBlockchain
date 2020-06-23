@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EVotingSystem.Application.Model.TransactionModel">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABACAAAAAABAAAAAAQAAgAAAAAE=</HashCode>
+      <FileName>Model\TransactionModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EVotingSystem.Application.Model.TransactionBallotModel">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Model\TransactionModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EVotingSystem.Application.Model.TransactionVoteModel">
+    <Position X="1.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Model\TransactionModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Models.CreateTransactionModel">
+    <Position X="7" Y="4.75" Width="3" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Models.CreateTransactionModelWithoutSignature">
+    <Position X="7" Y="1.5" Width="3" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

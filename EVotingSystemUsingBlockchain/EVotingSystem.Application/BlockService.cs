@@ -71,6 +71,7 @@ namespace EVotingSystem.Application
 
             var blockId = DbContext.BlockId(model.BlockIndex);
             var transService = new TransactionService();
+
             for (int i = 0; i < transaction.Count; i++)
             {
                 if (transaction[i].Item1.Type == "Ballot")
@@ -88,6 +89,7 @@ namespace EVotingSystem.Application
             var databaseState = DbContext.GetHash();
             var stateRootHash = CryptoService.CreateHash(databaseState);
             DbContext.UpdateStateRootHash(model.BlockIndex, Convert.ToBase64String(stateRootHash));
+
             return (new CreateBlockModel
             {
                 BlockIndex = model.BlockIndex,
@@ -114,15 +116,15 @@ namespace EVotingSystem.Application
             {
                 BlockIndex = (++previousBlock.BlockIndex),
                 PreviousHash = previousBlock.Hash,
-                TimeStamp = DateTime.Now,
+                TimeStamp = block.TimeStamp,
                 Transactions = tempList,
                 PublicKey = block.PublicKey
             };
 
             var signature = CryptoUtils.ValidateSignature(block.PublicKey, model.Serialize(), block.Signature, out string hash);
             var hashedData = hash;
-            if ((previousBlock.Hash == block.PreviousHash)
-                || previousBlock.BlockIndex == model.BlockIndex
+            if ((previousBlock.Hash != block.PreviousHash)
+                || previousBlock.BlockIndex != model.BlockIndex
                 || !signature)
             {
                 return null;
