@@ -1,6 +1,7 @@
 ﻿using KeyPairServices;
 using Nodes;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -10,8 +11,21 @@ namespace Wallet.PrivateApplication
 {
     class WalletMainApp
     {
+        private const int numberOfPorts = 2;
+
+        public static int Port
+        {
+            get
+            {
+                var timePerPort = 60 / numberOfPorts;
+
+                return 13000 + (DateTime.Now.Second / timePerPort);
+            }
+        }
+
         static void Main()
         {
+
             string password = null;
             int selector = 0;
             (byte[], byte[]) keyPair = (null, null);
@@ -52,7 +66,7 @@ namespace Wallet.PrivateApplication
 
             TransactionInstitutionService transaction = new TransactionInstitutionService();
             TransactionService accountTransaction = new TransactionService();
-            //randomize
+
             while (selector != 4)
             {
                 Console.WriteLine("Please select an action");
@@ -72,7 +86,7 @@ namespace Wallet.PrivateApplication
                             {
                                 Thread.CurrentThread.IsBackground = true;
                                 var finalTransaction = accountTransaction.CreateNewTransaction(accountPk, keyPair, ammount, "Account");
-                                Client.Connect("127.0.0.1", finalTransaction, 5, port2);
+                                Client.Connect("127.0.0.1", finalTransaction, 5, Port);
                             }).Start();
                             break;
 
@@ -103,7 +117,7 @@ namespace Wallet.PrivateApplication
                             {
                                 Thread.CurrentThread.IsBackground = true;
                                 var finalTransaction = transaction.CreateBallotTransaction(keyPair, candidates, ballotName, endDate);
-                                Client.Connect("127.0.0.1", finalTransaction, 5, 13001);
+                                Client.Connect("127.0.0.1", finalTransaction, 5, Port);
                             }).Start();
                             break;
 
@@ -118,6 +132,21 @@ namespace Wallet.PrivateApplication
                     Console.WriteLine("Please insert a valid number");
                 }
             }
+
+        }
+        private static int GetRandomNodes()
+        {
+            List<int> ports = new List<int>
+            {
+                13000,
+                13001,
+            };
+
+            ports.Remove(Port);
+            Random random = new Random();
+            int index = random.Next(ports.Count);
+
+            return ports[index];
         }
     }
 }

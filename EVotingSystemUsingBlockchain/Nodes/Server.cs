@@ -21,8 +21,6 @@ namespace Nodes
         {
            13000,
            13001,
-           13002,
-           13003
         };
 
         readonly TcpListener server = null;
@@ -52,7 +50,6 @@ namespace Nodes
                 }
                 GenerateKeysService.CreateKeyPair(password);
                 Console.WriteLine("You have been registered in the system");
-                Console.WriteLine("Choose another actions:");
             }
 
             Console.WriteLine("Enter your password:");
@@ -116,8 +113,7 @@ namespace Nodes
                     string hex = BitConverter.ToString(bytes);
                     data = Encoding.ASCII.GetString(bytes, 0, i);
 
-                    var requestObject = GetRequestType(data);
-
+                   
                     if (data.StartsWith("Balance"))
                     {
                         var result = blockchainService.CheckBalance(data.Substring(7));
@@ -145,7 +141,13 @@ namespace Nodes
                     {
 
                     }
-                    else if (requestObject is CreateTransactionModel createTransactionModel)
+                    else if(data.StartsWith("Ballot"))
+                    {
+                        Byte[] reply = new Byte[128];
+                        reply = Encoding.ASCII.GetBytes(blockchainService.GetCandidates());
+                        stream.Write(reply, 0, reply.Length);
+                    }
+                    else if (GetRequestType(data) is CreateTransactionModel createTransactionModel)
                     {
                         blockchainService.ReceiveTransactionVote(createTransactionModel);
 
@@ -153,28 +155,14 @@ namespace Nodes
                         Byte[] reply = Encoding.ASCII.GetBytes(str);
                         stream.Write(reply, 0, reply.Length);
                         Console.WriteLine("Sent: {0}", str);
-                        var result = blockchainService.ProposeBlock(keyPair);
 
-                        foreach (var port in Ports)
-                        {
-                            new Thread(() =>
-                            {
-                                Thread.CurrentThread.IsBackground = true;
-                                Client.Connect("127.0.0.1", result, 6, port);
-                            }).Start();
-                        }
-
-                        Console.WriteLine("Message sent to peers");
                     }
-                    else if (requestObject is CreateBallotTransactionModel ballotTransactionModel)
+                    else if (GetRequestType(data) is CreateBallotTransactionModel ballotTransactionModel)
                     {
                         blockchainService.ReceiveTransactionBallot(ballotTransactionModel);
 
-                        
-
-                        Console.WriteLine("Message sent to peers");
                     }
-                    else if (requestObject is CreateBlockModel blockModel)
+                    else if (GetRequestType(data) is CreateBlockModel blockModel)
                     {
                         if (blockchainService.ReceiveBlock(blockModel) == null)
                         {
@@ -187,11 +175,6 @@ namespace Nodes
                         }
                     }
 
-                    else if(data.StartsWith("Ballot"))
-                    {
-                        Byte[] reply = new Byte[128];
-                        reply = Encoding.ASCII.GetBytes(blockchainService.GetCandidates());
-                    }
 
                 }
             }
@@ -204,11 +187,16 @@ namespace Nodes
 
         private void SendToPeers()
         {
+
+            if (BlockchainService.transactionModels.Count==0)
+            {
+                return;
+            }
             Console.WriteLine("Sending to nodes");
 
             var result = blockchainService.ProposeBlock(keyPair);
             var a = Encoding.ASCII.GetBytes(result);
-
+            BlockchainService.transactionModels.Clear();
             foreach (var port in Ports)
             {
                 new Thread(() =>
@@ -236,7 +224,7 @@ namespace Nodes
 
             timeToSleep = (timeToSleep + 60) % 60;
 
-            Console.WriteLine(timeToSleep);
+           // Console.WriteLine(timeToSleep);
 
             Task.Run(() =>
             {
