@@ -84,13 +84,18 @@ namespace Wallet
                             }
 
                             var candidateList = JsonConvert.DeserializeObject<List<string>>(ballotResponse);
+                            var address = candidateList.ElementAt(0);
+                            var ballotName = candidateList.ElementAt(1);
+                            candidateList.RemoveAt(0);
+                            candidateList.RemoveAt(0);
                             var finalCandidates = new Dictionary<int, string>();
                             Console.WriteLine("Candidates:");
-                            int ct = 0;
+                            int ct = 1;
                             for (int i = 0; i < candidateList.Count(); i++)
                             {
-                                finalCandidates.Add(ct++, candidateList[i]);
+                                finalCandidates.Add(ct, candidateList[i]);
                                 Console.WriteLine(candidateList[i] + " " + ct);
+                                ct++;
                             }
 
                             var choice = Console.ReadLine();
@@ -101,16 +106,16 @@ namespace Wallet
                                 break;
                             }
 
-                            Client.Connect("127.0.0.1", vote.CreateNewTransaction("asda", keyPair, candidate, "Vote"), 1, Port);
+                            Client.Connect("127.0.0.1", vote.CreateNewTransaction(address, keyPair, candidate, "Vote"), 1, Port);
                             break;
                         case 2:
                             Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, Port);
                             break;
                         case 3:
-                            Client.Connect("127.0.0.1", "TPublicKey+key-ul", 1, 13000);
+                            var response = Client.Connect("127.0.0.1", "HistoryF"+Convert.ToBase64String(keyPair.Item2), 1, 13000);
                             break;
                         case 4:
-                            Client.Connect("127.0.0.1", "FPublicKey+key-ul", 1, 13001);
+                            var history = Client.Connect("127.0.0.1", "HistoryT" + Convert.ToBase64String(keyPair.Item2), 1, 13001);
                             break;
                         case 5:
                             Console.WriteLine(Convert.ToBase64String(keyPair.Item2));

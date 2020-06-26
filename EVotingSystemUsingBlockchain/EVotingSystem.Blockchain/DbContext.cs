@@ -61,6 +61,11 @@ namespace EVotingSystem.Blockchain
                 FirstOrDefault(p => p.PublicKey == publicKey);
         }
 
+        public static IEnumerable<Block> GetAllBlocks()
+        {
+            return connection.Table<Block>().ToList();
+        }
+
         public static IEnumerable<Transaction> GetTransactionFromAddress(string publicKey)
         {
             return connection.Table<Transaction>().
@@ -73,16 +78,15 @@ namespace EVotingSystem.Blockchain
                 Where(row => row.ToAddress == publicKey);
         }
 
-        public static IEnumerable<Candidate> GetAllCandidates()
+        public static (IEnumerable<Candidate>, string acc) GetAllCandidates()
         {
             var transactionBallot = connection.Table<Transaction>()
                 .Where(p => p.ToAddress == p.FromAddress
                 && p.Details != null).LastOrDefault();
 
             var account = connection.Table<Account>().Where(a => a.PublicKey == transactionBallot.FromAddress).FirstOrDefault();
-
-            return connection.Table<Candidate>()
-                .Where(r => r.AccountId == account.AccountId);
+            return (connection.Table<Candidate>()
+                .Where(r => r.AccountId == account.AccountId), account.PublicKey);
         }
         public static void DeleteTransactions(string hash)
         {

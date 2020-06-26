@@ -48,7 +48,7 @@ namespace EVotingSystem.Application.Model
 
                     createBlockModel.Transactions.Add(ballotTransaction);
                 }
-                else if (baseTransaction.Type == "Vote")
+                else
                 {
                     var voteTransaction = JsonConvert.DeserializeObject<TransactionVoteModel>(transaction.ToString());
 

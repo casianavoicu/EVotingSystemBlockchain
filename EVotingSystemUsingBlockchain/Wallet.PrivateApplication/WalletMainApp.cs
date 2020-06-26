@@ -10,6 +10,18 @@ namespace Wallet.PrivateApplication
 {
     class WalletMainApp
     {
+        private const int numberOfPorts = 2;
+
+        public static int Port
+        {
+            get
+            {
+                var timePerPort = 60 / numberOfPorts;
+
+                return 13000 + (DateTime.Now.Second / timePerPort);
+            }
+        }
+
         static void Main()
         {
             string password = null;
@@ -68,8 +80,8 @@ namespace Wallet.PrivateApplication
                             new Thread(() =>
                             {
                                 Thread.CurrentThread.IsBackground = true;
-                                var finalTransaction = accountTransaction.CreateNewTransaction(accountPk, keyPair, amount, "Vote");
-                                Client.Connect("127.0.0.1", finalTransaction, 5, 13000);
+                                var finalTransaction = accountTransaction.CreateNewTransaction(accountPk, keyPair, amount, "Account");
+                                Client.Connect("127.0.0.1", finalTransaction, 5, Port);
                             }).Start();
                             break;
 
@@ -100,13 +112,21 @@ namespace Wallet.PrivateApplication
                             {
                                 Thread.CurrentThread.IsBackground = true;
                                 var finalTransaction = transaction.CreateBallotTransaction(keyPair, candidates, ballotName, endDate);
-                                Client.Connect("127.0.0.1", finalTransaction, 5, 13001);
+                                Client.Connect("127.0.0.1", finalTransaction, 5, Port);
                             }).Start();
                             break;
 
                         case 3:
                             Console.WriteLine("View final:");
                             //request pentru a vizualiza voturile
+                            break;
+                        case 4:
+                            Console.WriteLine("View history");
+                            //request pentru a vizualiza istoricul
+                            break;
+                        case 5:
+                            Console.WriteLine("View history" );
+                            //request pentru a vizualiza istoricul
                             break;
                     }
                 }

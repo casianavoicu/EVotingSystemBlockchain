@@ -19,36 +19,21 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Acasă</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Voter" asp-action="Vote">Votează</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-dark" asp-controller="Home" asp-action="Results">Rezultate voturi</a>
-                </li>
-                <li class="nav-item dropdown text-dark">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Setări
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-area="" asp-controller="Election" asp-action="Index">Adaugă o nouă alegere</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" asp-area="" asp-controller="Candidate" asp-action="Index">Adaugă candidat</a>
-                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Rezultate Blockchain
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-area="" asp-controller="Blockchain" asp-action="Index">Tranzacții</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Blockchain" asp-action="Transactions">Tranzacții</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" asp-area="" asp-controller="Blockhain" asp-action="Index">Blocuri</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Blockchain" asp-action="Blocks">Blocuri</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-area="" asp-controller="Blockchain" asp-action="Index">Conturi</a>
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0 rightSide">
-                <a class="btn btn-outline-secondary btn-sm" asp-area="" asp-controller="Register" asp-action="LogIn" role="button">Autentificare</a>
-                <a class="btn btn-primary  btn-sm" asp-area="" asp-controller="Register" asp-action="Index" role="button">Înregistrare</a>
-            </form>
         </div>
     </nav>
     <main class="main">

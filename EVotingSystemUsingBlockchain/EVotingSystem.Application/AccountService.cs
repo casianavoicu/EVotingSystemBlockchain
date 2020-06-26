@@ -28,20 +28,32 @@ namespace EVotingSystem.Application
             return balance;
         }
 
-        public AccountModel VerifyAccount(string voterPublicKey)
+        public AccountModel VerifyAccount(string pK)
+        {
+            var voter = DbContext.GetAccount(pK);
+
+            if (voter == null)
+            {
+                return null;
+            }
+
+            return new AccountModel
+            {
+                Balance = voter.Balance,
+                PublicKey = voter.PublicKey,
+            };
+        }
+        public AccountModel AddAccount(string voterPublicKey)
         {
             var voter = DbContext.GetAccount(voterPublicKey);
-            AccountModel model;
             if (voter == null)
             {
                 var account = CreateAccount(voterPublicKey);
-                model = new AccountModel
+                return new AccountModel
                 {
                     Balance = account.Balance,
                     PublicKey = account.PublicKey
                 };
-
-                return model;
             }
 
             return new AccountModel
@@ -84,11 +96,14 @@ namespace EVotingSystem.Application
 
         public void UpdateBalanceAfterVote(AccountModel account)
         {
-            DbContext.UpdateBalance(new Account
+            Account accountModel = new Account
             {
-                Balance = account.Balance--,
                 PublicKey = account.PublicKey
-            });
+            };
+
+            accountModel.Balance = account.Balance - 1;
+            DbContext.UpdateBalance(accountModel);
+
         }
 
         public void UpdateBalanceBeforeVote(AccountModel account)

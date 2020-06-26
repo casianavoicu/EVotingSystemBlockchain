@@ -38,6 +38,9 @@ namespace Nodes
                     case 8:
                         Console.WriteLine("");
                         break;
+                    case 9:
+                        Console.WriteLine("");
+                        break;
                 }
 
                 var data = Encoding.ASCII.GetBytes(message);

@@ -2,8 +2,8 @@
 using EVotingSystem.Blockchain;
 using Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EVotingSystem.Application
 {
@@ -15,18 +15,24 @@ namespace EVotingSystem.Application
 
         }
 
+        public string GetAllBlocks()
+        {
+            return JsonConvert.SerializeObject(DbContext.GetAllBlocks());
+        }
+
         public string GetCandidates()
         {
-            var candidates = DbContext.GetAllCandidates();
-            List<string> candidatesName= new List<string>();
-            string ballotName = "";
-            foreach (var item in candidates)
+            var final = DbContext.GetAllCandidates();
+            List<string> result= new List<string>();
+            var ballotNamefinal = final.Item1.FirstOrDefault().Ballot;
+            result.Add(final.acc);
+            result.Add(ballotNamefinal);
+            foreach (var item in final.Item1)
             {
-                candidatesName.Add(item.Name);
-                ballotName = item.Ballot;
+                result.Add(item.Name);
             }
-            candidatesName.Add(ballotName);
-            return JsonConvert.SerializeObject(candidatesName);
+
+            return JsonConvert.SerializeObject(result);
         }
 
         public string ReceiveBlock(CreateBlockModel model)

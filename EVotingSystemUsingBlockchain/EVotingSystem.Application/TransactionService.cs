@@ -3,7 +3,6 @@ using EVotingSystem.Application.Utils;
 using EVotingSystem.Blockchain;
 using Models;
 using System;
-using System.Security.Cryptography;
 
 namespace EVotingSystem.Application
 {
@@ -17,16 +16,22 @@ namespace EVotingSystem.Application
             var serializedTransaction = transactionWithoutSignature.Serialize();
             if (CryptoUtils.ValidateSignature(transaction.FromAddress, serializedTransaction, transaction.Signature, out string hash))
             {
-                var acc = accountService.VerifyAccount(transaction.ToAddress);
-
                 if (transaction.Type == "Vote")
                 {
-
-                    accountService.UpdateBalanceBeforeVote(acc);
+                    var getAccount = accountService.VerifyAccount(transaction.FromAddress);
+                    if (getAccount != null && getAccount.Balance>0)
+                    {
+                        accountService.UpdateBalanceAfterVote(getAccount);
+                    }
+                    else
+                    {
+                        return (null, null);
+                    }
                 }
                 else
                 {
-                    accountService.UpdateBalanceAfterVote(acc);
+                    var acc = accountService.AddAccount(transaction.ToAddress);
+                    accountService.UpdateBalanceBeforeVote(acc);
                 }
 
                 return (transaction, hash);
@@ -42,7 +47,7 @@ namespace EVotingSystem.Application
             var serializedTransaction = transactionWithoutSignature.Serialize();
             if (CryptoUtils.ValidateSignature(transactionBallot.FromAddress, serializedTransaction, transactionBallot.Signature, out string hash))
             {
-                accountService.VerifyAccount(transactionBallot.ToAddress);
+                accountService.AddAccount(transactionBallot.ToAddress);
 
                 return (transactionBallot, hash);
             }
@@ -82,7 +87,7 @@ namespace EVotingSystem.Application
             }
         }
 
-        public void InsertVoteTransactions((TransactionVoteModel, string) finalTransaction, int BlockId)
+        public void InsertVoteTransactions((TransactionVoteModel, string) finalTransaction, int BlockId, string type)
         {
             DbContext.InsertTransaction(new Transaction
             {
@@ -97,13 +102,16 @@ namespace EVotingSystem.Application
                 Vote = finalTransaction.Item1.Vote
             });
 
-            var candidates = DbContext.GetAllCandidates();
-            foreach (var item in candidates)
+            if (type == "Vote")
             {
-                if (item.Name == finalTransaction.Item1.Vote)
+                var candidates = DbContext.GetAllCandidates();
+                foreach (var item in candidates.Item1)
                 {
-                    DbContext.UpdateCandidateVote(item.Name);
-                    return;
+                    if (item.Name == finalTransaction.Item1.Vote)
+                    {
+                        DbContext.UpdateCandidateVote(item.Name);
+                        return;
+                    }
                 }
             }
         }

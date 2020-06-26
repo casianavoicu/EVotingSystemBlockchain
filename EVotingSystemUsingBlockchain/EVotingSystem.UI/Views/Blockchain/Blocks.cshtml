@@ -1,7 +1,44 @@
-﻿
-@{
-    ViewData["Title"] = "Blocks";
-}
+﻿@model IEnumerable<BlockViewModel>
+<head>
 
-<h1>Blocuri</h1>
+</head>
+<main class="mainBg">
+    <div class="content">
+        <br>
+        <br>
+        <br>
+        <table class="table table-dark" style='max-width:100px'>
+            <thead>
+                <tr>
+                    <th scope="col">Block Id</th>
+                    <th scope="col">BlockIndex</th>
+                    <th scope="col">PublicKey</th>
+                    <th scope="col">Timestamp</th>
+                    <th scope="col">PreviousHash</th>
+                    <th scope="col">Hash</th>
+                    <th scope="col">Signature</th>
+                    <th scope="col">State Root Hash</th>
+                    <th scope="col">Transaction Id</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td style="height:100px">@item.BlockId</td>
+                    <td>@item.BlockIndex</td>
+                    <td>@item.PublicKey</td>
+                    <td>@item.TimeStamp</td>
+                    <td>@item.PreviousHash</td>
+                    <td>@item.Hash</td>
+                    <td  style="height:100px">@item.StateRootHash</td>
+                    <td>@item.Signature</td>
+                    <td>1</td>
+                </tr>
+                }
 
+
+            </tbody>
+        </table>
+    </div>
+</main>

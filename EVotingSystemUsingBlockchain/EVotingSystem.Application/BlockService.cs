@@ -11,7 +11,8 @@ namespace EVotingSystem.Application
     {
         public void GenesisBlock()
         {
-            CreateBlockModelWithoutSignatureAndRootHash genesisBlock = new CreateBlockModelWithoutSignatureAndRootHash
+            CreateBlockModelWithoutSignatureAndRootHash genesisBlock =
+                new CreateBlockModelWithoutSignatureAndRootHash
             {
                 BlockIndex = 0,
                 TimeStamp = new DateTime(2020, 6, 1, 14, 0, 0),
@@ -83,7 +84,7 @@ namespace EVotingSystem.Application
                 else
                 {
                     TransactionVoteModel trans = (TransactionVoteModel)transaction[i].Item1;
-                    transService.InsertVoteTransactions((trans, transaction[i].Item2), blockId);
+                    transService.InsertVoteTransactions((trans, transaction[i].Item2), blockId, transaction[i].Item1.Type);
                 }
             }
             var databaseState = DbContext.GetHash();
@@ -154,7 +155,7 @@ namespace EVotingSystem.Application
                     else
                     {
                         TransactionVoteModel trans = (TransactionVoteModel)verifiedTransactions[i].Item1;
-                        transService.InsertVoteTransactions((trans, verifiedTransactions[i].Item2), blockId);
+                        transService.InsertVoteTransactions((trans, verifiedTransactions[i].Item2), blockId, verifiedTransactions[i].Item1.Type);
                     }
                 }
 

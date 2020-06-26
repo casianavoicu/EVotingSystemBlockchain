@@ -136,13 +136,23 @@ namespace Nodes
                         var reply = Encoding.ASCII.GetBytes(candidates);
                         stream.Write(reply, 0, reply.Length);
                     }
+                    else if (data.StartsWith("BlockHistory"))
+                    {
+                        var blocks = blockchainService.GetAllBlocks();
+                        var reply = Encoding.ASCII.GetBytes(blocks);
+                        stream.Write(reply, 0, reply.Length);
+                    }
                     else if (data.StartsWith("HistoryF"))
                     {
-                        blockchainService.CheckBalance(data.Substring(8));
+                        var history = blockchainService.CheckTransactionFromAddress(data.Substring(8));
+                        var reply = Encoding.ASCII.GetBytes(history);
+                        stream.Write(reply, 0, reply.Length);
                     }
                     else if (data.StartsWith("HistoryT"))
                     {
-                        blockchainService.CheckBalance(data.Substring(8));
+                        var history = blockchainService.CheckTransactionToAddress(data.Substring(8));
+                        var reply = Encoding.ASCII.GetBytes(history);
+                        stream.Write(reply, 0, reply.Length);
                     }
                     else if (data.StartsWith("123"))
                     {
