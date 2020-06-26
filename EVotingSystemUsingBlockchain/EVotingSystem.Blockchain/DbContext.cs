@@ -65,11 +65,20 @@ namespace EVotingSystem.Blockchain
         {
             return connection.Table<Block>().ToList();
         }
+        public static IEnumerable<Account> GetAllAccounts()
+        {
+            return connection.Table<Account>().ToList();
+        }
+
+        public static IEnumerable<Transaction> GetAllTransactions()
+        {
+            return connection.Table<Transaction>().ToList();
+        }
 
         public static IEnumerable<Transaction> GetTransactionFromAddress(string publicKey)
         {
             return connection.Table<Transaction>().
-                Where(row => row.FromAddress == publicKey);
+                Where(row => row.FromAddress == publicKey).ToList();
         }
 
         public static IEnumerable<Transaction> GetTransactionToAddress(string publicKey)

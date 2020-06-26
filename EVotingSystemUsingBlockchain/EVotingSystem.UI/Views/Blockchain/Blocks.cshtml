@@ -3,42 +3,27 @@
 
 </head>
 <main class="mainBg">
-    <div class="content">
-        <br>
-        <br>
-        <br>
-        <table class="table table-dark" style='max-width:100px'>
-            <thead>
-                <tr>
-                    <th scope="col">Block Id</th>
-                    <th scope="col">BlockIndex</th>
-                    <th scope="col">PublicKey</th>
-                    <th scope="col">Timestamp</th>
-                    <th scope="col">PreviousHash</th>
-                    <th scope="col">Hash</th>
-                    <th scope="col">Signature</th>
-                    <th scope="col">State Root Hash</th>
-                    <th scope="col">Transaction Id</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                <tr>
-                    <td style="height:100px">@item.BlockId</td>
-                    <td>@item.BlockIndex</td>
-                    <td>@item.PublicKey</td>
-                    <td>@item.TimeStamp</td>
-                    <td>@item.PreviousHash</td>
-                    <td>@item.Hash</td>
-                    <td  style="height:100px">@item.StateRootHash</td>
-                    <td>@item.Signature</td>
-                    <td>1</td>
-                </tr>
-                }
+    <div class="contentBlocks">
+        @foreach (var item in Model)
+        {
+            <div class="table-responsive">
+                <table class="table table-dark">
+                    <tbody>
+                        <tr><td width="30%">Block Id</td><td class="tabelCellWidth">@item.BlockId</td></tr>
+                        <tr><td width="30%">BlockIndex</td><td class="tabelCellWidth">@item.BlockIndex</td></tr>
+                        <tr><td width="30%">PublicKey</td><td class="tabelCellWidth">@item.PublicKey</td></tr>
+                        <tr><td width="30%">Timestamp</td><td class="tabelCellWidth">@item.TimeStamp</td></tr>
+                        <tr><td width="30%">Hash</td><td class="tabelCellWidth">@item.PreviousHash</td></tr>
+                        <tr><td width="30%">PreviousHash</td><td class="tabelCellWidth">@item.Hash</td></tr>
+                        <tr><td width="30%">Signature</td><td class="tabelCellWidth">@item.StateRootHash</td></tr>
+                        <tr><td width="30%">State Root Hash</td><td class="tabelCellWidth">@item.Signature</td></tr>
+                        <tr><td width="30%">Transaction Processed</td><td class="tabelCellWidth">1</td></tr>
 
+                    </tbody>
+                </table>
 
-            </tbody>
-        </table>
+            </div>
+        }
+
     </div>
 </main>

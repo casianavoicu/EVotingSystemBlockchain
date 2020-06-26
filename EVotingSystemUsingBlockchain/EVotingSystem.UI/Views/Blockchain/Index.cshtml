@@ -1,27 +1,25 @@
-﻿<head>
+﻿
+@model IEnumerable<AccountsViewModelcs>
+<head>
 
 </head>
 <main class="mainBg">
-    <div class="content">
-        <br>
-        <br>
-        <br>
-        <table class="table table-dark">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Public Key</th>
-                    <th scope="col">Balance</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                </tr>
+    <div class="contentBlocks">
+        @foreach (var item in Model)
+        {
+            <div class="table-responsive">
+                <table class="table table-dark">
+                    <tbody>
+                        <tr><td width="30%">Account Id</td><td class="tabelCellWidth">@item.AccountId</td></tr>
+                        <tr><td width="30%">Public Key</td><td class="tabelCellWidth">@item.PublicKey</td></tr>
+                        <tr><td width="30%">Balance</td><td class="tabelCellWidth">@item.Balance</td></tr>
 
-            </tbody>
-        </table>
+
+                    </tbody>
+                </table>
+
+            </div>
+        }
+
     </div>
 </main>

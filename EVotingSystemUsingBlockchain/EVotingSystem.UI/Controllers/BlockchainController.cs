@@ -12,14 +12,16 @@ namespace EVotingSystem.UI.Controllers
     {
         private readonly ILogger<BlockchainController> _logger;
 
-        public BlockchainController(ILogger<BlockchainController> logger, IHttpClientFactory httpClientFactory)
+        public BlockchainController(ILogger<BlockchainController> logger)
         {
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var response = Client.Connect("127.0.0.1", "AccountsHistory", 9, 13000);
+            var final = JsonConvert.DeserializeObject<List<AccountsViewModelcs>>(response);
+            return View(final);
         }
 
         public IActionResult Blocks()
@@ -31,7 +33,9 @@ namespace EVotingSystem.UI.Controllers
 
         public IActionResult Transactions()
         {
-            return View();
+            var response = Client.Connect("127.0.0.1", "TransactionHistory", 9, 13000);
+            var final = JsonConvert.DeserializeObject<List<TransactionViewModel>>(response);
+            return View(final);
         }
 
     }

@@ -63,35 +63,23 @@ namespace EVotingSystem.Application
             };
         }
 
-        public IEnumerable<string> GetAccountSentTransactions(string voterPublicKey)
+        public IEnumerable<Transaction> GetAccountSentTransactions(string voterPublicKey)
         {
             IEnumerable<Transaction> transactions = DbContext.GetTransactionFromAddress(voterPublicKey);
             if (transactions == null)
                 return null;
 
-            List<string> result = new List<string>();
-            foreach (var item in transactions)
-            {
-                result.Add(item.ToAddress);
-            }
-
-            return result;
+            return transactions;
         }
 
-        public IEnumerable<string> GetAccountReceivedTransactions(string voterPublicKey)
+        public IEnumerable<Transaction> GetAccountReceivedTransactions(string voterPublicKey)
         {
 
             var transactions = DbContext.GetTransactionToAddress(voterPublicKey);
             if (transactions == null)
                 return null;
 
-            List<string> result = new List<string>();
-            foreach (var item in transactions)
-            {
-                result.Add(item.FromAddress);
-            }
-
-            return result;
+            return transactions;
         }
 
         public void UpdateBalanceAfterVote(AccountModel account)

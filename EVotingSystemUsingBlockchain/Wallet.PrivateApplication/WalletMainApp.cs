@@ -21,6 +21,17 @@ namespace Wallet.PrivateApplication
                 return 13000 + (DateTime.Now.Second / timePerPort);
             }
         }
+        public static int PortRandom
+        {
+            get
+            {
+                var ports = Server.Ports;
+                ports.Remove(Port);
+                Random random = new Random();
+                int index = random.Next(ports.Count());
+                return Server.Ports.ElementAt(index);
+            }
+        }
 
         static void Main()
         {
@@ -122,11 +133,12 @@ namespace Wallet.PrivateApplication
                             break;
                         case 4:
                             Console.WriteLine("View history");
-                            //request pentru a vizualiza istoricul
+                            var response = Client.Connect("127.0.0.1", "HistoryF" + Convert.ToBase64String(keyPair.Item2), 1, PortRandom);
+                            Console.WriteLine("Your history :" + response);
                             break;
                         case 5:
-                            Console.WriteLine("View history" );
-                            //request pentru a vizualiza istoricul
+                            var responseHist = Client.Connect("127.0.0.1", "HistoryT" + Convert.ToBase64String(keyPair.Item2), 1, PortRandom);
+                            Console.WriteLine("Your history :" + responseHist);
                             break;
                     }
                 }

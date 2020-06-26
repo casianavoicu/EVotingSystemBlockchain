@@ -19,6 +19,15 @@ namespace EVotingSystem.Application
         {
             return JsonConvert.SerializeObject(DbContext.GetAllBlocks());
         }
+        public string GetAllAccounts()
+        {
+            return JsonConvert.SerializeObject(DbContext.GetAllAccounts());
+        }
+
+        public string GetAllTransactions()
+        {
+            return JsonConvert.SerializeObject(DbContext.GetAllTransactions());
+        }
 
         public string GetCandidates()
         {
@@ -155,7 +164,7 @@ namespace EVotingSystem.Application
             var result = accountService.GetAccountSentTransactions(publicKey);
             if (result == null)
                 return null;
-            return result.ToString();
+            return JsonConvert.SerializeObject(result);
         }
 
         public string CheckTransactionToAddress(string publicKey)
@@ -164,7 +173,7 @@ namespace EVotingSystem.Application
             var result = accountService.GetAccountReceivedTransactions(publicKey);
             if (result == null)
                 return null;
-            return result.ToString();
+            return JsonConvert.SerializeObject(result);
         }
 
     }

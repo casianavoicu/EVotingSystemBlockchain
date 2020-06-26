@@ -22,6 +22,18 @@ namespace Wallet
                 return 13000 + (DateTime.Now.Second / timePerPort);
             }
         }
+        public static int PortRandom
+        {
+            get
+            {
+                var ports = Server.Ports;
+                ports.Remove(Port);
+                Random random = new Random();
+                int index = random.Next(ports.Count());
+                return Server.Ports.ElementAt(index);
+            }
+        }
+
 
         static void Main()
         {
@@ -64,12 +76,12 @@ namespace Wallet
             Console.WriteLine("View sent transactions: 3");
             Console.WriteLine("View received transactions: 4");
             Console.WriteLine("Get public key: 5");
-            Console.WriteLine("Please select an action");
 
             while (selector != 7)
             {
                 try
                 {
+                    Console.WriteLine("Please select an action");
                     selector = Convert.ToInt32(Console.ReadLine());
                     switch (selector)
                     {
@@ -82,7 +94,6 @@ namespace Wallet
                             {
                                 break;
                             }
-
                             var candidateList = JsonConvert.DeserializeObject<List<string>>(ballotResponse);
                             var address = candidateList.ElementAt(0);
                             var ballotName = candidateList.ElementAt(1);
@@ -106,16 +117,20 @@ namespace Wallet
                                 break;
                             }
 
-                            Client.Connect("127.0.0.1", vote.CreateNewTransaction(address, keyPair, candidate, "Vote"), 1, Port);
+                            var transactionResponse = Client.Connect("127.0.0.1", vote.CreateNewTransaction(address, keyPair, candidate, "Vote"), 1, Port);
+                            Console.WriteLine(transactionResponse);
                             break;
                         case 2:
-                            Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, Port);
+                            var balance = Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, PortRandom);
+                            Console.WriteLine("Your balance :" + balance);
                             break;
                         case 3:
-                            var response = Client.Connect("127.0.0.1", "HistoryF"+Convert.ToBase64String(keyPair.Item2), 1, 13000);
+                            var response = Client.Connect("127.0.0.1", "HistoryF"+Convert.ToBase64String(keyPair.Item2), 1, PortRandom);
+                            Console.WriteLine("Your history :" + response);
                             break;
                         case 4:
-                            var history = Client.Connect("127.0.0.1", "HistoryT" + Convert.ToBase64String(keyPair.Item2), 1, 13001);
+                            var history = Client.Connect("127.0.0.1", "HistoryT" + Convert.ToBase64String(keyPair.Item2), 1, PortRandom);
+                            Console.WriteLine("Your history :" + history);
                             break;
                         case 5:
                             Console.WriteLine(Convert.ToBase64String(keyPair.Item2));
@@ -126,7 +141,6 @@ namespace Wallet
                 {
                     Console.WriteLine("Please insert a valid number");
                 }
-                    Console.WriteLine("Please select an action");
             }
         }
     }

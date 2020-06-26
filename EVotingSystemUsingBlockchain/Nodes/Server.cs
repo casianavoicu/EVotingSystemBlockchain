@@ -17,10 +17,12 @@ namespace Nodes
     public class Server
     {
         private readonly (byte[], byte[]) keyPair = (null, null);
-        private static readonly List<int> Ports = new List<int>
+        public static readonly List<int> Ports = new List<int>
         {
            13000,
-           13001
+           13001,
+           13002,
+           13003
         };
 
         readonly TcpListener server = null;
@@ -102,7 +104,6 @@ namespace Nodes
         {
             TcpClient client = (TcpClient)obj;
             var stream = client.GetStream();
-            string imei = String.Empty;
             string data = null;
             Byte[] bytes = new Byte[60000];
             int i;
@@ -140,6 +141,18 @@ namespace Nodes
                     {
                         var blocks = blockchainService.GetAllBlocks();
                         var reply = Encoding.ASCII.GetBytes(blocks);
+                        stream.Write(reply, 0, reply.Length);
+                    }
+                    else if (data.StartsWith("TransactionHistory"))
+                    {
+                        var transactions = blockchainService.GetAllTransactions();
+                        var reply = Encoding.ASCII.GetBytes(transactions);
+                        stream.Write(reply, 0, reply.Length);
+                    }
+                    else if (data.StartsWith("AccountsHistory"))
+                    {
+                        var accounts = blockchainService.GetAllAccounts();
+                        var reply = Encoding.ASCII.GetBytes(accounts);
                         stream.Write(reply, 0, reply.Length);
                     }
                     else if (data.StartsWith("HistoryF"))

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Nodes\Client.cs" Link="Client.cs" />
+    <Compile Include="..\Nodes\Server.cs" Link="Server.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EVotingSystem.Application\EVotingSystem.Application.csproj" />
+  </ItemGroup>
+
+</Project>
