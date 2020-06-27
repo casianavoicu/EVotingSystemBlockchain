@@ -97,7 +97,11 @@ namespace EVotingSystem.Blockchain
             var transactionBallot = connection.Table<Transaction>()
                 .Where(p => p.ToAddress == p.FromAddress
                 && p.Details != null).LastOrDefault();
-
+            var test =  DateTime.Parse(transactionBallot.Details).Date;
+            if (test < DateTime.Now)
+            {
+                return (null, null);
+            }
             var account = connection.Table<Account>().Where(a => a.PublicKey == transactionBallot.FromAddress).FirstOrDefault();
             return (connection.Table<Candidate>()
                 .Where(r => r.AccountId == account.AccountId), account.PublicKey);
