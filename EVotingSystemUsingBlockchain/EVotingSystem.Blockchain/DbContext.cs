@@ -61,6 +61,11 @@ namespace EVotingSystem.Blockchain
                 FirstOrDefault(p => p.PublicKey == publicKey);
         }
 
+        public static IEnumerable<Candidate> GetVotes()
+        {
+            return connection.Table<Candidate>().ToList();
+        }
+
         public static IEnumerable<Block> GetAllBlocks()
         {
             return connection.Table<Block>().ToList();

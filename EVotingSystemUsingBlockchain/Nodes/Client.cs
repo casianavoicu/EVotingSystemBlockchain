@@ -21,13 +21,13 @@ namespace Nodes
                         Console.WriteLine("Wait: {0}", "Checking your balance");
                         break;
                     case 3:
-                        Console.WriteLine("Wait: {0}", "Checking your transactions");
+                        Console.WriteLine("Wait: {0}", "Checking your sent transactions");
                         break;
                     case 4:
-                        Console.WriteLine("Wait: {0}", "Checking your transactions");
+                        Console.WriteLine("Wait: {0}", "Checking your received transactions");
                         break;
                     case 5:
-                        Console.WriteLine("Wait: {0}", "Register Account");
+                        Console.WriteLine("Please wait");
                         break;
                     case 6:
                         Console.WriteLine("Broadcasting: {0}", "Blocks");

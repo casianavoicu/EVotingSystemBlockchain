@@ -21,8 +21,7 @@ namespace Nodes
         {
            13000,
            13001,
-           13002,
-           13003
+
         };
 
         readonly TcpListener server = null;
@@ -167,9 +166,11 @@ namespace Nodes
                         var reply = Encoding.ASCII.GetBytes(history);
                         stream.Write(reply, 0, reply.Length);
                     }
-                    else if (data.StartsWith("123"))
+                    else if (data.StartsWith("FinalVotes"))
                     {
-
+                        var candidates = blockchainService.GetAllVotes();
+                        var reply = Encoding.ASCII.GetBytes(candidates);
+                        stream.Write(reply, 0, reply.Length);
                     }
                     else if (requestObject is CreateTransactionModel createTransactionModel)
                     {

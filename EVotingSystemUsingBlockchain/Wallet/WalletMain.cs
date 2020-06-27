@@ -88,7 +88,7 @@ namespace Wallet
                         case 1:
 
                             TransactionService vote = new TransactionService();
-                            var ballotResponse = Client.Connect("127.0.0.1", "Ballot", 8, Port);
+                            var ballotResponse = Client.Connect("127.0.0.1", "Ballot", 5, Port);
 
                             if (ballotResponse == null)
                             {
@@ -121,15 +121,15 @@ namespace Wallet
                             Console.WriteLine(transactionResponse);
                             break;
                         case 2:
-                            var balance = Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 8, PortRandom);
+                            var balance = Client.Connect("127.0.0.1", "Balance" + Convert.ToBase64String(keyPair.Item2), 2, PortRandom);
                             Console.WriteLine("Your balance :" + balance);
                             break;
                         case 3:
-                            var response = Client.Connect("127.0.0.1", "HistoryF"+Convert.ToBase64String(keyPair.Item2), 1, PortRandom);
+                            var response = Client.Connect("127.0.0.1", "HistoryF"+Convert.ToBase64String(keyPair.Item2), 3, PortRandom);
                             Console.WriteLine("Your history :" + response);
                             break;
                         case 4:
-                            var history = Client.Connect("127.0.0.1", "HistoryT" + Convert.ToBase64String(keyPair.Item2), 1, PortRandom);
+                            var history = Client.Connect("127.0.0.1", "HistoryT" + Convert.ToBase64String(keyPair.Item2), 4, PortRandom);
                             Console.WriteLine("Your history :" + history);
                             break;
                         case 5:

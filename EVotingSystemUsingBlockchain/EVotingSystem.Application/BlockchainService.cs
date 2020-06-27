@@ -23,6 +23,17 @@ namespace EVotingSystem.Application
         {
             return JsonConvert.SerializeObject(DbContext.GetAllAccounts());
         }
+        public string GetAllVotes()
+        {
+            var list = DbContext.GetVotes();
+            var finalVotes = new List<string>();
+            finalVotes.Add(list.FirstOrDefault().Ballot);
+            foreach (var item in list)
+            {
+                finalVotes.Add(item.Name + " " + item.Votes);
+            }
+            return JsonConvert.SerializeObject(finalVotes);
+        }
 
         public string GetAllTransactions()
         {

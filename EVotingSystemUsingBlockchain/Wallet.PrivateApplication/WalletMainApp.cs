@@ -1,6 +1,8 @@
 ﻿using KeyPairServices;
+using Newtonsoft.Json;
 using Nodes;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -72,10 +74,12 @@ namespace Wallet.PrivateApplication
             Console.WriteLine("Transaction: 1");
             Console.WriteLine("Create Ballot: 2");
             Console.WriteLine("View final votes: 3");
+            Console.WriteLine("View sent transactions: 4");
+            Console.WriteLine("View received transactions: 5"); ;
 
             TransactionInstitutionService transaction = new TransactionInstitutionService();
             TransactionService accountTransaction = new TransactionService();
-            while (selector != 4)
+            while (selector != 6)
             {
                 Console.WriteLine("Please select an action");
                 try
@@ -92,7 +96,7 @@ namespace Wallet.PrivateApplication
                             {
                                 Thread.CurrentThread.IsBackground = true;
                                 var finalTransaction = accountTransaction.CreateNewTransaction(accountPk, keyPair, amount, "Account");
-                                Client.Connect("127.0.0.1", finalTransaction, 5, Port);
+                                Client.Connect("127.0.0.1", finalTransaction, 1, Port);
                             }).Start();
                             break;
 
@@ -123,21 +127,26 @@ namespace Wallet.PrivateApplication
                             {
                                 Thread.CurrentThread.IsBackground = true;
                                 var finalTransaction = transaction.CreateBallotTransaction(keyPair, candidates, ballotName, endDate);
-                                Client.Connect("127.0.0.1", finalTransaction, 5, Port);
+                                Client.Connect("127.0.0.1", finalTransaction, 1, Port);
                             }).Start();
                             break;
 
                         case 3:
                             Console.WriteLine("View final:");
-                            //request pentru a vizualiza voturile
+                            var finalCandidatesSerialized = Client.Connect("127.0.0.1", "FinalVotes" + Convert.ToBase64String(keyPair.Item2), 5, PortRandom);
+                            var deserialized = JsonConvert.DeserializeObject<List<string>>(finalCandidatesSerialized);
+                            foreach (var item in deserialized)
+                            {
+                                Console.WriteLine(item);
+                            }
                             break;
                         case 4:
                             Console.WriteLine("View history");
-                            var response = Client.Connect("127.0.0.1", "HistoryF" + Convert.ToBase64String(keyPair.Item2), 1, PortRandom);
+                            var response = Client.Connect("127.0.0.1", "HistoryF" + Convert.ToBase64String(keyPair.Item2), 3, PortRandom);
                             Console.WriteLine("Your history :" + response);
                             break;
                         case 5:
-                            var responseHist = Client.Connect("127.0.0.1", "HistoryT" + Convert.ToBase64String(keyPair.Item2), 1, PortRandom);
+                            var responseHist = Client.Connect("127.0.0.1", "HistoryT" + Convert.ToBase64String(keyPair.Item2), 4, PortRandom);
                             Console.WriteLine("Your history :" + responseHist);
                             break;
                     }
